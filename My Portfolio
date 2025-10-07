@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey: From Curiosity to Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        .poster {
+            width: 720px;
+            min-height: 960px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .title {
+            font-size: 50px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .story-section {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-icon {
+            color: #64ffda;
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .section-content {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #b0b0b0;
+        }
+        .highlight {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        .quote {
+            font-style: italic;
+            color: #e0e0e0;
+            margin: 12px 0;
+            padding-left: 15px;
+            border-left: 3px solid #64ffda;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .age-badge {
+            display: inline-block;
+            background-color: #64ffda;
+            color: #121212;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .story-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .story-point-icon {
+            color: #64ffda;
+            margin-right: 10px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .story-point-text {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .journey-marker {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background-color: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #64ffda;
+            font-size: 18px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #b0b0b0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <h1 class="title">My Journey: From Curiosity to Creation</h1>
+        </div>
+        
+        <div class="content">
+            <div class="story-section">
+                <div class="journey-marker">1</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">child_care</i>
+                    The Beginning
+                </h2>
+                <span class="age-badge">Age 3</span>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">build</i>
+                        <div class="story-point-text">
+                            <span class="highlight">It all started</span> from trying to <span class="highlight">fix</span> the <span class="highlight">toys</span> I <span class="highlight">broke</span> when I was 3
+                        </div>
+                    </div>
+                </div>
+                <span class="age-badge">Age 6</span>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">tv</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Captivated</span> by <span class="highlight">"How The Universe Works"</span> and <span class="highlight">"How It's Made"</span> on Discovery Channel
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">psychology</i>
+                        <div class="story-point-text">
+                            Wanted to <span class="highlight">understand</span> <span class="highlight">everything</span> around me - why it existed and how it was created
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "The creation of the universe, to space and everything in it was the first subject of my interest at age 6."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">2</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">build</i>
+                    Breaking and Making
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">touch_app</i>
+                        <div class="story-point-text">
+                            Began <span class="highlight">breaking</span> <span class="highlight">everything</span> I got my hands on to understand how it worked
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">settings</i>
+                        <div class="story-point-text">
+                            Learned to <span class="highlight">reverse engineer</span> from watching countless episodes of "How It's Made"
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "I knew the <span class="highlight">quantum mechanics</span> of our universe's creation, and the <span class="highlight">cosmic scale</span> of <span class="highlight">stars</span> and <span class="highlight">blackholes</span>, it was time to learn of everything in between"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">3</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">public</i>
+                    The Digital Awakening
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">language</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Internet access on the family desktop PC</span> - a <span class="highlight">literal BIG BANG</span> of <span class="highlight">resources</span>, friends, and <span class="highlight">exposure</span>
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">computer</i>
+                        <div class="story-point-text">
+                            <span class="highlight">When my mother put screen time limits during COVID</span>, I learned about <span class="highlight">Linux</span> and <span class="highlight">circumvented</span> Windows entirely using <span class="highlight">NomadBSD OS</span> on a pendrive
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "The internet became my university, my mentor, and my workshop - all in one."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">4</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">school</i>
+                    Academic Challenges
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">engineering</i>
+                        <div class="story-point-text">
+                            Started with <span class="highlight">electronics</span> and communications <span class="highlight">engineering</span>, but <span class="highlight">clinical depression</span> made it impossible to continue
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">design_services</i>
+                        <div class="story-point-text">
+                            Found a <span class="highlight">product design</span> program that felt like striking gold - built around the <span class="highlight">curiosity</span> that defined me
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "I'm on 7 antidepressants, SSRI's and SNRI's, and yet fall into episodes of depression where it feels like an inescapable end. But I'm still here, still creating, still fighting."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">5</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">hub</i>
+                    The Discovery
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">auto_awesome</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Recognised</span> how to use everything I had learned during my entire <span class="highlight">childhood</span>. From the <span class="highlight">cosmos</span> to humanity's <span class="highlight">inventions</span>, our <span class="highlight">Earth</span>, with <span class="highlight">physics</span>, <span class="highlight">chemistry</span>, <span class="highlight">biology</span>, <span class="highlight">math</span>, <span class="highlight">engineering</span>, and finally <span class="highlight">design</span>
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">calculate</i>
+                        <div class="story-point-text">
+                            <span class="highlight">I could interconnect</span> <span class="highlight">concepts</span> by <span class="highlight">multiplying</span> them with each other, making the whole <span class="highlight">greater</span> than the <span class="highlight">sum</span> of its parts by sheer <span class="highlight">computation</span>, to <span class="highlight">figure out</span> how to <span class="highlight">make</span> almost <span class="highlight">anything</span>
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "Applying one concept to another is easy when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions."
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            "Even if I don't succeed, at least I die trying, rather than half-assing the degree of my dreams."
+        </div>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Laboratory: My Career Plan and Calling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        .poster {
+            width: 720px;
+            min-height: 960px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .title {
+            font-size: 50px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .story-section {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-icon {
+            color: #64ffda;
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .section-content {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #b0b0b0;
+        }
+        .highlight {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        .quote {
+            font-style: italic;
+            color: #e0e0e0;
+            margin: 12px 0;
+            padding-left: 15px;
+            border-left: 3px solid #64ffda;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .story-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .story-point-icon {
+            color: #64ffda;
+            margin-right: 10px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .story-point-text {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .journey-marker {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background-color: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #64ffda;
+            font-size: 18px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+        .stage-badge {
+            display: inline-block;
+            background-color: #64ffda;
+            color: #121212;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #b0b0b0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <h1 class="title">Idea Laboratory: My Career Plan and Calling</h1>
+        </div>
+        
+        <div class="content">
+            <div class="story-section">
+                <div class="journey-marker">1</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">lightbulb</i>
+                    The Birth of an Idea
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">psychology</i>
+                        <div class="story-point-text">
+                            <span class="highlight">I never had anyone</span> to tell me how to make the things I wanted as a kid, this is my way of ensuring that no one else has to figure it all out alone
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "This isn't just about prototyping; it's about providing the guidance and support I never had. It's about creating a space where people with ideas but no technical knowledge can find direction."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">2</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">people</i>
+                    The Human-Centric Approach
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">favorite</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Idea Laboratory</span> is more than just turning ideas into prototypes, it's about <span class="highlight">democratizing</span> the capability to create
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">science</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Ideators</span> work in an idea laboratory, the same way scientists and researchers work in a lab
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "Building a community where curiosity is nurtured rather than dismissed, where knowledge flows freely."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">3</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">route</i>
+                    The Journey of Ideas
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">psychology</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Fundamental understanding</span> of the idea's existence even when clients can't articulate them technically
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">brush</i>
+                        <div class="story-point-text">
+                            Transforming abstract concepts into <span class="highlight">detailed sketches</span> and technical specifications
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">description</i>
+                        <div class="story-point-text">
+                            Creating <span class="highlight">comprehensive documentation</span> that becomes a resource anyone can follow
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "When someone comes to Idea Laboratory with an idea, I don't just build a prototype - I create a complete visual and technical journey. I document the 'why' behind each design decision, the 'how' of each technical aspect, and the 'what' of each implementation step."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">4</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">timeline</i>
+                    The Three Stages
+                </h2>
+                <div class="section-content">
+                    <span class="stage-badge">Stage 1</span>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">engineering</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Building portfolio</span> through internships and freelance work, and continued self study, documenting every project
+                        </div>
+                    </div>
+                    
+                    <span class="stage-badge">Stage 2</span>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">school</i>
+                        <div class="story-point-text">
+                            Working with <span class="highlight">incubators and universities</span>, becoming a portable incubator for students
+                        </div>
+                    </div>
+                    
+                    <span class="stage-badge">Stage 3</span>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">rocket_launch</i>
+                        <div class="story-point-text">
+                            Running the <span class="highlight">fully funded startup</span>, providing free prototyping support to those with potential <span class="highlight">in the long run</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">emoji_events</i>
+                        <div class="story-point-text">
+                            <span class="highlight">We stand on the shoulders of giants</span>, but it is now time to raise the new giants for our future
+                        </div>
+                    </div>
+                    
+                    <div class="quote">
+                        "This isn't just a backup plan; it's my path forward. I'm creating this documentation to hold myself accountable when I feel like giving up."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">5</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">groups</i>
+                    The People Behind the Ideas
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">lightbulb</i>
+                        <div class="story-point-text">
+                            People with <span class="highlight">ideas but no technical knowledge</span> who need guidance to bring them to life
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">school</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Universities and students</span> who need R&D support for their innovative projects
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">rocket_launch</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Startups</span> that need help with prototype development or creating investor-ready documentation
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "People who have ideas should be supported and given direction. And so, whatever idea you have, you can come to me and we will explore it further, without boundaries."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="journey-marker">6</div>
+                <h2 class="section-title">
+                    <i class="material-icons section-icon">visibility</i>
+                    The Vision
+                </h2>
+                <div class="section-content">
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">public</i>
+                        <div class="story-point-text">
+                            <span class="highlight">Democratizing</span> the capability to create regardless of background or resources
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">loop</i>
+                        <div class="story-point-text">
+                            Creating a <span class="highlight">sustainable ecosystem</span> where successful projects help fund new ones
+                        </div>
+                    </div>
+                    <div class="story-point">
+                        <i class="material-icons story-point-icon">share</i>
+                        <div class="story-point-text">
+                            Following <span class="highlight">open source principles</span> for knowledge sharing and collaborative development
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            "Join the journey of democratizing creation and building a community where no one has to figure it all out alone."
+            <br>
+            idealaboratoryhemu@gmail.com
+        </div>
+    </div>
+</body>
+</html>
