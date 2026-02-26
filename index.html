@@ -1,798 +1,1157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hemmenth Kumar | Idea Laboratory</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0a0c;
-      --bg-secondary: #111114;
-      --fg: #e8e6e3;
-      --muted: #a8a8a8;
-      --accent-cyan: #00e5cc;
-      --accent-magenta: #e930a8;
-      --accent-amber: #f5a623;
-      --card: rgba(18, 18, 22, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
-      --glow-cyan: rgba(0, 229, 204, 0.4);
-      --glow-magenta: rgba(233, 48, 168, 0.4);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemmenth Kumar | Idea Laboratory</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0c;
+  --bg-secondary: #111114;
+  --fg: #e8e6e3;
+  --muted: #a8a8a8;
+  --accent-cyan: #00e5cc;
+  --accent-magenta: #e930a8;
+  --accent-amber: #f5a623;
+  --card: rgba(18, 18, 22, 0.85);
+  --border: rgba(255, 255, 255, 0.08);
+  --glow-cyan: rgba(0, 229, 204, 0.4);
+  --glow-magenta: rgba(233, 48, 168, 0.4);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-scroll-behavior: smooth; }
+body {
+  font-family: 'Space Mono', monospace;
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Space Mono', monospace;
-      background: var(--bg);
-      color: var(--fg);
-      overflow-x: hidden;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
+/* CRT Scanlines */
+.scanlines {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
+  background: -webkit-repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
+  opacity: 0.3;
+}
 
-    /* CRT Scanlines */
-    .scanlines {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 9999;
-      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
-      opacity: 0.3;
-    }
+/* Film Grain */
+.film-grain {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9998; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  -webkit-animation: grain 0.5s steps(10) infinite;
+  animation: grain 0.5s steps(10) infinite;
+}
 
-    /* Film Grain */
-    .film-grain {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 9998; opacity: 0.05;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      animation: grain 0.5s steps(10) infinite;
-    }
+/* WEBKIT KEYFRAMES - ALL ANIMATIONS */
+@-webkit-keyframes grain {
+  0%, 100% { -webkit-transform: translate(0, 0); transform: translate(0, 0); }
+  10% { -webkit-transform: translate(-1%, -1%); transform: translate(-1%, -1%); }
+  20% { -webkit-transform: translate(1%, 1%); transform: translate(1%, 1%); }
+  30% { -webkit-transform: translate(-1%, 1%); transform: translate(-1%, 1%); }
+  40% { -webkit-transform: translate(1%, -1%); transform: translate(1%, -1%); }
+  50% { -webkit-transform: translate(-1%, 0); transform: translate(-1%, 0); }
+  60% { -webkit-transform: translate(1%, 0); transform: translate(1%, 0); }
+  70% { -webkit-transform: translate(0, 1%); transform: translate(0, 1%); }
+  80% { -webkit-transform: translate(0, -1%); transform: translate(0, -1%); }
+  90% { -webkit-transform: translate(1%, 1%); transform: translate(1%, 1%); }
+}
 
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-1%, -1%); } 20% { transform: translate(1%, 1%); } 30% { transform: translate(-1%, 1%); } 40% { transform: translate(1%, -1%); } 50% { transform: translate(-1%, 0); } 60% { transform: translate(1%, 0); } 70% { transform: translate(0, 1%); } 80% { transform: translate(0, -1%); } 90% { transform: translate(1%, 1%); }
-    }
+@keyframes grain {
+  0%, 100% { -webkit-transform: translate(0, 0); transform: translate(0, 0); }
+  10% { -webkit-transform: translate(-1%, -1%); transform: translate(-1%, -1%); }
+  20% { -webkit-transform: translate(1%, 1%); transform: translate(1%, 1%); }
+  30% { -webkit-transform: translate(-1%, 1%); transform: translate(-1%, 1%); }
+  40% { -webkit-transform: translate(1%, -1%); transform: translate(1%, -1%); }
+  50% { -webkit-transform: translate(-1%, 0); transform: translate(-1%, 0); }
+  60% { -webkit-transform: translate(1%, 0); transform: translate(1%, 0); }
+  70% { -webkit-transform: translate(0, 1%); transform: translate(0, 1%); }
+  80% { -webkit-transform: translate(0, -1%); transform: translate(0, -1%); }
+  90% { -webkit-transform: translate(1%, 1%); transform: translate(1%, 1%); }
+}
 
-    /* Rain Effect Canvas */
-    #rain-canvas { 
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-      pointer-events: none; z-index: 3; /* Z-index 3 to be above hero bg */
-      opacity: 0.7; /* Increased opacity */
-    }
+/* Rain Effect Canvas */
+#rain-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 3;
+  opacity: 0.7;
+}
 
-    /* Hero Section */
-    .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 10, 12, 0) 0%, rgba(10, 10, 12, 0.3) 50%, var(--bg) 100%); z-index: 1; }
-    .cityscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 0; }
-    .city-layer { position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; background-size: contain; background-repeat: repeat-x; background-position: bottom; }
-    .city-far { background: linear-gradient(0deg, rgba(0, 229, 204, 0.03) 0%, transparent 100%); opacity: 0.5; }
-    .neon-grid { position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; background: linear-gradient(90deg, rgba(0, 229, 204, 0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(0, 229, 204, 0.05) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: bottom; opacity: 0.3; }
-    .hero-content { position: relative; z-index: 10; text-align: center; padding: 2rem; }
+/* Hero Section */
+.hero { 
+  position: relative; min-height: 100vh; display: flex; flex-direction: column; 
+  justify-content: center; align-items: center; overflow: hidden; 
+}
+.hero-bg { 
+  position: absolute; inset: 0; 
+  background: -webkit-linear-gradient(180deg, rgba(10, 10, 12, 0) 0%, rgba(10, 10, 12, 0.3) 50%, var(--bg) 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0) 0%, rgba(10, 10, 12, 0.3) 50%, var(--bg) 100%);
+  z-index: 1; 
+}
+.cityscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 0; }
+.city-layer { 
+  position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; 
+  background-size: contain; background-repeat: repeat-x; background-position: bottom; 
+}
+.city-far { 
+  background: -webkit-linear-gradient(0deg, rgba(0, 229, 204, 0.03) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(0, 229, 204, 0.03) 0%, transparent 100%);
+  opacity: 0.5; 
+}
+.neon-grid { 
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; 
+  background: -webkit-linear-gradient(90deg, rgba(0, 229, 204, 0.1) 1px, transparent 1px), -webkit-linear-gradient(0deg, rgba(0, 229, 204, 0.05) 1px, transparent 1px);
+  background: linear-gradient(90deg, rgba(0, 229, 204, 0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(0, 229, 204, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px; 
+  -webkit-transform: perspective(500px) rotateX(60deg);
+  transform: perspective(500px) rotateX(60deg);
+  -webkit-transform-origin: bottom;
+  transform-origin: bottom; 
+  opacity: 0.3; 
+}
+.hero-content { position: relative; z-index: 10; text-align: center; padding: 2rem; }
 
-    /* Glitch Headline - Layered & Colored */
-    .glitch-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 12vw, 10rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      line-height: 1.1;
-      display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      /* Default color for fallback, though spans handle the color */
-      color: var(--fg); 
-    }
+/* Glitch Headline */
+.glitch-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 12vw, 10rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: var(--fg);
+}
+.glitch-word {
+  position: relative;
+  display: inline-block;
+  color: #ffffff;
+}
+.glitch-word::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  opacity: 0.8;
+  -webkit-animation: glitch-bottom 2s infinite linear alternate-reverse;
+  animation: glitch-bottom 2s infinite linear alternate-reverse;
+}
+.glitch-word::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  opacity: 0.8;
+  -webkit-animation: glitch-top 3s infinite linear alternate-reverse;
+  animation: glitch-top 3s infinite linear alternate-reverse;
+}
+.glitch-word.cyan::before { color: var(--accent-cyan); }
+.glitch-word.cyan::after { color: var(--accent-magenta); }
+.glitch-word.magenta::before { color: var(--accent-magenta); }
+.glitch-word.magenta::after { color: var(--accent-cyan); }
 
-    .glitch-word {
-      position: relative;
-      display: inline-block;
-      /* BASE LAYER (MIDDLE): WHITE & STATIONARY */
-      color: #ffffff;
-    }
+@-webkit-keyframes glitch-bottom {
+  0%, 90%, 100% { -webkit-transform: translate(0); transform: translate(0); }
+  92% { -webkit-transform: translate(-4px, 2px); transform: translate(-4px, 2px); }
+  94% { -webkit-transform: translate(4px, -2px); transform: translate(4px, -2px); }
+  96% { -webkit-transform: translate(-2px, 3px); transform: translate(-2px, 3px); }
+  98% { -webkit-transform: translate(3px, -1px); transform: translate(3px, -1px); }
+}
 
-    /* LAYER 1 (BOTTOM): Underneath, Jittering */
-    .glitch-word::before {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1; /* Behind the white text */
-      opacity: 0.8;
-      animation: glitch-bottom 2s infinite linear alternate-reverse;
-    }
+@keyframes glitch-bottom {
+  0%, 90%, 100% { -webkit-transform: translate(0); transform: translate(0); }
+  92% { -webkit-transform: translate(-4px, 2px); transform: translate(-4px, 2px); }
+  94% { -webkit-transform: translate(4px, -2px); transform: translate(4px, -2px); }
+  96% { -webkit-transform: translate(-2px, 3px); transform: translate(-2px, 3px); }
+  98% { -webkit-transform: translate(3px, -1px); transform: translate(3px, -1px); }
+}
 
-    /* LAYER 2 (TOP): On top, Jittering */
-    .glitch-word::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1; /* In front of the white text */
-      opacity: 0.8;
-      animation: glitch-top 3s infinite linear alternate-reverse;
-    }
+@-webkit-keyframes glitch-top {
+  0%, 88%, 100% { -webkit-transform: translate(0); transform: translate(0); }
+  90% { -webkit-transform: translate(4px, -2px); transform: translate(4px, -2px); }
+  93% { -webkit-transform: translate(-4px, 2px); transform: translate(-4px, 2px); }
+  95% { -webkit-transform: translate(3px, 1px); transform: translate(3px, 1px); }
+  97% { -webkit-transform: translate(-2px, -3px); transform: translate(-2px, -3px); }
+}
 
-    /* HEMMENTH: Cyan Under, Magenta Top */
-    .glitch-word.cyan::before {
-      color: var(--accent-cyan); /* Cyan Under */
-    }
-    .glitch-word.cyan::after {
-      color: var(--accent-magenta); /* Magenta Top */
-    }
+@keyframes glitch-top {
+  0%, 88%, 100% { -webkit-transform: translate(0); transform: translate(0); }
+  90% { -webkit-transform: translate(4px, -2px); transform: translate(4px, -2px); }
+  93% { -webkit-transform: translate(-4px, 2px); transform: translate(-4px, 2px); }
+  95% { -webkit-transform: translate(3px, 1px); transform: translate(3px, 1px); }
+  97% { -webkit-transform: translate(-2px, -3px); transform: translate(-2px, -3px); }
+}
 
-    /* KUMAR: Magenta Under, Cyan Top (Mirrored) */
-    .glitch-word.magenta::before {
-      color: var(--accent-magenta); /* Magenta Under */
-    }
-    .glitch-word.magenta::after {
-      color: var(--accent-cyan); /* Cyan Top */
-    }
+.neon-marquee {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+  letter-spacing: 0.4em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-top: 1rem;
+  text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
+  -webkit-animation: flicker 4s infinite;
+  animation: flicker 4s infinite;
+}
 
-    @keyframes glitch-bottom {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-4px, 2px); }
-      94% { transform: translate(4px, -2px); }
-      96% { transform: translate(-2px, 3px); }
-      98% { transform: translate(3px, -1px); }
-    }
+@-webkit-keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan); 
+  }
+  20%, 24%, 55% { opacity: 0.6; text-shadow: none; }
+}
 
-    @keyframes glitch-top {
-      0%, 88%, 100% { transform: translate(0); }
-      90% { transform: translate(4px, -2px); }
-      93% { transform: translate(-4px, 2px); }
-      95% { transform: translate(3px, 1px); }
-      97% { transform: translate(-2px, -3px); }
-    }
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan); 
+  }
+  20%, 24%, 55% { opacity: 0.6; text-shadow: none; }
+}
 
-    .neon-marquee {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(0.9rem, 2.5vw, 1.4rem);
-      letter-spacing: 0.4em;
-      color: var(--accent-cyan);
-      text-transform: uppercase;
-      margin-top: 1rem;
-      text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
-      animation: flicker 4s infinite;
-    }
+.tagline { 
+  font-size: clamp(0.8rem, 1.5vw, 1rem); 
+  color: var(--muted); 
+  margin-top: 2rem; 
+  max-width: 600px; 
+  letter-spacing: 0.1em; 
+}
 
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan); }
-      20%, 24%, 55% { opacity: 0.6; text-shadow: none; }
-    }
+.scroll-indicator { 
+  position: absolute; bottom: 2rem; left: 50%; 
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 10; 
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; 
+  color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; 
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite; 
+}
+.scroll-indicator svg { width: 24px; height: 24px; stroke: var(--accent-cyan); }
 
-    .tagline { font-size: clamp(0.8rem, 1.5vw, 1rem); color: var(--muted); margin-top: 2rem; max-width: 600px; letter-spacing: 0.1em; }
-    .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; animation: bounce 2s infinite; }
-    .scroll-indicator svg { width: 24px; height: 24px; stroke: var(--accent-cyan); }
-    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+@-webkit-keyframes bounce { 
+  0%, 100% { -webkit-transform: translateX(-50%) translateY(0); transform: translateX(-50%) translateY(0); } 
+  50% { -webkit-transform: translateX(-50%) translateY(10px); transform: translateX(-50%) translateY(10px); } 
+}
 
-    /* Section Styles */
-    section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
-    .section-header { margin-bottom: 4rem; text-align: center; }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: 0.15em; color: var(--fg); position: relative; display: inline-block; }
-    .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-magenta), transparent); }
+@keyframes bounce { 
+  0%, 100% { -webkit-transform: translateX(-50%) translateY(0); transform: translateX(-50%) translateY(0); } 
+  50% { -webkit-transform: translateX(-50%) translateY(10px); transform: translateX(-50%) translateY(10px); } 
+}
 
-    /* Timeline */
-    .timeline-container { max-width: 900px; margin: 0 auto; position: relative; }
-    .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta), transparent); }
-    @media (min-width: 768px) { .timeline-line { left: 50%; transform: translateX(-50%); } }
+/* Section Styles */
+section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
+.section-header { margin-bottom: 4rem; text-align: center; }
+.section-title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: clamp(2.5rem, 6vw, 4rem); 
+  letter-spacing: 0.15em; 
+  color: var(--fg); 
+  position: relative; 
+  display: inline-block; 
+}
+.section-title::after { 
+  content: ''; position: absolute; bottom: -10px; left: 50%; 
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 60%; height: 2px; 
+  background: -webkit-linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-magenta), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-magenta), transparent);
+}
 
-    .timeline-item {
-      position: relative; margin-bottom: 3rem;
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+/* Timeline */
+.timeline-container { max-width: 900px; margin: 0 auto; position: relative; }
+.timeline-line { 
+  position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; 
+  background: -webkit-linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta), transparent);
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta), transparent);
+}
+@media (min-width: 768px) { 
+  .timeline-line { left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); } 
+}
+.timeline-item {
+  position: relative; margin-bottom: 3rem;
+  opacity: 0; 
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: opacity 0.6s ease, -webkit-transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.timeline-item.visible { 
+  opacity: 1; 
+  -webkit-transform: translateY(0);
+  transform: translateY(0); 
+}
+.timeline-dot { 
+  position: absolute; left: 12px; top: 0; width: 18px; height: 18px; 
+  border-radius: 50%; background: var(--bg); border: 2px solid var(--accent-cyan); 
+  box-shadow: 0 0 20px var(--glow-cyan); z-index: 2; 
+}
+@media (min-width: 768px) { 
+  .timeline-dot { left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); } 
+}
+.timeline-content { 
+  margin-left: 50px; padding: 1.5rem; 
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px; 
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-transition: -webkit-transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  color: var(--fg); 
+}
+@media (min-width: 768px) {
+  .timeline-content { width: 45%; margin-left: 0; }
+  .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; margin-right: 55%; }
+  .timeline-item:nth-child(even) .timeline-content { margin-left: 55%; }
+}
+.timeline-content:hover { 
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 40px rgba(0, 229, 204, 0.1); 
+}
+.timeline-year { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 1.2rem; color: var(--accent-amber); 
+  letter-spacing: 0.1em; margin-bottom: 0.5rem; 
+}
+.timeline-role { font-size: 1.1rem; color: var(--fg); font-weight: 700; margin-bottom: 0.25rem; }
+.timeline-org { font-size: 0.8rem; color: var(--accent-cyan); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.timeline-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.timeline-specs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.timeline-spec { 
+  font-size: 0.65rem; padding: 0.3rem 0.6rem; 
+  background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.2); 
+  border-radius: 2px; color: var(--accent-cyan); letter-spacing: 0.05em; 
+}
 
-    .timeline-dot { position: absolute; left: 12px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent-cyan); box-shadow: 0 0 20px var(--glow-cyan); z-index: 2; }
-    @media (min-width: 768px) { .timeline-dot { left: 50%; transform: translateX(-50%); } }
+/* Project Cards */
+.projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto; }
+@media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+.project-card {
+  position: relative; 
+  background: var(--card);
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-transition: -webkit-transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0; 
+  -webkit-transform: translateY(40px);
+  transform: translateY(40px);
+}
+.project-card.visible { 
+  opacity: 1; 
+  -webkit-transform: translateY(0);
+  transform: translateY(0); 
+}
+.project-card::before { 
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; 
+  background: -webkit-linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  opacity: 0; -webkit-transition: opacity 0.3s ease; transition: opacity 0.3s ease; 
+}
+.project-card:hover::before { opacity: 1; }
+.project-card:hover { 
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px); 
+  box-shadow: 0 20px 60px rgba(0, 229, 204, 0.15), 0 0 1px var(--accent-cyan); 
+}
+.project-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
+.project-id { font-size: 0.65rem; color: var(--accent-magenta); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+.project-title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 1.6rem; letter-spacing: 0.08em; color: var(--fg); 
+}
+.project-body { padding: 1.25rem 1.5rem; }
+.project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+.project-specs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.spec-tag { 
+  font-size: 0.7rem; padding: 0.4rem 0.8rem; 
+  background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.2); 
+  border-radius: 2px; color: var(--accent-cyan); letter-spacing: 0.05em; 
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+.spec-tag:hover { 
+  background: rgba(0, 229, 204, 0.2); 
+  box-shadow: 0 0 15px var(--glow-cyan); 
+}
+.project-footer { 
+  padding: 1rem 1.5rem; border-top: 1px solid var(--border); 
+  display: flex; justify-content: space-between; align-items: center; 
+}
+.project-stat { text-align: center; }
+.stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--accent-amber); }
+.stat-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
 
-    .timeline-content { margin-left: 50px; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease; color: var(--fg); }
-    @media (min-width: 768px) {
-      .timeline-content { width: 45%; margin-left: 0; }
-      .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; margin-right: 55%; }
-      .timeline-item:nth-child(even) .timeline-content { margin-left: 55%; }
-    }
-    .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0, 229, 204, 0.1); }
+/* Dragon AWACS Viewer */
+.dragon-section { 
+  grid-column: 1 / -1; 
+  background: -webkit-linear-gradient(135deg, var(--card), rgba(0, 229, 204, 0.05));
+  background: linear-gradient(135deg, var(--card), rgba(0, 229, 204, 0.05));
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden; 
+  display: grid; grid-template-columns: 1fr; gap: 0; 
+}
+@media (min-width: 1024px) { .dragon-section { grid-template-columns: 1fr 1fr; min-height: 500px; } }
+.dragon-visuals { 
+  position: relative; 
+  background: -webkit-radial-gradient(circle at center, rgba(0, 229, 204, 0.08), transparent 70%);
+  background: radial-gradient(circle at center, rgba(0, 229, 204, 0.08), transparent 70%);
+  display: flex; flex-direction: column; 
+}
+.dragon-image-container { 
+  flex: 1; display: flex; align-items: center; justify-content: center; 
+  padding: 2rem; position: relative; 
+}
+.dragon-image { 
+  max-width: 100%; max-height: 400px; object-fit: contain; 
+  filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3)); 
+  -webkit-filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3));
+  -webkit-transition: -webkit-transform 0.5s ease, -webkit-filter 0.5s ease;
+  transition: transform 0.5s ease, filter 0.5s ease; 
+  display: none; 
+}
+.dragon-image.active { 
+  display: block; 
+  -webkit-animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.5s ease; 
+}
 
-    .timeline-year { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--accent-amber); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    .timeline-role { font-size: 1.1rem; color: var(--fg); font-weight: 700; margin-bottom: 0.25rem; }
-    .timeline-org { font-size: 0.8rem; color: var(--accent-cyan); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-    .timeline-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+@-webkit-keyframes fadeIn { 
+  from { opacity: 0; -webkit-transform: scale(0.95); transform: scale(0.95); } 
+  to { opacity: 1; -webkit-transform: scale(1); transform: scale(1); } 
+}
 
-    /* Timeline Specs List */
-    .timeline-specs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .timeline-spec { font-size: 0.65rem; padding: 0.3rem 0.6rem; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.2); border-radius: 2px; color: var(--accent-cyan); letter-spacing: 0.05em; }
+@keyframes fadeIn { 
+  from { opacity: 0; -webkit-transform: scale(0.95); transform: scale(0.95); } 
+  to { opacity: 1; -webkit-transform: scale(1); transform: scale(1); } 
+}
 
-    /* Project Cards */
-    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto; }
-    @media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+.dragon-view-tabs { display: flex; border-top: 1px solid var(--border); }
+.dragon-tab { 
+  flex: 1; padding: 1rem; background: transparent; border: none; 
+  color: var(--muted); font-family: 'Space Mono', monospace; 
+  font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer; 
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+  border-right: 1px solid var(--border); 
+}
+.dragon-tab:last-child { border-right: none; }
+.dragon-tab:hover { color: var(--fg); background: rgba(0, 229, 204, 0.05); }
+.dragon-tab.active { 
+  color: var(--accent-cyan); background: rgba(0, 229, 204, 0.1); 
+  text-shadow: 0 0 10px var(--glow-cyan); 
+}
+.dragon-info { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+.dragon-id { font-size: 0.65rem; color: var(--accent-magenta); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+.dragon-title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 2.5rem; letter-spacing: 0.08em; color: var(--fg); 
+  line-height: 1.1; margin-bottom: 0.5rem; 
+}
+.dragon-subtitle { font-size: 0.9rem; color: var(--accent-cyan); letter-spacing: 0.15em; margin-bottom: 1.5rem; }
+.dragon-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.dragon-stats-grid { 
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; 
+  padding-top: 1.5rem; border-top: 1px solid var(--border); 
+}
+.dragon-stat { text-align: center; }
+.dragon-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--accent-amber); }
+.dragon-stat-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
 
-    .project-card {
-      position: relative; background: var(--card);
-      border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      opacity: 0; transform: translateY(40px);
-    }
-    .project-card.visible { opacity: 1; transform: translateY(0); }
-    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta)); opacity: 0; transition: opacity 0.3s ease; }
-    .project-card:hover::before { opacity: 1; }
-    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0, 229, 204, 0.15), 0 0 1px var(--accent-cyan); }
+/* Skills Section */
+.skills-container { max-width: 1000px; margin: 0 auto; }
+.skills-category { 
+  margin-bottom: 3rem; opacity: 0; 
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease; 
+}
+.skills-category.visible { 
+  opacity: 1; 
+  -webkit-transform: translateY(0);
+  transform: translateY(0); 
+}
+.category-header { 
+  display: flex; align-items: center; gap: 1rem; 
+  margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); 
+}
+.category-icon { width: 24px; height: 24px; stroke: var(--accent-magenta); stroke-width: 1.5; fill: none; }
+.category-title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 1.3rem; letter-spacing: 0.15em; color: var(--fg); 
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.skill-item { 
+  font-size: 0.75rem; padding: 0.5rem 1rem; 
+  background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 2px; 
+  color: var(--muted); 
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+  cursor: default; 
+}
+.skill-item:hover { 
+  background: rgba(0, 229, 204, 0.1); border-color: var(--accent-cyan); color: var(--accent-cyan); 
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px); 
+}
 
-    .project-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
-    .project-id { font-size: 0.65rem; color: var(--accent-magenta); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-    .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em; color: var(--fg); }
-    .project-body { padding: 1.25rem 1.5rem; }
-    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
-    .project-specs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .spec-tag { font-size: 0.7rem; padding: 0.4rem 0.8rem; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.2); border-radius: 2px; color: var(--accent-cyan); letter-spacing: 0.05em; transition: all 0.3s ease; }
-    .spec-tag:hover { background: rgba(0, 229, 204, 0.2); box-shadow: 0 0 15px var(--glow-cyan); }
-    .project-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .project-stat { text-align: center; }
-    .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--accent-amber); }
-    .stat-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
+/* Quote Wall */
+.quote-wall { max-width: 900px; margin: 0 auto; }
+.quote-card { 
+  position: relative; padding: 2.5rem; margin-bottom: 2rem; 
+  background: var(--card); border-left: 3px solid var(--accent-cyan); 
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0; 
+  -webkit-transform: translateX(-30px);
+  transform: translateX(-30px);
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease; 
+}
+.quote-card.visible { 
+  opacity: 1; 
+  -webkit-transform: translateX(0);
+  transform: translateX(0); 
+}
+.quote-card:nth-child(even) { border-left-color: var(--accent-magenta); }
+.quote-text { 
+  font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--fg); 
+  font-style: italic; line-height: 1.8; margin-bottom: 1rem; position: relative; 
+}
+.quote-text::before { 
+  content: '"'; position: absolute; top: -10px; left: -15px; 
+  font-family: 'Bebas Neue', sans-serif; font-size: 4rem; 
+  color: var(--accent-cyan); opacity: 0.3; line-height: 1; 
+}
+.quote-card:nth-child(even) .quote-text::before { color: var(--accent-magenta); }
+.quote-author { font-size: 0.8rem; color: var(--accent-amber); letter-spacing: 0.1em; }
+.typewriter-cursor { 
+  display: inline-block; width: 2px; height: 1em; 
+  background: var(--accent-cyan); margin-left: 2px; 
+  -webkit-animation: blink 0.8s infinite;
+  animation: blink 0.8s infinite; 
+}
 
-    /* Feature: Dragon AWACS Viewer */
-    .dragon-section { grid-column: 1 / -1; background: linear-gradient(135deg, var(--card), rgba(0, 229, 204, 0.05)); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 1fr; gap: 0; }
-    @media (min-width: 1024px) { .dragon-section { grid-template-columns: 1fr 1fr; min-height: 500px; } }
-    .dragon-visuals { position: relative; background: radial-gradient(circle at center, rgba(0, 229, 204, 0.08), transparent 70%); display: flex; flex-direction: column; }
-    .dragon-image-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; position: relative; }
-    .dragon-image { max-width: 100%; max-height: 400px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3)); transition: transform 0.5s ease, filter 0.5s ease; display: none; }
-    .dragon-image.active { display: block; animation: fadeIn 0.5s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-    .dragon-view-tabs { display: flex; border-top: 1px solid var(--border); }
-    .dragon-tab { flex: 1; padding: 1rem; background: transparent; border: none; color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer; transition: all 0.3s ease; border-right: 1px solid var(--border); }
-    .dragon-tab:last-child { border-right: none; }
-    .dragon-tab:hover { color: var(--fg); background: rgba(0, 229, 204, 0.05); }
-    .dragon-tab.active { color: var(--accent-cyan); background: rgba(0, 229, 204, 0.1); text-shadow: 0 0 10px var(--glow-cyan); }
-    .dragon-info { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
-    .dragon-id { font-size: 0.65rem; color: var(--accent-magenta); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-    .dragon-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.08em; color: var(--fg); line-height: 1.1; margin-bottom: 0.5rem; }
-    .dragon-subtitle { font-size: 0.9rem; color: var(--accent-cyan); letter-spacing: 0.15em; margin-bottom: 1.5rem; }
-    .dragon-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
-    .dragon-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-    .dragon-stat { text-align: center; }
-    .dragon-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--accent-amber); }
-    .dragon-stat-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
+@-webkit-keyframes blink { 
+  0%, 50% { opacity: 1; } 
+  51%, 100% { opacity: 0; } 
+}
 
-    /* Skills Section */
-    .skills-container { max-width: 1000px; margin: 0 auto; }
-    .skills-category { margin-bottom: 3rem; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
-    .skills-category.visible { opacity: 1; transform: translateY(0); }
-    .category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-    .category-icon { width: 24px; height: 24px; stroke: var(--accent-magenta); stroke-width: 1.5; fill: none; }
-    .category-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.15em; color: var(--fg); }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .skill-item { font-size: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 2px; color: var(--muted); transition: all 0.3s ease; cursor: default; }
-    .skill-item:hover { background: rgba(0, 229, 204, 0.1); border-color: var(--accent-cyan); color: var(--accent-cyan); transform: translateY(-2px); }
+@keyframes blink { 
+  0%, 50% { opacity: 1; } 
+  51%, 100% { opacity: 0; } 
+}
 
-    /* Quote Wall */
-    .quote-wall { max-width: 900px; margin: 0 auto; }
-    .quote-card { position: relative; padding: 2.5rem; margin-bottom: 2rem; background: var(--card); border-left: 3px solid var(--accent-cyan); backdrop-filter: blur(10px); opacity: 0; transform: translateX(-30px); transition: all 0.6s ease; }
-    .quote-card.visible { opacity: 1; transform: translateX(0); }
-    .quote-card:nth-child(even) { border-left-color: var(--accent-magenta); }
-    .quote-text { font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--fg); font-style: italic; line-height: 1.8; margin-bottom: 1rem; position: relative; }
-    .quote-text::before { content: '"'; position: absolute; top: -10px; left: -15px; font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--accent-cyan); opacity: 0.3; line-height: 1; }
-    .quote-card:nth-child(even) .quote-text::before { color: var(--accent-magenta); }
-    .quote-author { font-size: 0.8rem; color: var(--accent-amber); letter-spacing: 0.1em; }
-    .typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-cyan); margin-left: 2px; animation: blink 0.8s infinite; }
-    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+/* Contact Section */
+.contact-section { 
+  text-align: center; padding: 8rem 1.5rem; 
+  background: -webkit-linear-gradient(180deg, transparent, rgba(0, 229, 204, 0.02), rgba(233, 48, 168, 0.02));
+  background: linear-gradient(180deg, transparent, rgba(0, 229, 204, 0.02), rgba(233, 48, 168, 0.02));
+}
+.contact-title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: clamp(2rem, 5vw, 3.5rem); 
+  letter-spacing: 0.15em; margin-bottom: 1rem; color: var(--fg); 
+}
+.contact-subtitle { 
+  font-size: 0.9rem; color: var(--muted); 
+  max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; 
+}
+.contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.contact-link { 
+  display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.75rem; 
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px; 
+  color: var(--fg); text-decoration: none; font-size: 0.85rem; 
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+.contact-link:hover { 
+  border-color: var(--accent-cyan); box-shadow: 0 0 30px var(--glow-cyan); 
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px); 
+}
+.contact-link svg { width: 18px; height: 18px; stroke: var(--accent-cyan); stroke-width: 1.5; fill: none; }
 
-    /* Contact Section */
-    .contact-section { text-align: center; padding: 8rem 1.5rem; background: linear-gradient(180deg, transparent, rgba(0, 229, 204, 0.02), rgba(233, 48, 168, 0.02)); }
-    .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.15em; margin-bottom: 1rem; color: var(--fg); }
-    .contact-subtitle { font-size: 0.9rem; color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; }
-    .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    .contact-link { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; color: var(--fg); text-decoration: none; font-size: 0.85rem; transition: all 0.3s ease; }
-    .contact-link:hover { border-color: var(--accent-cyan); box-shadow: 0 0 30px var(--glow-cyan); transform: translateY(-3px); }
-    .contact-link svg { width: 18px; height: 18px; stroke: var(--accent-cyan); stroke-width: 1.5; fill: none; }
+/* Footer */
+footer { 
+  padding: 2rem; text-align: center; border-top: 1px solid var(--border); 
+  background: -webkit-linear-gradient(180deg, transparent, rgba(10, 10, 12, 0.5));
+  background: linear-gradient(180deg, transparent, rgba(10, 10, 12, 0.5));
+}
+.footer-meta { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; opacity: 0.6; }
 
-    /* Footer */
-    footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border); background: linear-gradient(180deg, transparent, rgba(10, 10, 12, 0.5)); }
-    .footer-meta { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; opacity: 0.6; }
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { 
+    -webkit-animation-duration: 0.01ms !important; 
+    animation-duration: 0.01ms !important; 
+    -webkit-animation-iteration-count: 1 !important; 
+    animation-iteration-count: 1 !important; 
+    -webkit-transition-duration: 0.01ms !important; 
+    transition-duration: 0.01ms !important; 
+  }
+  .scanlines, .film-grain { display: none; }
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-      .scanlines, .film-grain { display: none; }
-    }
+a:focus-visible, button:focus-visible { 
+  outline: 2px solid var(--accent-cyan); outline-offset: 2px; 
+}
 
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
+/* Navigation */
+nav { 
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; 
+  padding: 1rem 2rem; 
+  background: rgba(10, 10, 12, 0.9); 
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); 
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease; 
+}
+nav.visible { 
+  -webkit-transform: translateY(0);
+  transform: translateY(0); 
+}
+.nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 1.2rem; letter-spacing: 0.15em; color: var(--fg); 
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-link { 
+  font-size: 0.75rem; color: var(--muted); text-decoration: none; 
+  letter-spacing: 0.15em; -webkit-transition: color 0.3s ease; transition: color 0.3s ease; 
+}
+.nav-link:hover { color: var(--accent-cyan); }
+@media (max-width: 640px) { .nav-links { display: none; } }
 
-    /* Navigation */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(10, 10, 12, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); transform: translateY(-100%); transition: transform 0.3s ease; }
-    nav.visible { transform: translateY(0); }
-    .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--fg); }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-link { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; transition: color 0.3s ease; }
-    .nav-link:hover { color: var(--accent-cyan); }
-    @media (max-width: 640px) { .nav-links { display: none; } }
-  </style>
+/* Performance hints for mobile */
+.timeline-item, .project-card, .skills-category, .quote-card, .dragon-image {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+</style>
 </head>
 <body>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="film-grain" aria-hidden="true"></div>
-  <canvas id="rain-canvas" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="film-grain" aria-hidden="true"></div>
+<canvas id="rain-canvas" aria-hidden="true"></canvas>
 
-  <!-- Navigation -->
-  <nav role="navigation" aria-label="Main navigation">
-    <div class="nav-content">
-      <div class="nav-logo">IDEA LABORATORY</div>
-      <div class="nav-links">
-        <a href="#origin" class="nav-link">ORIGIN</a>
-        <a href="#method" class="nav-link">METHOD</a>
-        <a href="#projects" class="nav-link">PROJECTS</a>
-        <a href="#transmissions" class="nav-link">TRANSMISSIONS</a>
-        <a href="#idea-lab" class="nav-link">IDEA LAB</a>
-        <a href="#contact" class="nav-link">CONTACT</a>
+<!-- Navigation -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-content">
+    <div class="nav-logo">IDEA LABORATORY</div>
+    <div class="nav-links">
+      <a href="#origin" class="nav-link">ORIGIN</a>
+      <a href="#method" class="nav-link">METHOD</a>
+      <a href="#projects" class="nav-link">PROJECTS</a>
+      <a href="#transmissions" class="nav-link">TRANSMISSIONS</a>
+      <a href="#idea-lab" class="nav-link">IDEA LAB</a>
+      <a href="#contact" class="nav-link">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="cityscape" aria-hidden="true">
+    <div class="city-layer city-far" id="city-far"></div>
+    <div class="neon-grid"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="glitch-headline">
+      <span class="glitch-word cyan" data-text="HEMMENTH">HEMMENTH</span>
+      <span class="glitch-word magenta" data-text="KUMAR">KUMAR</span>
+    </h1>
+    <p class="neon-marquee">Founder, Idea Laboratory</p>
+    <p class="tagline">Product Prototypist & R&D Consultant</p>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </div>
+</header>
+
+<!-- ORIGIN SECTION -->
+<section id="origin">
+  <div class="section-header"><h2 class="section-title">SUBJECT FILE: ORIGIN</h2></div>
+  <div class="timeline-container">
+    <div class="timeline-line" aria-hidden="true"></div>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">THE START</div>
+        <div class="timeline-role">Cosmos to Circuits</div>
+        <div class="timeline-desc">My extensive knowledge gained from my childhood curiosity to understand how everything around me works and why it exists, learning how to make things with them myself by breaking basically everything I ever got my hands on, only to then try to fix it, led me to learn how everything around us came to exist, understand how it was created, and know how it works.</div>
       </div>
-    </div>
-  </nav>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">AGE 06</div>
+        <div class="timeline-role">The Spark</div>
+        <div class="timeline-desc">The creation of the universe, to space and everything in it was the first subject of my interest at age 6. I have the show "How The Universe Works" to thank for that. And right after parallely came "How It's Made", and every other show on Discovery Channel and Discovery Science.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">THE TELEPHONE</div>
+        <div class="timeline-role">Reverse Engineering</div>
+        <div class="timeline-desc">As I grew older, I started to break electronics, but this time from watching the countless episodes of how it's made, I began to reverse engineer and learned to take apart and put them back together, even if I'd never seen that specific thing on the show before. Oh the joys and that poor tortured telephone, I still miss you. We could've had cordless telephones, but no. Mom would never buy the same thing again, for "some reason".</div>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="cityscape" aria-hidden="true">
-      <div class="city-layer city-far" id="city-far"></div>
-      <div class="neon-grid"></div>
-    </div>
-    <div class="hero-content">
-      <!-- Structure: 3 Layers. 
-           1. White (Static, Middle)
-           2. Cyan (Jittering, Bottom)
-           3. Magenta (Jittering, Top)
-      -->
-      <h1 class="glitch-headline">
-        <span class="glitch-word cyan" data-text="HEMMENTH">HEMMENTH</span>
-        <span class="glitch-word magenta" data-text="KUMAR">KUMAR</span>
-      </h1>
-      <p class="neon-marquee">Founder, Idea Laboratory</p>
-      <p class="tagline">Product Prototypist & R&D Consultant</p>
-    </div>
-    <div class="scroll-indicator" aria-hidden="true">
-      <span>SCROLL</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    </div>
-  </header>
+<!-- METHOD SECTION -->
+<section id="method" style="background: linear-gradient(180deg, var(--bg), var(--bg-secondary)); background: -webkit-linear-gradient(180deg, var(--bg), var(--bg-secondary));">
+  <div class="section-header"><h2 class="section-title">SYSTEM LOG: METHOD</h2></div>
+  <div class="timeline-container">
+    <div class="timeline-line" aria-hidden="true"></div>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">ACCESS</div>
+        <div class="timeline-role">Unrestricted Internet</div>
+        <div class="timeline-desc">Then came along unrestricted internet access, mostly. A literal big bang of resources, friends, and exposure that comes along with it.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">CIRCUMVENTION</div>
+        <div class="timeline-role">The NomadBSD Solution</div>
+        <div class="timeline-desc">When my mother started putting a screen limit on the desktop PC, I learned about Linux, and circumvented windows entirely by using NomadBSD on a pendrive.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2022 - 2024</div>
+        <div class="timeline-role">B.Tech Electronics & Communications</div>
+        <div class="timeline-org">IIIT NAGPUR</div>
+        <div class="timeline-desc">Gained formal grounding in circuit theory, signal processing, and embedded systems. While the structured academic pace couldn't match the speed of independent experimentation, the theoretical base remains vital to current R&D work in UAV systems.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2024 - PRESENT</div>
+        <div class="timeline-role">Certificate in Product Design</div>
+        <div class="timeline-org">SOMAIYA SCHOOL OF DESIGN, MUMBAI</div>
+        <div class="timeline-desc">Focused on design thinking, material science, and human-centered design. Opted to conclude with a certificate to pursue full-time R&D on the Dragon UAV system, prioritizing field application over academic tenure.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">CURRENT OPS</div>
+        <div class="timeline-role">AR/VR R&D Intern</div>
+        <div class="timeline-org">MAJORBEAM</div>
+        <div class="timeline-desc">Currently interning at Majorbeam to master industry-level AR/VR technologies while developing the Dragon UAV//AWACS system. Gaining practical experience in immersive tech integration for real-world R&D applications.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">SYNTHESIS</div>
+        <div class="timeline-role">The Repository</div>
+        <div class="timeline-desc">My knack for taking things apart grew even more from here, turning into the ability to not only be able to reverse engineer anything, but also create things using the entire repository of everything I had learned during my entire childhood. From the cosmos to humanity's inventions, our Earth, with physics, chemistry, biology, math, and finally, design.</div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">PHILOSOPHY</div>
+        <div class="timeline-role">Interconnecting Concepts</div>
+        <div class="timeline-desc">Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions. So this is where I am now, with the ability to create anything to answer any question, reasonably well. Knowing where and how to find information is also very important, and so is to be able to correctly read and follow resources. Also we stand on the shoulders of giants.</div>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- ORIGIN SECTION -->
-  <section id="origin">
-    <div class="section-header"><h2 class="section-title">SUBJECT FILE: ORIGIN</h2></div>
-    <div class="timeline-container">
-      <div class="timeline-line" aria-hidden="true"></div>
-      
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">THE START</div>
-          <div class="timeline-role">Cosmos to Circuits</div>
-          <div class="timeline-desc">My extensive knowledge gained from my childhood curiosity to understand how everything around me works and why it exists, learning how to make things with them myself by breaking basically everything I ever got my hands on, only to then try to fix it, led me to learn how everything around us came to exist, understand how it was created, and know how it works.</div>
+<!-- Projects Section -->
+<section id="projects" style="background: linear-gradient(180deg, var(--bg-secondary), rgba(233, 48, 168, 0.02)); background: -webkit-linear-gradient(180deg, var(--bg-secondary), rgba(233, 48, 168, 0.02));">
+  <div class="section-header"><h2 class="section-title">ACTIVE OPS</h2></div>
+  <div class="projects-grid">
+    <!-- DRAGON AWACS FEATURED SECTION -->
+    <article class="dragon-section project-card visible">
+      <div class="dragon-visuals">
+        <div class="dragon-image-container">
+          <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/edfd6c15fa38ffb04f925661547ab79d3a96a9ce/image.png" alt="Dragon TMFM Mode" class="dragon-image active" id="dragon-tmfm">
+          <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="Dragon VTOL Mode" class="dragon-image" id="dragon-vtol">
         </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">AGE 06</div>
-          <div class="timeline-role">The Spark</div>
-          <div class="timeline-desc">The creation of the universe, to space and everything in it was the first subject of my interest at age 6. I have the show "How The Universe Works" to thank for that. And right after parallely came "How It's Made", and every other show on Discovery Channel and Discovery Science.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">THE TELEPHONE</div>
-          <div class="timeline-role">Reverse Engineering</div>
-          <div class="timeline-desc">As I grew older, I started to break electronics, but this time from watching the countless episodes of how it's made, I began to reverse engineer and learned to take apart and put them back together, even if I'd never seen that specific thing on the show before. Oh the joys and that poor tortured telephone, I still miss you. We could've had cordless telephones, but no. Mom would never buy the same thing again, for "some reason".</div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- METHOD SECTION -->
-  <section id="method" style="background: linear-gradient(180deg, var(--bg), var(--bg-secondary));">
-    <div class="section-header"><h2 class="section-title">SYSTEM LOG: METHOD</h2></div>
-    <div class="timeline-container">
-      <div class="timeline-line" aria-hidden="true"></div>
-      
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">ACCESS</div>
-          <div class="timeline-role">Unrestricted Internet</div>
-          <div class="timeline-desc">Then came along unrestricted internet access, mostly. A literal big bang of resources, friends, and exposure that comes along with it.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">CIRCUMVENTION</div>
-          <div class="timeline-role">The NomadBSD Solution</div>
-          <div class="timeline-desc">When my mother started putting a screen limit on the desktop PC, I learned about Linux, and circumvented windows entirely by using NomadBSD on a pendrive.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2022 - 2024</div>
-          <div class="timeline-role">B.Tech Electronics & Communications</div>
-          <div class="timeline-org">IIIT NAGPUR</div>
-          <div class="timeline-desc">Gained formal grounding in circuit theory, signal processing, and embedded systems. While the structured academic pace couldn't match the speed of independent experimentation, the theoretical base remains vital to current R&D work in UAV systems.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2024 - PRESENT</div>
-          <div class="timeline-role">Certificate in Product Design</div>
-          <div class="timeline-org">SOMAIYA SCHOOL OF DESIGN, MUMBAI</div>
-          <div class="timeline-desc">Focused on design thinking, material science, and human-centered design. Opted to conclude with a certificate to pursue full-time R&D on the Dragon UAV system, prioritizing field application over academic tenure.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">CURRENT OPS</div>
-          <div class="timeline-role">AR/VR R&D Intern</div>
-          <div class="timeline-org">MAJORBEAM</div>
-          <div class="timeline-desc">Currently interning at Majorbeam to master industry-level AR/VR technologies while developing the Dragon UAV//AWACS system. Gaining practical experience in immersive tech integration for real-world R&D applications.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">SYNTHESIS</div>
-          <div class="timeline-role">The Repository</div>
-          <div class="timeline-desc">My knack for taking things apart grew even more from here, turning into the ability to not only be able to reverse engineer anything, but also create things using the entire repository of everything I had learned during my entire childhood. From the cosmos to humanity's inventions, our Earth, with physics, chemistry, biology, math, and finally, design.</div>
-        </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">PHILOSOPHY</div>
-          <div class="timeline-role">Interconnecting Concepts</div>
-          <div class="timeline-desc">Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions. So this is where I am now, with the ability to create anything to answer any question, reasonably well. Knowing where and how to find information is also very important, and so is to be able to correctly read and follow resources. Also we stand on the shoulders of giants.</div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" style="background: linear-gradient(180deg, var(--bg-secondary), rgba(233, 48, 168, 0.02));">
-    <div class="section-header"><h2 class="section-title">ACTIVE OPS</h2></div>
-    <div class="projects-grid">
-      
-      <!-- DRAGON AWACS FEATURED SECTION -->
-      <article class="dragon-section project-card visible">
-        <div class="dragon-visuals">
-          <div class="dragon-image-container">
-            <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/edfd6c15fa38ffb04f925661547ab79d3a96a9ce/image.png" alt="Dragon TMFM Mode" class="dragon-image active" id="dragon-tmfm">
-            <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="Dragon VTOL Mode" class="dragon-image" id="dragon-vtol">
-          </div>
-          <div class="dragon-view-tabs" role="tablist" aria-label="Aircraft Modes">
-            <button class="dragon-tab active" data-view="tmfm" role="tab" aria-selected="true">TMFM</button>
-            <button class="dragon-tab" data-view="vtol" role="tab" aria-selected="false">VTOL</button>
-          </div>
-        </div>
-        <div class="dragon-info">
-          <div class="dragon-id">CASE FILE 001 // PRIMARY ASSET</div>
-          <h3 class="dragon-title">DRAGON UAV//AWACS</h3>
-          <div class="dragon-subtitle">Autonomous Search And Rescue AWACS Package</div>
-          <p class="dragon-desc">Featuring VTOL to TMFM (twin motor flight mode) with redundancy systems, quadrupling flight range to over 400 KM and ensuring uninterrupted flight in case of motor failure. Can carry up to three flares. Designed for persistent aerial surveying in disaster zones with live video transmission and real-time AI analysis to locate people. Helps rescuers find the optimal path while avoiding hazards—up to 3x faster than manual drone surveying.</p>
-          <div class="project-specs" style="margin-bottom: 1.5rem;">
-            <span class="spec-tag">VTOL TO TMFM</span>
-            <span class="spec-tag">AI ANALYSIS</span>
-            <span class="spec-tag">HOVER</span>
-            <span class="spec-tag">LIVE FEED</span>
-          </div>
-          <div class="dragon-stats-grid">
-            <div class="dragon-stat"><div class="dragon-stat-value">14 KG</div><div class="dragon-stat-label">AUW</div></div>
-            <div class="dragon-stat"><div class="dragon-stat-value">400+ KM</div><div class="dragon-stat-label">RANGE</div></div>
-            <div class="dragon-stat"><div class="dragon-stat-value">50 KM/H</div><div class="dragon-stat-label">CRUISE</div></div>
-          </div>
-        </div>
-      </article>
-      <!-- END DRAGON SECTION -->
-
-      <!-- BURST SWARM AWACS -->
-      <article class="project-card">
-        <div class="project-header">
-          <div class="project-id">CASE FILE 002</div>
-          <h3 class="project-title">BURST SWARM AWACS</h3>
-        </div>
-        <div class="project-body">
-          <p class="project-desc">Autonomous mesh network deployment system that scatters self-organizing, solar-powered Meshtastic nodes across disaster zones. Enables persistent communication infrastructure in denied environments by setting up its own 2.4GHz Wi-Fi (802.11 b/g/n) network. The LoRa radio mesh allows for communications amongst rescuers directly, and allowing the DRAGON UAV//AWACS to be controlled beyond and behind Line of Sight. Upon burst deployment, six modules glide down in a spiral, capturing video which upon landing is converted into a 3D model of the scanned area, and uploaded to the ground station via the LoRa Mesh.</p>
-          <div class="project-specs">
-            <span class="spec-tag">LoRa MESH</span>
-            <span class="spec-tag">Wi-Fi AP</span>
-            <span class="spec-tag">3D MAPPING</span>
-            <span class="spec-tag">BLOS</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <div class="project-stat"><div class="stat-value">4 KM²</div><div class="stat-label">COVERAGE</div></div>
-          <div class="project-stat"><div class="stat-value">90 SEC</div><div class="stat-label">DEPLOY</div></div>
-          <div class="project-stat"><div class="stat-value">6 MODULES</div><div class="stat-label">PAYLOAD</div></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="specs">
-    <div class="section-header"><h2 class="section-title">SYSTEM SPECIFICATIONS</h2></div>
-    <div class="skills-container">
-      <div class="skills-category">
-        <div class="category-header">
-          <svg class="category-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <h3 class="category-title">CORE SCIENCES</h3>
-        </div>
-        <div class="skills-list">
-          <span class="skill-item">Math</span><span class="skill-item">Physics</span><span class="skill-item">Chemistry</span><span class="skill-item">Biology</span><span class="skill-item">Astronomy</span><span class="skill-item">Space Stuff</span>
+        <div class="dragon-view-tabs" role="tablist" aria-label="Aircraft Modes">
+          <button class="dragon-tab active" data-view="tmfm" role="tab" aria-selected="true">TMFM</button>
+          <button class="dragon-tab" data-view="vtol" role="tab" aria-selected="false">VTOL</button>
         </div>
       </div>
-
-      <div class="skills-category">
-        <div class="category-header">
-          <svg class="category-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          <h3 class="category-title">ENGINEERING & FABRICATION</h3>
+      <div class="dragon-info">
+        <div class="dragon-id">CASE FILE 001 // PRIMARY ASSET</div>
+        <h3 class="dragon-title">DRAGON UAV//AWACS</h3>
+        <div class="dragon-subtitle">Autonomous Search And Rescue AWACS Package</div>
+        <p class="dragon-desc">Featuring VTOL to TMFM (twin motor flight mode) with redundancy systems, quadrupling flight range to over 400 KM and ensuring uninterrupted flight in case of motor failure. Can carry up to three flares. Designed for persistent aerial surveying in disaster zones with live video transmission and real-time AI analysis to locate people. Helps rescuers find the optimal path while avoiding hazards—up to 3x faster than manual drone surveying.</p>
+        <div class="project-specs" style="margin-bottom: 1.5rem;">
+          <span class="spec-tag">VTOL TO TMFM</span>
+          <span class="spec-tag">AI ANALYSIS</span>
+          <span class="spec-tag">HOVER</span>
+          <span class="spec-tag">LIVE FEED</span>
         </div>
-        <div class="skills-list">
-          <span class="skill-item">Engineering</span><span class="skill-item">Aerospace</span><span class="skill-item">Aerodynamics</span><span class="skill-item">Manufacturing & Machining</span><span class="skill-item">Electronics Repair</span><span class="skill-item">Silicon & Chemistry</span>
-        </div>
-      </div>
-
-      <div class="skills-category">
-        <div class="category-header">
-          <svg class="category-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          <h3 class="category-title">DESIGN & TOOLS</h3>
-        </div>
-        <div class="skills-list">
-          <span class="skill-item">Product Design</span><span class="skill-item">SolidWorks</span><span class="skill-item">Illustration</span><span class="skill-item">Sketching</span><span class="skill-item">Simulations & Game Engines</span><span class="skill-item">Consumer Products</span>
+        <div class="dragon-stats-grid">
+          <div class="dragon-stat"><div class="dragon-stat-value">14 KG</div><div class="dragon-stat-label">AUW</div></div>
+          <div class="dragon-stat"><div class="dragon-stat-value">400+ KM</div><div class="dragon-stat-label">RANGE</div></div>
+          <div class="dragon-stat"><div class="dragon-stat-value">50 KM/H</div><div class="dragon-stat-label">CRUISE</div></div>
         </div>
       </div>
-
-      <div class="skills-category">
-        <div class="category-header">
-          <svg class="category-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-          <h3 class="category-title">COMPUTING & TECH</h3>
-        </div>
-        <div class="skills-list">
-          <span class="skill-item">Programming</span><span class="skill-item">Electronics</span><span class="skill-item">Videogames</span><span class="skill-item">Networking</span><span class="skill-item">Open Source</span>
+    </article>
+    <!-- END DRAGON SECTION -->
+    <!-- BURST SWARM AWACS -->
+    <article class="project-card">
+      <div class="project-header">
+        <div class="project-id">CASE FILE 002</div>
+        <h3 class="project-title">BURST SWARM AWACS</h3>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Autonomous mesh network deployment system that scatters self-organizing, solar-powered Meshtastic nodes across disaster zones. Enables persistent communication infrastructure in denied environments by setting up its own 2.4GHz Wi-Fi (802.11 b/g/n) network. The LoRa radio mesh allows for communications amongst rescuers directly, and allowing the DRAGON UAV//AWACS to be controlled beyond and behind Line of Sight. Upon burst deployment, six modules glide down in a spiral, capturing video which upon landing is converted into a 3D model of the scanned area, and uploaded to the ground station via the LoRa Mesh.</p>
+        <div class="project-specs">
+          <span class="spec-tag">LoRa MESH</span>
+          <span class="spec-tag">Wi-Fi AP</span>
+          <span class="spec-tag">3D MAPPING</span>
+          <span class="spec-tag">BLOS</span>
         </div>
       </div>
+      <div class="project-footer">
+        <div class="project-stat"><div class="stat-value">4 KM²</div><div class="stat-label">COVERAGE</div></div>
+        <div class="project-stat"><div class="stat-value">90 SEC</div><div class="stat-label">DEPLOY</div></div>
+        <div class="project-stat"><div class="stat-value">6 MODULES</div><div class="stat-label">PAYLOAD</div></div>
+      </div>
+    </article>
+  </div>
+</section>
 
-      <div class="skills-category">
-        <div class="category-header">
-          <svg class="category-icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          <h3 class="category-title">RESEARCH & FOCUS</h3>
-        </div>
-        <div class="skills-list">
-          <span class="skill-item">UAVs</span><span class="skill-item">Cars & Planes</span><span class="skill-item">Engines & Energy</span><span class="skill-item">Disability Innovations</span><span class="skill-item">Research Papers</span><span class="skill-item">Documentation</span>
-        </div>
+<!-- Skills Section -->
+<section id="specs">
+  <div class="section-header"><h2 class="section-title">SYSTEM SPECIFICATIONS</h2></div>
+  <div class="skills-container">
+    <div class="skills-category">
+      <div class="category-header">
+        <svg class="category-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <h3 class="category-title">CORE SCIENCES</h3>
+      </div>
+      <div class="skills-list">
+        <span class="skill-item">Math</span><span class="skill-item">Physics</span><span class="skill-item">Chemistry</span><span class="skill-item">Biology</span><span class="skill-item">Astronomy</span><span class="skill-item">Space Stuff</span>
       </div>
     </div>
-  </section>
-
-  <!-- Intercepted Transmissions -->
-  <section id="transmissions" style="background: linear-gradient(180deg, var(--bg), rgba(233, 48, 168, 0.02));">
-    <div class="section-header"><h2 class="section-title">INTERCEPTED TRANSMISSIONS</h2></div>
-    <div class="quote-wall">
-      <blockquote class="quote-card">
-        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
-        <cite class="quote-author">From the Project Archives</cite>
-      </blockquote>
-      <blockquote class="quote-card">
-        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
-        <cite class="quote-author">Design Philosophy v2.4</cite>
-      </blockquote>
-      <blockquote class="quote-card">
-        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
-        <cite class="quote-author">Mission Statement</cite>
-      </blockquote>
+    <div class="skills-category">
+      <div class="category-header">
+        <svg class="category-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <h3 class="category-title">ENGINEERING & FABRICATION</h3>
+      </div>
+      <div class="skills-list">
+        <span class="skill-item">Engineering</span><span class="skill-item">Aerospace</span><span class="skill-item">Aerodynamics</span><span class="skill-item">Manufacturing & Machining</span><span class="skill-item">Electronics Repair</span><span class="skill-item">Silicon & Chemistry</span>
+      </div>
     </div>
-  </section>
+    <div class="skills-category">
+      <div class="category-header">
+        <svg class="category-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <h3 class="category-title">DESIGN & TOOLS</h3>
+      </div>
+      <div class="skills-list">
+        <span class="skill-item">Product Design</span><span class="skill-item">SolidWorks</span><span class="skill-item">Illustration</span><span class="skill-item">Sketching</span><span class="skill-item">Simulations & Game Engines</span><span class="skill-item">Consumer Products</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="category-header">
+        <svg class="category-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        <h3 class="category-title">COMPUTING & TECH</h3>
+      </div>
+      <div class="skills-list">
+        <span class="skill-item">Programming</span><span class="skill-item">Electronics</span><span class="skill-item">Videogames</span><span class="skill-item">Networking</span><span class="skill-item">Open Source</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="category-header">
+        <svg class="category-icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <h3 class="category-title">RESEARCH & FOCUS</h3>
+      </div>
+      <div class="skills-list">
+        <span class="skill-item">UAVs</span><span class="skill-item">Cars & Planes</span><span class="skill-item">Engines & Energy</span><span class="skill-item">Disability Innovations</span><span class="skill-item">Research Papers</span><span class="skill-item">Documentation</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- IDEA LABORATORY SECTION -->
-  <section id="idea-lab" style="background: linear-gradient(180deg, rgba(233, 48, 168, 0.02), var(--bg-secondary));">
-    <div class="section-header"><h2 class="section-title">DIRECTIVE: IDEA LABORATORY</h2></div>
-    <div class="timeline-container">
-      <div class="timeline-line" aria-hidden="true"></div>
-      
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">ACCESSIBILITY CRISIS</div>
-          <div class="timeline-role">The Access Friction Problem</div>
-          <div class="timeline-desc">
-            R&D infrastructure is currently siloed. Access is gated by institutional affiliation (Universities) or corporate status (Incubators/Makerlabs). The "Solo Innovator" faces a <strong style="color: var(--fg);">Resource Desert</strong>—no access to labs, tools, or expertise. Idea Laboratory breaches this barrier.
-            <div class="timeline-specs">
-              <span class="timeline-spec">INSTITUTIONAL GATEKEEPING</span>
-              <span class="timeline-spec">RESOURCE SILOS</span>
-              <span class="timeline-spec">SOLO INNOVATOR GAP</span>
-            </div>
+<!-- Intercepted Transmissions -->
+<section id="transmissions" style="background: linear-gradient(180deg, var(--bg), rgba(233, 48, 168, 0.02)); background: -webkit-linear-gradient(180deg, var(--bg), rgba(233, 48, 168, 0.02));">
+  <div class="section-header"><h2 class="section-title">INTERCEPTED TRANSMISSIONS</h2></div>
+  <div class="quote-wall">
+    <blockquote class="quote-card">
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <cite class="quote-author">From the Project Archives</cite>
+    </blockquote>
+    <blockquote class="quote-card">
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <cite class="quote-author">Design Philosophy v2.4</cite>
+    </blockquote>
+    <blockquote class="quote-card">
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <cite class="quote-author">Mission Statement</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- IDEA LABORATORY SECTION -->
+<section id="idea-lab" style="background: linear-gradient(180deg, rgba(233, 48, 168, 0.02), var(--bg-secondary)); background: -webkit-linear-gradient(180deg, rgba(233, 48, 168, 0.02), var(--bg-secondary));">
+  <div class="section-header"><h2 class="section-title">DIRECTIVE: IDEA LABORATORY</h2></div>
+  <div class="timeline-container">
+    <div class="timeline-line" aria-hidden="true"></div>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">ACCESSIBILITY CRISIS</div>
+        <div class="timeline-role">The Access Friction Problem</div>
+        <div class="timeline-desc">
+          R&D infrastructure is currently siloed. Access is gated by institutional affiliation (Universities) or corporate status (Incubators/Makerlabs). The "Solo Innovator" faces a <strong style="color: var(--fg);">Resource Desert</strong>—no access to labs, tools, or expertise. Idea Laboratory breaches this barrier.
+          <div class="timeline-specs">
+            <span class="timeline-spec">INSTITUTIONAL GATEKEEPING</span>
+            <span class="timeline-spec">RESOURCE SILOS</span>
+            <span class="timeline-spec">SOLO INNOVATOR GAP</span>
           </div>
         </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">PROTOCOL</div>
-          <div class="timeline-role">R&D Democratization Engine</div>
-          <div class="timeline-desc">
-            A portable prototyping ecosystem. We don't just fabricate; we translate <strong style="color: var(--fg);">Abstract Intent</strong> into <strong style="color: var(--fg);">Engineered Reality</strong>. Input: Abstract Concept. Process: Technical Specification → Functional Prototype → Technical Data Package (TDP). Output: Investment-Ready Asset.
-            <div class="timeline-specs">
-              <span class="timeline-spec">CONCEPT TRANSLATION</span>
-              <span class="timeline-spec">FIRST ARTICLE FABRICATION</span>
-              <span class="timeline-spec">TDP GENERATION</span>
-            </div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">PROTOCOL</div>
+        <div class="timeline-role">R&D Democratization Engine</div>
+        <div class="timeline-desc">
+          A portable prototyping ecosystem. We don't just fabricate; we translate <strong style="color: var(--fg);">Abstract Intent</strong> into <strong style="color: var(--fg);">Engineered Reality</strong>. Input: Abstract Concept. Process: Technical Specification → Functional Prototype → Technical Data Package (TDP). Output: Investment-Ready Asset.
+          <div class="timeline-specs">
+            <span class="timeline-spec">CONCEPT TRANSLATION</span>
+            <span class="timeline-spec">FIRST ARTICLE FABRICATION</span>
+            <span class="timeline-spec">TDP GENERATION</span>
           </div>
         </div>
-      </article>
-
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">SUSTAINABILITY MODEL</div>
-          <div class="timeline-role">Self-Perpetuating Ecosystem</div>
-          <div class="timeline-desc">
-            Royalty-based funding cycle. Successful ventures feed the next generation of prototypes. A closed-loop engine for democratized creation. Revenue Streams: CSR Funding, Royalties, High-Tier Consultancy. Exit Strategy: Transfer viable startups to incubators with a validated TDP.
-            <div class="timeline-specs">
-              <span class="timeline-spec">ROYALTY CYCLE</span>
-              <span class="timeline-spec">ECOSYSTEM AUTONOMY</span>
-              <span class="timeline-spec">VENTURE TRANSFER</span>
-            </div>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">SUSTAINABILITY MODEL</div>
+        <div class="timeline-role">Self-Perpetuating Ecosystem</div>
+        <div class="timeline-desc">
+          Royalty-based funding cycle. Successful ventures feed the next generation of prototypes. A closed-loop engine for democratized creation. Revenue Streams: CSR Funding, Royalties, High-Tier Consultancy. Exit Strategy: Transfer viable startups to incubators with a validated TDP.
+          <div class="timeline-specs">
+            <span class="timeline-spec">ROYALTY CYCLE</span>
+            <span class="timeline-spec">ECOSYSTEM AUTONOMY</span>
+            <span class="timeline-spec">VENTURE TRANSFER</span>
           </div>
         </div>
-      </article>
-    </div>
-  </section>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <h2 class="contact-title">INITIATE CONTACT</h2>
-    <p class="contact-subtitle">Have an idea but lack the tools or knowledge to build it? I didn't have anyone to teach me—so I became the person I needed.</p>
-    <div class="contact-links">
-      <a href="mailto:idealaboratoryhemu@gmail.com" class="contact-link" aria-label="Send email">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span>idealaboratoryhemu@gmail.com</span>
-      </a>
-      <a href="https://hemmenthkumar.github.io" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Visit portfolio">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span>hemmenthkumar.github.io</span>
-      </a>
-    </div>
-  </section>
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+  <h2 class="contact-title">INITIATE CONTACT</h2>
+  <p class="contact-subtitle">Have an idea but lack the tools or knowledge to build it? I didn't have anyone to teach me—so I became the person I needed.</p>
+  <div class="contact-links">
+    <a href="mailto:idealaboratoryhemu@gmail.com" class="contact-link" aria-label="Send email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>idealaboratoryhemu@gmail.com</span>
+    </a>
+    <a href="https://hemmenthkumar.github.io" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Visit portfolio">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span>hemmenthkumar.github.io</span>
+    </a>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer><p class="footer-meta">MUMBAI, INDIA // 2026</p></footer>
+<!-- Footer -->
+<footer><p class="footer-meta">MUMBAI, INDIA // 2026</p></footer>
 
-  <script>
-    const rainCanvas = document.getElementById('rain-canvas');
-    const ctx = rainCanvas.getContext('2d');
-    let rainDrops = [];
-    let animationFrameId = null;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<script>
+const rainCanvas = document.getElementById('rain-canvas');
+const ctx = rainCanvas.getContext('2d');
+let rainDrops = [];
+let animationFrameId = null;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function initRain() {
-      if (prefersReducedMotion) return;
-      rainCanvas.width = window.innerWidth;
-      rainCanvas.height = window.innerHeight;
-      rainDrops = [];
-      // Increased density for visibility
-      const density = window.innerWidth < 768 ? 15 : 8; 
-      const dropCount = Math.floor(window.innerWidth / density);
-      
-      for (let i = 0; i < dropCount; i++) {
-        rainDrops.push({
-          x: Math.random() * rainCanvas.width,
-          y: Math.random() * rainCanvas.height,
-          length: Math.random() * 25 + 10, // Longer drops
-          speed: Math.random() * 10 + 6, // Faster
-          opacity: Math.random() * 0.5 + 0.3 // Higher opacity
-        });
+function initRain() {
+  if (prefersReducedMotion) return;
+  rainCanvas.width = window.innerWidth;
+  rainCanvas.height = window.innerHeight;
+  rainDrops = [];
+  const density = window.innerWidth < 768 ? 15 : 8;
+  const dropCount = Math.floor(window.innerWidth / density);
+  for (let i = 0; i < dropCount; i++) {
+    rainDrops.push({
+      x: Math.random() * rainCanvas.width,
+      y: Math.random() * rainCanvas.height,
+      length: Math.random() * 25 + 10,
+      speed: Math.random() * 10 + 6,
+      opacity: Math.random() * 0.5 + 0.3
+    });
+  }
+}
+
+function drawRain() {
+  if (prefersReducedMotion || !ctx || document.hidden) return;
+  ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  rainDrops.forEach(drop => {
+    ctx.beginPath();
+    ctx.moveTo(drop.x, drop.y);
+    ctx.lineTo(drop.x, drop.y + drop.length);
+    ctx.strokeStyle = `rgba(0, 229, 204, ${drop.opacity})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    drop.y += drop.speed;
+    if (drop.y > rainCanvas.height) { 
+      drop.y = -drop.length; 
+      drop.x = Math.random() * rainCanvas.width; 
+    }
+  });
+  animationFrameId = requestAnimationFrame(drawRain);
+}
+
+function initParallax() {
+  if (prefersReducedMotion) return;
+  const cityFar = document.getElementById('city-far');
+  window.addEventListener('scroll', () => { 
+    if (cityFar) cityFar.style.transform = `translateX(${window.scrollY * 0.05}px)`; 
+    if (cityFar) cityFar.style.webkitTransform = `translateX(${window.scrollY * 0.05}px)`;
+  }, { passive: true });
+}
+
+function initNavigation() {
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => { 
+    window.scrollY > 100 ? nav.classList.add('visible') : nav.classList.remove('visible'); 
+  }, { passive: true });
+}
+
+function initScrollReveal() {
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 50);
       }
-    }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category, .quote-card').forEach(el => observer.observe(el));
+}
 
-    function drawRain() {
-      if (prefersReducedMotion || !ctx) return;
-      ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
-      rainDrops.forEach(drop => {
-        ctx.beginPath();
-        ctx.moveTo(drop.x, drop.y);
-        ctx.lineTo(drop.x, drop.y + drop.length);
-        ctx.strokeStyle = `rgba(0, 229, 204, ${drop.opacity})`;
-        ctx.lineWidth = 1.5; // Slightly thicker
-        ctx.stroke();
-        drop.y += drop.speed;
-        if (drop.y > rainCanvas.height) { drop.y = -drop.length; drop.x = Math.random() * rainCanvas.width; }
-      });
-      animationFrameId = requestAnimationFrame(drawRain);
-    }
+function initDragonViewer() {
+  const tabs = document.querySelectorAll('.dragon-tab');
+  const images = document.querySelectorAll('.dragon-image');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const view = tab.dataset.view;
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
+      images.forEach(img => img.classList.remove('active'));
+      const targetImage = document.getElementById(`dragon-${view}`);
+      if (targetImage) targetImage.classList.add('active');
+    });
+  });
+}
 
-    function initParallax() {
-      if (prefersReducedMotion) return;
-      const cityFar = document.getElementById('city-far');
-      window.addEventListener('scroll', () => { if (cityFar) cityFar.style.transform = `translateX(${window.scrollY * 0.05}px)`; }, { passive: true });
-    }
-
-    function initNavigation() {
-      const nav = document.querySelector('nav');
-      window.addEventListener('scroll', () => { window.scrollY > 100 ? nav.classList.add('visible') : nav.classList.remove('visible'); }, { passive: true });
-    }
-
-    function initScrollReveal() {
-      const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), 50); 
-          }
-        });
-      }, observerOptions);
-      document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category, .quote-card').forEach(el => observer.observe(el));
-    }
-
-    function initDragonViewer() {
-      const tabs = document.querySelectorAll('.dragon-tab');
-      const images = document.querySelectorAll('.dragon-image');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const view = tab.dataset.view;
-          tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-          tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
-          images.forEach(img => img.classList.remove('active'));
-          const targetImage = document.getElementById(`dragon-${view}`);
-          if (targetImage) targetImage.classList.add('active');
-        });
-      });
-    }
-
-    function initTypewriter() {
-      const quotes = [
-        "I don't just build prototypes—I create the complete technical pathway that enables others to understand, replicate, and improve upon the work.",
-        "Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions.",
-        "True understanding is demonstrated through teaching. Every system must include documentation that enables replication without requiring my presence."
-      ];
-      const quoteCards = document.querySelectorAll('.quote-card');
-      if (prefersReducedMotion) {
-        quoteCards.forEach((card, index) => {
-          const content = card.querySelector('.quote-content'); const cursor = card.querySelector('.typewriter-cursor');
-          if (content) content.textContent = quotes[index]; if (cursor) cursor.style.display = 'none';
-        }); return;
+function initTypewriter() {
+  const quotes = [
+    "I don't just build prototypes—I create the complete technical pathway that enables others to understand, replicate, and improve upon the work.",
+    "Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions.",
+    "True understanding is demonstrated through teaching. Every system must include documentation that enables replication without requiring my presence."
+  ];
+  const quoteCards = document.querySelectorAll('.quote-card');
+  if (prefersReducedMotion) {
+    quoteCards.forEach((card, index) => {
+      const content = card.querySelector('.quote-content'); 
+      const cursor = card.querySelector('.typewriter-cursor');
+      if (content) content.textContent = quotes[index]; 
+      if (cursor) cursor.style.display = 'none';
+    }); 
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const card = entry.target; 
+        const content = card.querySelector('.quote-content'); 
+        const cursor = card.querySelector('.typewriter-cursor');
+        const cardIndex = Array.from(quoteCards).indexOf(card);
+        const text = quotes[cardIndex];
+        if (content && text && !card.dataset.typed) { 
+          card.dataset.typed = 'true'; 
+          typeText(content, text, cursor); 
+        }
       }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const card = entry.target; const content = card.querySelector('.quote-content'); const cursor = card.querySelector('.typewriter-cursor');
-            const cardIndex = Array.from(quoteCards).indexOf(card);
-            const text = quotes[cardIndex];
-            if (content && text && !card.dataset.typed) { card.dataset.typed = 'true'; typeText(content, text, cursor); }
-          }
-        });
-      }, { threshold: 0.5 });
-      quoteCards.forEach(card => observer.observe(card));
-    }
+    });
+  }, { threshold: 0.5 });
+  quoteCards.forEach(card => observer.observe(card));
+}
 
-    function typeText(element, text, cursor) { if (!element || !text) return; let i = 0; element.textContent = ''; function type() { if (i < text.length) { element.textContent += text.charAt(i); i++; setTimeout(type, prefersReducedMotion ? 0 : 30); } else if (cursor) { cursor.style.animation = 'blink 0.8s infinite'; } } type(); }
+function typeText(element, text, cursor) { 
+  if (!element || !text) return; 
+  let i = 0; 
+  element.textContent = ''; 
+  function type() { 
+    if (i < text.length) { 
+      element.textContent += text.charAt(i); 
+      i++; 
+      setTimeout(type, prefersReducedMotion ? 0 : 30); 
+    } else if (cursor) { 
+      cursor.style.animation = 'blink 0.8s infinite'; 
+      cursor.style.webkitAnimation = 'blink 0.8s infinite';
+    } 
+  } 
+  type(); 
+}
 
-    // Initialize Everything on Load
-    function init() { initRain(); if (!prefersReducedMotion) drawRain(); initParallax(); initNavigation(); initScrollReveal(); initDragonViewer(); initTypewriter(); }
-    
-    window.addEventListener('resize', initRain);
-    document.addEventListener('DOMContentLoaded', init);
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' }); }); });
-    window.addEventListener('beforeunload', () => { if (animationFrameId) cancelAnimationFrame(animationFrameId); });
-  </script>
+function init() { 
+  initRain(); 
+  if (!prefersReducedMotion) drawRain(); 
+  initParallax(); 
+  initNavigation(); 
+  initScrollReveal(); 
+  initDragonViewer(); 
+  initTypewriter(); 
+}
+
+window.addEventListener('resize', initRain);
+document.addEventListener('DOMContentLoaded', init);
+document.querySelectorAll('a[href^="#"]').forEach(anchor => { 
+  anchor.addEventListener('click', function(e) { 
+    e.preventDefault(); 
+    document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' }); 
+  }); 
+});
+window.addEventListener('beforeunload', () => { 
+  if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+});
+</script>
 </body>
 </html>
