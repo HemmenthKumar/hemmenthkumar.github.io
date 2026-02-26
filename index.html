@@ -711,6 +711,72 @@
       letter-spacing: 0.1em;
     }
 
+    /* Skills Section */
+    .skills-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skills-category {
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .skills-category.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-icon {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent-magenta);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .category-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.15em;
+      color: var(--fg);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill-item {
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .skill-item:hover {
+      background: rgba(0, 229, 204, 0.1);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
     /* Contact Section */
     .contact-section {
       text-align: center;
@@ -894,6 +960,7 @@
       <div class="nav-links">
         <a href="#timeline" class="nav-link">ORIGIN</a>
         <a href="#projects" class="nav-link">PROJECTS</a>
+        <a href="#skills" class="nav-link">SPECIFICATIONS</a>
         <a href="#contact" class="nav-link">CONTACT</a>
       </div>
     </div>
@@ -980,11 +1047,9 @@
       <article class="dragon-section project-card visible">
         <div class="dragon-visuals">
           <div class="dragon-image-container">
-            <!-- Updated Images -->
             <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/edfd6c15fa38ffb04f925661547ab79d3a96a9ce/image.png" alt="Dragon TMFM Mode" class="dragon-image active" id="dragon-tmfm">
             <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="Dragon VTOL Mode" class="dragon-image" id="dragon-vtol">
           </div>
-          <!-- Updated Tabs -->
           <div class="dragon-view-tabs" role="tablist" aria-label="Aircraft Modes">
             <button class="dragon-tab active" data-view="tmfm" role="tab" aria-selected="true">TMFM</button>
             <button class="dragon-tab" data-view="vtol" role="tab" aria-selected="false">VTOL</button>
@@ -1052,6 +1117,114 @@
           </div>
         </div>
       </article>
+
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="section-header">
+      <h2 class="section-title">SYSTEM SPECIFICATIONS</h2>
+    </div>
+
+    <div class="skills-container">
+      <div class="skills-category">
+        <div class="category-header">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <h3 class="category-title">CORE SCIENCES</h3>
+        </div>
+        <div class="skills-list">
+          <span class="skill-item">Math</span>
+          <span class="skill-item">Physics</span>
+          <span class="skill-item">Chemistry</span>
+          <span class="skill-item">Biology</span>
+          <span class="skill-item">Astronomy</span>
+          <span class="skill-item">Space Science</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="category-header">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+          <h3 class="category-title">ENGINEERING & MANUFACTURING</h3>
+        </div>
+        <div class="skills-list">
+          <span class="skill-item">Aerospace Engineering</span>
+          <span class="skill-item">Aerodynamics</span>
+          <span class="skill-item">Manufacturing</span>
+          <span class="skill-item">Machining</span>
+          <span class="skill-item">Engines & Energy</span>
+          <span class="skill-item">Electronics Repair</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="category-header">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </svg>
+          <h3 class="category-title">DESIGN & VISUALIZATION</h3>
+        </div>
+        <div class="skills-list">
+          <span class="skill-item">Product Design</span>
+          <span class="skill-item">SolidWorks</span>
+          <span class="skill-item">Illustration</span>
+          <span class="skill-item">Sketching</span>
+          <span class="skill-item">Game Engines</span>
+          <span class="skill-item">Consumer Products</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="category-header">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+            <rect x="9" y="9" width="6" height="6"/>
+            <line x1="9" y1="1" x2="9" y2="4"/>
+            <line x1="15" y1="1" x2="15" y2="4"/>
+            <line x1="9" y1="20" x2="9" y2="23"/>
+            <line x1="15" y1="20" x2="15" y2="23"/>
+            <line x1="20" y1="9" x2="23" y2="9"/>
+            <line x1="20" y1="14" x2="23" y2="14"/>
+            <line x1="1" y1="9" x2="4" y2="9"/>
+            <line x1="1" y1="14" x2="4" y2="14"/>
+          </svg>
+          <h3 class="category-title">COMPUTING & SILICON</h3>
+        </div>
+        <div class="skills-list">
+          <span class="skill-item">Programming</span>
+          <span class="skill-item">Electronics</span>
+          <span class="skill-item">Silicon Architecture</span>
+          <span class="skill-item">Open Source Innovation</span>
+          <span class="skill-item">Linux Systems</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="category-header">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <h3 class="category-title">RESEARCH DOMAINS</h3>
+        </div>
+        <div class="skills-list">
+          <span class="skill-item">UAV Advancements</span>
+          <span class="skill-item">Automotive Tech</span>
+          <span class="skill-item">Aviation</span>
+          <span class="skill-item">Disability Innovation</span>
+          <span class="skill-item">Research Papers</span>
+          <span class="skill-item">Documentation</span>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -1188,7 +1361,7 @@
         });
       }, observerOptions);
       
-      document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section)').forEach(el => {
+      document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category').forEach(el => {
         observer.observe(el);
       });
     }
