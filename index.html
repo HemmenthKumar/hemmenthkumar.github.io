@@ -38,7 +38,7 @@
       background: var(--bg);
       color: var(--fg);
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     /* CRT Scanlines */
@@ -428,7 +428,7 @@
     .timeline-desc {
       font-size: 0.85rem;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     /* Project Cards */
@@ -958,9 +958,10 @@
     <div class="nav-content">
       <div class="nav-logo">IDEA LABORATORY</div>
       <div class="nav-links">
-        <a href="#timeline" class="nav-link">ORIGIN</a>
+        <a href="#origin" class="nav-link">ORIGIN</a>
+        <a href="#method" class="nav-link">METHOD</a>
         <a href="#projects" class="nav-link">PROJECTS</a>
-        <a href="#skills" class="nav-link">SPECIFICATIONS</a>
+        <a href="#specs" class="nav-link">SPECS</a>
         <a href="#contact" class="nav-link">CONTACT</a>
       </div>
     </div>
@@ -970,7 +971,6 @@
   <header class="hero">
     <div class="hero-bg"></div>
     
-    <!-- Cityscape Layers -->
     <div class="cityscape" aria-hidden="true">
       <div class="city-layer city-far" id="city-far"></div>
       <div class="neon-grid"></div>
@@ -990,45 +990,101 @@
     </div>
   </header>
 
-  <!-- Timeline Section -->
-  <section id="timeline">
+  <!-- ORIGIN SECTION -->
+  <section id="origin">
     <div class="section-header">
-      <h2 class="section-title">MISSION LOG</h2>
+      <h2 class="section-title">SUBJECT FILE: ORIGIN</h2>
     </div>
 
     <div class="timeline-container">
       <div class="timeline-line" aria-hidden="true"></div>
       
-      <!-- Origin Story -->
       <article class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year">THE SPARK</div>
-          <div class="timeline-role">The Cosmos to Circuits</div>
-          <div class="timeline-org">SELF-DIRECTED EDUCATION</div>
-          <p class="timeline-desc">It started with "How The Universe Works" at age 6. Then came "How It's Made" and every show on Discovery Science. I didn't just watch—I disassembled. Phones, toys, electronics. The poor tortured telephone never stood a chance. I learned to reverse engineer before I knew the term.</p>
+          <div class="timeline-year">THE START</div>
+          <div class="timeline-role">Cosmos to Circuits</div>
+          <div class="timeline-desc">
+            My extensive knowledge gained from my childhood curiosity to understand how everything around me works and why it exists, learning how to make things with them myself by breaking basically everything I ever got my hands on, only to then try to fix it, led me to learn how everything around us came to exist, understand how it was created, and know how it works.
+          </div>
         </div>
       </article>
 
-      <!-- The Method -->
       <article class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year">THE METHOD</div>
-          <div class="timeline-role">Systems Thinking & Circumvention</div>
-          <div class="timeline-org">UNRESTRICTED ACCESS</div>
-          <p class="timeline-desc">When screen limits hit the family PC, I didn't complain. I installed NomadBSD on a pendrive and circumvented Windows entirely. That moment defined my approach: if a system doesn't let you build, you don't obey it—you route around it. I learned that understanding physics, chemistry, biology, and math from the ground up lets you simulate possibilities others can't see.</p>
+          <div class="timeline-year">AGE 06</div>
+          <div class="timeline-role">The Spark</div>
+          <div class="timeline-desc">
+            The creation of the universe, to space and everything in it was the first subject of my interest at age 6. I have the show "How The Universe Works" to thank for that. And right after parallely came "How It's Made", and every other show on Discovery Channel and Discovery Science.
+          </div>
         </div>
       </article>
 
-      <!-- The Mission -->
       <article class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year">PRESENT</div>
-          <div class="timeline-role">Independent R&D Consultant</div>
-          <div class="timeline-org">OPERATIONAL MODE</div>
-          <p class="timeline-desc">Currently developing the Dragon UAV//AWACS while interning at Majorbeam to master industry-level AR/VR. I turn ideas into functional prototypes with full documentation—because I never had a mentor to teach me. The dream is Idea Laboratory: a place where knowledge isn't a gatekeeper.</p>
+          <div class="timeline-year">THE TELEPHONE</div>
+          <div class="timeline-role">Reverse Engineering</div>
+          <div class="timeline-desc">
+            As I grew older, I started to break electronics, but this time from watching the countless episodes of how it's made, I began to reverse engineer and learned to take apart and put them back together, even if I'd never seen that specific thing on the show before. Oh the joys and that poor tortured telephone, I still miss you. We could've had cordless telephones, but no. Mom would never buy the same thing again, for "some reason".
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- METHOD SECTION -->
+  <section id="method" style="background: linear-gradient(180deg, var(--bg), var(--bg-secondary));">
+    <div class="section-header">
+      <h2 class="section-title">SYSTEM LOG: METHOD</h2>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-line" aria-hidden="true"></div>
+      
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">ACCESS</div>
+          <div class="timeline-role">Unrestricted Internet</div>
+          <div class="timeline-desc">
+            Then came along unrestricted internet access, mostly. A literal big bang of resources, friends, and exposure that comes along with it.
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">CIRCUMVENTION</div>
+          <div class="timeline-role">The NomadBSD Solution</div>
+          <div class="timeline-desc">
+            When my mother started putting a screen limit on the desktop PC, I learned about Linux, and circumvented windows entirely by using NomadBSD on a pendrive.
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">SYNTHESIS</div>
+          <div class="timeline-role">The Repository</div>
+          <div class="timeline-desc">
+            My knack for taking things apart grew even more from here, turning into the ability to not only be able to reverse engineer anything, but also create things using the entire repository of everything I had learned during my entire childhood. From the cosmos to humanity's inventions, our Earth, with physics, chemistry, biology, and math.
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">PHILOSOPHY</div>
+          <div class="timeline-role">Interconnecting Concepts</div>
+          <div class="timeline-desc">
+            Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions. So this is where I am now, with the ability to create anything to answer any question, reasonably well. Knowing where and how to find information is also very important, and so is to be able to correctly read and follow resources. Also we stand on the shoulders of giants.
+          </div>
         </div>
       </article>
 
@@ -1036,9 +1092,9 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" style="background: linear-gradient(180deg, transparent, rgba(233, 48, 168, 0.02), transparent);">
+  <section id="projects" style="background: linear-gradient(180deg, var(--bg-secondary), rgba(233, 48, 168, 0.02));">
     <div class="section-header">
-      <h2 class="section-title">CASE FILES</h2>
+      <h2 class="section-title">ACTIVE OPS</h2>
     </div>
 
     <div class="projects-grid">
@@ -1122,7 +1178,7 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills">
+  <section id="specs">
     <div class="section-header">
       <h2 class="section-title">SYSTEM SPECIFICATIONS</h2>
     </div>
@@ -1143,7 +1199,7 @@
           <span class="skill-item">Chemistry</span>
           <span class="skill-item">Biology</span>
           <span class="skill-item">Astronomy</span>
-          <span class="skill-item">Space Science</span>
+          <span class="skill-item">Space Stuff</span>
         </div>
       </div>
 
@@ -1152,15 +1208,15 @@
           <svg class="category-icon" viewBox="0 0 24 24">
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
           </svg>
-          <h3 class="category-title">ENGINEERING & MANUFACTURING</h3>
+          <h3 class="category-title">ENGINEERING & FABRICATION</h3>
         </div>
         <div class="skills-list">
-          <span class="skill-item">Aerospace Engineering</span>
+          <span class="skill-item">Engineering</span>
+          <span class="skill-item">Aerospace</span>
           <span class="skill-item">Aerodynamics</span>
-          <span class="skill-item">Manufacturing</span>
-          <span class="skill-item">Machining</span>
-          <span class="skill-item">Engines & Energy</span>
+          <span class="skill-item">Manufacturing & Machining</span>
           <span class="skill-item">Electronics Repair</span>
+          <span class="skill-item">Silicon & Chemistry</span>
         </div>
       </div>
 
@@ -1171,14 +1227,14 @@
             <polyline points="2 17 12 22 22 17"/>
             <polyline points="2 12 12 17 22 12"/>
           </svg>
-          <h3 class="category-title">DESIGN & VISUALIZATION</h3>
+          <h3 class="category-title">DESIGN & TOOLS</h3>
         </div>
         <div class="skills-list">
           <span class="skill-item">Product Design</span>
           <span class="skill-item">SolidWorks</span>
           <span class="skill-item">Illustration</span>
           <span class="skill-item">Sketching</span>
-          <span class="skill-item">Game Engines</span>
+          <span class="skill-item">Simulations & Game Engines</span>
           <span class="skill-item">Consumer Products</span>
         </div>
       </div>
@@ -1197,14 +1253,14 @@
             <line x1="1" y1="9" x2="4" y2="9"/>
             <line x1="1" y1="14" x2="4" y2="14"/>
           </svg>
-          <h3 class="category-title">COMPUTING & SILICON</h3>
+          <h3 class="category-title">COMPUTING & TECH</h3>
         </div>
         <div class="skills-list">
           <span class="skill-item">Programming</span>
           <span class="skill-item">Electronics</span>
-          <span class="skill-item">Silicon Architecture</span>
-          <span class="skill-item">Open Source Innovation</span>
-          <span class="skill-item">Linux Systems</span>
+          <span class="skill-item">Videogames</span>
+          <span class="skill-item">Networking</span>
+          <span class="skill-item">Open Source</span>
         </div>
       </div>
 
@@ -1214,13 +1270,13 @@
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
           </svg>
-          <h3 class="category-title">RESEARCH DOMAINS</h3>
+          <h3 class="category-title">RESEARCH & FOCUS</h3>
         </div>
         <div class="skills-list">
-          <span class="skill-item">UAV Advancements</span>
-          <span class="skill-item">Automotive Tech</span>
-          <span class="skill-item">Aviation</span>
-          <span class="skill-item">Disability Innovation</span>
+          <span class="skill-item">UAVs</span>
+          <span class="skill-item">Cars & Planes</span>
+          <span class="skill-item">Engines & Energy</span>
+          <span class="skill-item">Disability Innovations</span>
           <span class="skill-item">Research Papers</span>
           <span class="skill-item">Documentation</span>
         </div>
@@ -1257,7 +1313,7 @@
   <!-- Footer -->
   <footer>
     <p class="footer-quote">
-      "Applying one concept to another is easy when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions. We stand on the shoulders of giants."
+      "Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions. Also we stand on the shoulders of giants."
     </p>
     <p class="footer-meta">MUMBAI, INDIA // 2024</p>
   </footer>
