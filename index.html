@@ -100,6 +100,7 @@ body {
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .toggle-btn:hover {
@@ -195,17 +196,7 @@ body {
 .glitch-word.magenta::before { color: var(--accent-magenta); }
 .glitch-word.magenta::after { color: var(--accent-cyan); }
 
-/* Neon Sign Effect Class */
-.neon-enabled .neon-marquee {
-  text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
-  animation: flicker 4s infinite;
-}
-.neon-disabled .neon-marquee {
-  text-shadow: none;
-  animation: none;
-  opacity: 1;
-}
-
+/* Neon Effects - Controlled by JS */
 .neon-marquee {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(0.9rem, 2.5vw, 1.4rem);
@@ -215,6 +206,15 @@ body {
   margin-top: 1rem;
   transition: text-shadow 0.3s ease, opacity 0.3s ease;
 }
+.neon-marquee.enabled {
+  text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
+  animation: flicker 4s infinite;
+}
+.neon-marquee.disabled {
+  text-shadow: none;
+  animation: none;
+  opacity: 1;
+}
 
 @keyframes flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan); }
@@ -223,7 +223,8 @@ body {
 
 .tagline { font-size: clamp(0.8rem, 1.5vw, 1rem); color: var(--muted); margin-top: 2rem; max-width: 600px; letter-spacing: 0.1em; }
 
-.scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; animation: bounce 2s infinite; }
+.scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; }
+.scroll-indicator.enabled { animation: bounce 2s infinite; }
 .scroll-indicator.disabled { animation: none; }
 .scroll-indicator svg { width: 24px; height: 24px; stroke: var(--accent-cyan); }
 
@@ -331,7 +332,8 @@ section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
 .quote-text::before { content: '"'; position: absolute; top: -10px; left: -15px; font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--accent-cyan); opacity: 0.3; line-height: 1; }
 .quote-card:nth-child(even) .quote-text::before { color: var(--accent-magenta); }
 .quote-author { font-size: 0.8rem; color: var(--accent-amber); letter-spacing: 0.1em; }
-.typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-cyan); margin-left: 2px; animation: blink 0.8s infinite; }
+.typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-cyan); margin-left: 2px; }
+.typewriter-cursor.enabled { animation: blink 0.8s infinite; }
 .typewriter-cursor.disabled { animation: none; opacity: 0; }
 @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
@@ -412,10 +414,10 @@ nav.visible { transform: translateY(0); }
       <span class="glitch-word cyan" data-text="HEMMENTH">HEMMENTH</span>
       <span class="glitch-word magenta" data-text="KUMAR">KUMAR</span>
     </h1>
-    <p class="neon-marquee">Founder, Idea Laboratory</p>
+    <p class="neon-marquee enabled" id="neon-marquee">Founder, Idea Laboratory</p>
     <p class="tagline">Product Prototypist & R&D Consultant</p>
   </div>
-  <div class="scroll-indicator" id="scroll-indicator" aria-hidden="true">
+  <div class="scroll-indicator enabled" id="scroll-indicator" aria-hidden="true">
     <span>SCROLL</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
   </div>
@@ -636,15 +638,15 @@ nav.visible { transform: translateY(0); }
   <div class="section-header"><h2 class="section-title">INTERCEPTED TRANSMISSIONS</h2></div>
   <div class="quote-wall">
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-1"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor enabled" id="cursor-1"></span></p>
       <cite class="quote-author">From the Project Archives</cite>
     </blockquote>
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-2"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor enabled" id="cursor-2"></span></p>
       <cite class="quote-author">Design Philosophy v2.4</cite>
     </blockquote>
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-3"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor enabled" id="cursor-3"></span></p>
       <cite class="quote-author">Mission Statement</cite>
     </blockquote>
   </div>
@@ -729,7 +731,7 @@ let rainDrops = [];
 let animationFrameId = null;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Effect State
+// Effect State - START ENABLED BY DEFAULT
 let rainEnabled = true;
 let neonEnabled = true;
 
@@ -775,8 +777,8 @@ function drawRain() {
   animationFrameId = requestAnimationFrame(drawRain);
 }
 
-function toggleRainEffect() {
-  rainEnabled = !rainEnabled;
+function setRainState(enabled) {
+  rainEnabled = enabled;
   toggleRain.classList.toggle('active', rainEnabled);
   toggleRain.setAttribute('aria-pressed', rainEnabled);
   rainCanvas.classList.toggle('disabled', !rainEnabled);
@@ -790,46 +792,51 @@ function toggleRainEffect() {
   }
 }
 
+function toggleRainEffect() {
+  setRainState(!rainEnabled);
+}
+
 /* ========== NEON EFFECT ========== */
-function toggleNeonEffect() {
-  neonEnabled = !neonEnabled;
+function setNeonState(enabled) {
+  neonEnabled = enabled;
   toggleNeon.classList.toggle('active', neonEnabled);
   toggleNeon.setAttribute('aria-pressed', neonEnabled);
   
-  const hero = document.getElementById('hero-section');
-  const marquee = document.querySelector('.neon-marquee');
+  const marquee = document.getElementById('neon-marquee');
   const scrollIndicator = document.getElementById('scroll-indicator');
   const cursors = document.querySelectorAll('.typewriter-cursor');
   const scanlines = document.getElementById('scanlines');
   const filmGrain = document.getElementById('film-grain');
   
   if (neonEnabled) {
-    hero.classList.remove('neon-disabled');
-    hero.classList.add('neon-enabled');
-    marquee.style.textShadow = '0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan)';
-    marquee.style.animation = 'flicker 4s infinite';
+    // Enable all neon effects
+    marquee.classList.remove('disabled');
+    marquee.classList.add('enabled');
     scrollIndicator.classList.remove('disabled');
-    scrollIndicator.style.animation = 'bounce 2s infinite';
+    scrollIndicator.classList.add('enabled');
     cursors.forEach(c => {
       c.classList.remove('disabled');
-      c.style.animation = 'blink 0.8s infinite';
+      c.classList.add('enabled');
     });
     scanlines.classList.remove('disabled');
     filmGrain.classList.remove('disabled');
   } else {
-    hero.classList.remove('neon-enabled');
-    hero.classList.add('neon-disabled');
-    marquee.style.textShadow = 'none';
-    marquee.style.animation = 'none';
+    // Disable all neon effects
+    marquee.classList.remove('enabled');
+    marquee.classList.add('disabled');
+    scrollIndicator.classList.remove('enabled');
     scrollIndicator.classList.add('disabled');
-    scrollIndicator.style.animation = 'none';
     cursors.forEach(c => {
+      c.classList.remove('enabled');
       c.classList.add('disabled');
-      c.style.animation = 'none';
     });
     scanlines.classList.add('disabled');
     filmGrain.classList.add('disabled');
   }
+}
+
+function toggleNeonEffect() {
+  setNeonState(!neonEnabled);
 }
 
 /* ========== PARALLAX ========== */
@@ -923,19 +930,17 @@ function typeText(element, text, cursor) {
       i++; 
       setTimeout(type, prefersReducedMotion ? 0 : 30); 
     } else if (cursor && neonEnabled) { 
-      cursor.style.animation = 'blink 0.8s infinite'; 
+      cursor.classList.add('enabled');
     } 
   } 
   type(); 
 }
 
-/* ========== INITIALIZE ========== */
+/* ========== INITIALIZE - EFFECTS START ON ========== */
 function init() { 
-  // Auto-toggle effects on load (with slight delay for DOM readiness)
-  setTimeout(() => {
-    toggleRainEffect();
-    toggleNeonEffect();
-  }, 100);
+  // Start effects ON by default (don't toggle, just enable)
+  setRainState(true);
+  setNeonState(true);
   
   initParallax(); 
   initNavigation(); 
@@ -944,9 +949,17 @@ function init() {
   initTypewriter(); 
 }
 
-// Event Listeners
-toggleRain.addEventListener('click', toggleRainEffect);
-toggleNeon.addEventListener('click', toggleNeonEffect);
+// Event Listeners - Use click which works on both desktop and mobile
+toggleRain.addEventListener('click', function(e) {
+  e.preventDefault();
+  toggleRainEffect();
+});
+
+toggleNeon.addEventListener('click', function(e) {
+  e.preventDefault();
+  toggleNeonEffect();
+});
+
 window.addEventListener('resize', initRain);
 document.addEventListener('DOMContentLoaded', init);
 document.querySelectorAll('a[href^="#"]').forEach(anchor => { 
