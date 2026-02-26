@@ -190,7 +190,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%);
+      height: 100%;
     }
 
     .glitch-headline::before {
@@ -430,6 +430,10 @@
       color: var(--muted);
       line-height: 1.8;
     }
+
+    /* Timeline Specs List */
+    .timeline-specs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .timeline-spec { font-size: 0.65rem; padding: 0.3rem 0.6rem; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.2); border-radius: 2px; color: var(--accent-cyan); letter-spacing: 0.05em; }
 
     /* Project Cards */
     .projects-grid {
@@ -777,6 +781,18 @@
       transform: translateY(-2px);
     }
 
+    /* Quote Wall (Intercepted Transmissions) */
+    .quote-wall { max-width: 900px; margin: 0 auto; }
+    .quote-card { position: relative; padding: 2.5rem; margin-bottom: 2rem; background: var(--card); border-left: 3px solid var(--accent-cyan); backdrop-filter: blur(10px); opacity: 0; transform: translateX(-30px); transition: all 0.6s ease; }
+    .quote-card.visible { opacity: 1; transform: translateX(0); }
+    .quote-card:nth-child(even) { border-left-color: var(--accent-magenta); }
+    .quote-text { font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--fg); font-style: italic; line-height: 1.8; margin-bottom: 1rem; position: relative; }
+    .quote-text::before { content: '"'; position: absolute; top: -10px; left: -15px; font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--accent-cyan); opacity: 0.3; line-height: 1; }
+    .quote-card:nth-child(even) .quote-text::before { color: var(--accent-magenta); }
+    .quote-author { font-size: 0.8rem; color: var(--accent-amber); letter-spacing: 0.1em; }
+    .typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-cyan); margin-left: 2px; animation: blink 0.8s infinite; }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
     /* Contact Section */
     .contact-section {
       text-align: center;
@@ -948,7 +964,8 @@
         <a href="#origin" class="nav-link">ORIGIN</a>
         <a href="#method" class="nav-link">METHOD</a>
         <a href="#projects" class="nav-link">PROJECTS</a>
-        <a href="#specs" class="nav-link">SPECS</a>
+        <a href="#transmissions" class="nav-link">TRANSMISSIONS</a>
+        <a href="#idea-lab" class="nav-link">IDEA LAB</a>
         <a href="#contact" class="nav-link">CONTACT</a>
       </div>
     </div>
@@ -1296,6 +1313,84 @@
     </div>
   </section>
 
+  <!-- Intercepted Transmissions (Quote Wall) -->
+  <section id="transmissions" style="background: linear-gradient(180deg, var(--bg), rgba(233, 48, 168, 0.02));">
+    <div class="section-header"><h2 class="section-title">INTERCEPTED TRANSMISSIONS</h2></div>
+    <div class="quote-wall">
+      <blockquote class="quote-card">
+        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+        <cite class="quote-author">From the Project Archives</cite>
+      </blockquote>
+
+      <blockquote class="quote-card">
+        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+        <cite class="quote-author">Design Philosophy v2.4</cite>
+      </blockquote>
+
+      <blockquote class="quote-card">
+        <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+        <cite class="quote-author">Mission Statement</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- IDEA LABORATORY SECTION -->
+  <section id="idea-lab" style="background: linear-gradient(180deg, rgba(233, 48, 168, 0.02), var(--bg-secondary));">
+    <div class="section-header"><h2 class="section-title">DIRECTIVE: IDEA LABORATORY</h2></div>
+    <div class="timeline-container">
+      <div class="timeline-line" aria-hidden="true"></div>
+      
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">ACCESSIBILITY CRISIS</div>
+          <div class="timeline-role">The Access Friction Problem</div>
+          <div class="timeline-desc">
+            R&D infrastructure is currently siloed. Access is gated by institutional affiliation (Universities) or corporate status (Incubators/Makerlabs). The "Solo Innovator" faces a <strong style="color: var(--fg);">Resource Desert</strong>—no access to labs, tools, or expertise. Idea Laboratory breaches this barrier.
+            <div class="timeline-specs">
+              <span class="timeline-spec">INSTITUTIONAL GATEKEEPING</span>
+              <span class="timeline-spec">RESOURCE SILOS</span>
+              <span class="timeline-spec">SOLO INNOVATOR GAP</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">PROTOCOL</div>
+          <div class="timeline-role">R&D Democratization Engine</div>
+          <div class="timeline-desc">
+            A portable prototyping ecosystem. We don't just fabricate; we translate <strong style="color: var(--fg);">Abstract Intent</strong> into <strong style="color: var(--fg);">Engineered Reality</strong>. Input: Abstract Concept. Process: Technical Specification → Functional Prototype → Technical Data Package (TDP). Output: Investment-Ready Asset.
+            <div class="timeline-specs">
+              <span class="timeline-spec">CONCEPT TRANSLATION</span>
+              <span class="timeline-spec">FIRST ARTICLE FABRICATION</span>
+              <span class="timeline-spec">TDP GENERATION</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">SUSTAINABILITY MODEL</div>
+          <div class="timeline-role">Self-Perpetuating Ecosystem</div>
+          <div class="timeline-desc">
+            Royalty-based funding cycle. Successful ventures feed the next generation of prototypes. A closed-loop engine for democratized creation. Revenue Streams: CSR Funding, Royalties, High-Tier Consultancy. Exit Strategy: Transfer viable startups to incubators with a validated TDP.
+            <div class="timeline-specs">
+              <span class="timeline-spec">ROYALTY CYCLE</span>
+              <span class="timeline-spec">ECOSYSTEM AUTONOMY</span>
+              <span class="timeline-spec">VENTURE TRANSFER</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="contact-section">
     <h2 class="contact-title">INITIATE CONTACT</h2>
@@ -1425,7 +1520,7 @@
         });
       }, observerOptions);
       
-      document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category').forEach(el => {
+      document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category, .quote-card').forEach(el => {
         observer.observe(el);
       });
     }
@@ -1458,6 +1553,42 @@
       });
     }
 
+    // Typewriter Effect
+    function initTypewriter() {
+      const quotes = [
+        "I don't just build prototypes—I create the complete technical pathway that enables others to understand, replicate, and improve upon the work.",
+        "Applying one concept to another is easy as cake when you have enough knowledge to understand both from the ground up, so you can correctly simulate every possibility of their interactions.",
+        "True understanding is demonstrated through teaching. Every system must include documentation that enables replication without requiring my presence."
+      ];
+      
+      const quoteCards = document.querySelectorAll('.quote-card');
+      
+      if (prefersReducedMotion) {
+        quoteCards.forEach((card, index) => {
+          const content = card.querySelector('.quote-content'); const cursor = card.querySelector('.typewriter-cursor');
+          if (content) content.textContent = quotes[index]; if (cursor) cursor.style.display = 'none';
+        }); return;
+      }
+      
+      const observerOptions = { threshold: 0.5 };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target; const content = card.querySelector('.quote-content'); const cursor = card.querySelector('.typewriter-cursor');
+            const cardIndex = Array.from(quoteCards).indexOf(card);
+            const text = quotes[cardIndex];
+            
+            if (content && text && !card.dataset.typed) { card.dataset.typed = 'true'; typeText(content, text, cursor); }
+          }
+        });
+      }, observerOptions);
+      
+      quoteCards.forEach(card => observer.observe(card));
+    }
+
+    function typeText(element, text, cursor) { if (!element || !text) return; let i = 0; element.textContent = ''; function type() { if (i < text.length) { element.textContent += text.charAt(i); i++; setTimeout(type, prefersReducedMotion ? 0 : 30); } else if (cursor) { cursor.style.animation = 'blink 0.8s infinite'; } } type(); }
+
     // Initialize Everything
     function init() {
       initRain();
@@ -1468,6 +1599,7 @@
       initNavigation();
       initScrollReveal();
       initDragonViewer();
+      initTypewriter();
     }
 
     window.addEventListener('resize', () => {
