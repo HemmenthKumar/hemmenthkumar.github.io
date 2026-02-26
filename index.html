@@ -40,6 +40,7 @@ body {
   background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
   opacity: 0.3;
 }
+.scanlines.disabled { display: none; }
 
 /* Film Grain */
 .film-grain {
@@ -48,6 +49,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   animation: grain 0.5s steps(10) infinite;
 }
+.film-grain.disabled { display: none; }
 
 @keyframes grain {
   0%, 100% { transform: translate(0, 0); }
@@ -62,11 +64,85 @@ body {
   90% { transform: translate(1%, 1%); }
 }
 
-/* Rain Effect Canvas - HIGHEST Z-INDEX TO SHOW OVER SECTIONS */
+/* Rain Effect Canvas */
 #rain-canvas {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 9997; /* Below scanlines/grain but ABOVE sections */
+  pointer-events: none; z-index: 9997;
   opacity: 0.7;
+  transition: opacity 0.5s ease;
+}
+#rain-canvas.disabled { opacity: 0; }
+
+/* TOGGLE BUTTONS - Fixed Position */
+.effect-toggles {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(10, 10, 12, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.toggle-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--fg);
+}
+
+.toggle-btn.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+.toggle-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.toggle-btn .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: background 0.3s ease;
+}
+
+.toggle-btn.active .status-dot {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--glow-cyan);
+}
+
+@media (max-width: 640px) {
+  .effect-toggles {
+    bottom: 15px;
+    right: 15px;
+  }
+  .toggle-btn {
+    padding: 8px 12px;
+    font-size: 0.65rem;
+  }
 }
 
 /* Hero Section */
@@ -78,7 +154,7 @@ body {
 .neon-grid { position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; background: linear-gradient(90deg, rgba(0, 229, 204, 0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(0, 229, 204, 0.05) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: bottom; opacity: 0.3; }
 .hero-content { position: relative; z-index: 10; text-align: center; padding: 2rem; }
 
-/* Glitch Headline - TWO LAYER SYSTEM (NO WHITE BASE) */
+/* Glitch Headline - Layered & Colored */
 .glitch-headline {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(3rem, 12vw, 10rem);
@@ -94,7 +170,7 @@ body {
 .glitch-word {
   position: relative;
   display: inline-block;
-  color: transparent; /* NO BASE COLOR - layers handle all coloring */
+  color: #ffffff;
 }
 .glitch-word::before {
   content: attr(data-text);
@@ -102,7 +178,7 @@ body {
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: -1;
-  opacity: 0.9;
+  opacity: 0.8;
   animation: glitch-bottom 2s infinite linear alternate-reverse;
 }
 .glitch-word::after {
@@ -111,30 +187,23 @@ body {
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: 1;
-  opacity: 0.9;
+  opacity: 0.8;
   animation: glitch-top 3s infinite linear alternate-reverse;
 }
-/* HEMMENTH: Cyan Bottom Layer, Magenta Top Layer */
 .glitch-word.cyan::before { color: var(--accent-cyan); }
 .glitch-word.cyan::after { color: var(--accent-magenta); }
-/* KUMAR: Magenta Bottom Layer, Cyan Top Layer (Mirrored) */
 .glitch-word.magenta::before { color: var(--accent-magenta); }
 .glitch-word.magenta::after { color: var(--accent-cyan); }
 
-@keyframes glitch-bottom {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(-4px, 2px); }
-  94% { transform: translate(4px, -2px); }
-  96% { transform: translate(-2px, 3px); }
-  98% { transform: translate(3px, -1px); }
+/* Neon Sign Effect Class */
+.neon-enabled .neon-marquee {
+  text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
+  animation: flicker 4s infinite;
 }
-
-@keyframes glitch-top {
-  0%, 88%, 100% { transform: translate(0); }
-  90% { transform: translate(4px, -2px); }
-  93% { transform: translate(-4px, 2px); }
-  95% { transform: translate(3px, 1px); }
-  97% { transform: translate(-2px, -3px); }
+.neon-disabled .neon-marquee {
+  text-shadow: none;
+  animation: none;
+  opacity: 1;
 }
 
 .neon-marquee {
@@ -144,8 +213,7 @@ body {
   color: var(--accent-cyan);
   text-transform: uppercase;
   margin-top: 1rem;
-  text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
-  animation: flicker 4s infinite;
+  transition: text-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 @keyframes flicker {
@@ -156,6 +224,7 @@ body {
 .tagline { font-size: clamp(0.8rem, 1.5vw, 1rem); color: var(--muted); margin-top: 2rem; max-width: 600px; letter-spacing: 0.1em; }
 
 .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; animation: bounce 2s infinite; }
+.scroll-indicator.disabled { animation: none; }
 .scroll-indicator svg { width: 24px; height: 24px; stroke: var(--accent-cyan); }
 
 @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
@@ -178,15 +247,7 @@ section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
 .timeline-item.visible { opacity: 1; transform: translateY(0); }
 .timeline-dot { position: absolute; left: 12px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent-cyan); box-shadow: 0 0 20px var(--glow-cyan); z-index: 2; }
 @media (min-width: 768px) { .timeline-dot { left: 50%; transform: translateX(-50%); } }
-.timeline-content { 
-  margin-left: 50px; padding: 1.5rem; 
-  background: var(--card); 
-  border: 1px solid var(--border); 
-  border-radius: 4px; 
-  backdrop-filter: blur(10px); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
-  color: var(--fg); 
-}
+.timeline-content { margin-left: 50px; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease; color: var(--fg); }
 @media (min-width: 768px) {
   .timeline-content { width: 45%; margin-left: 0; }
   .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; margin-right: 55%; }
@@ -228,20 +289,13 @@ section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
 .stat-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
 
 /* Dragon AWACS Viewer */
-.dragon-section { 
-  grid-column: 1 / -1; 
-  background: linear-gradient(135deg, rgba(18, 18, 22, 0.9), rgba(0, 229, 204, 0.05)); 
-  border: 1px solid var(--border); border-radius: 4px; overflow: hidden; 
-  display: grid; grid-template-columns: 1fr; gap: 0; 
-}
+.dragon-section { grid-column: 1 / -1; background: linear-gradient(135deg, var(--card), rgba(0, 229, 204, 0.05)); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 1fr; gap: 0; }
 @media (min-width: 1024px) { .dragon-section { grid-template-columns: 1fr 1fr; min-height: 500px; } }
 .dragon-visuals { position: relative; background: radial-gradient(circle at center, rgba(0, 229, 204, 0.08), transparent 70%); display: flex; flex-direction: column; }
 .dragon-image-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; position: relative; }
 .dragon-image { max-width: 100%; max-height: 400px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3)); transition: transform 0.5s ease, filter 0.5s ease; display: none; }
 .dragon-image.active { display: block; animation: fadeIn 0.5s ease; }
-
 @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
 .dragon-view-tabs { display: flex; border-top: 1px solid var(--border); }
 .dragon-tab { flex: 1; padding: 1rem; background: transparent; border: none; color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer; transition: all 0.3s ease; border-right: 1px solid var(--border); }
 .dragon-tab:last-child { border-right: none; }
@@ -278,7 +332,7 @@ section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
 .quote-card:nth-child(even) .quote-text::before { color: var(--accent-magenta); }
 .quote-author { font-size: 0.8rem; color: var(--accent-amber); letter-spacing: 0.1em; }
 .typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-cyan); margin-left: 2px; animation: blink 0.8s infinite; }
-
+.typewriter-cursor.disabled { animation: none; opacity: 0; }
 @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
 /* Contact Section */
@@ -313,9 +367,23 @@ nav.visible { transform: translateY(0); }
 </style>
 </head>
 <body>
-<div class="scanlines" aria-hidden="true"></div>
-<div class="film-grain" aria-hidden="true"></div>
+<div class="scanlines" id="scanlines" aria-hidden="true"></div>
+<div class="film-grain" id="film-grain" aria-hidden="true"></div>
 <canvas id="rain-canvas" aria-hidden="true"></canvas>
+
+<!-- Effect Toggle Buttons -->
+<div class="effect-toggles">
+  <button class="toggle-btn active" id="toggle-rain" aria-label="Toggle rain effect" aria-pressed="true">
+    <svg viewBox="0 0 24 24"><path d="M20 16.2A4.5 4.5 0 0 0 3.8 12H2a6 6 0 0 0 11.2 3.2M12 2v6m0 0l-3-3m3 3l3-3"/></svg>
+    <span>RAIN</span>
+    <span class="status-dot"></span>
+  </button>
+  <button class="toggle-btn active" id="toggle-neon" aria-label="Toggle neon effects" aria-pressed="true">
+    <svg viewBox="0 0 24 24"><path d="M9 18h6a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+    <span>NEON</span>
+    <span class="status-dot"></span>
+  </button>
+</div>
 
 <!-- Navigation -->
 <nav role="navigation" aria-label="Main navigation">
@@ -333,7 +401,7 @@ nav.visible { transform: translateY(0); }
 </nav>
 
 <!-- Hero Section -->
-<header class="hero">
+<header class="hero" id="hero-section">
   <div class="hero-bg"></div>
   <div class="cityscape" aria-hidden="true">
     <div class="city-layer city-far" id="city-far"></div>
@@ -347,7 +415,7 @@ nav.visible { transform: translateY(0); }
     <p class="neon-marquee">Founder, Idea Laboratory</p>
     <p class="tagline">Product Prototypist & R&D Consultant</p>
   </div>
-  <div class="scroll-indicator" aria-hidden="true">
+  <div class="scroll-indicator" id="scroll-indicator" aria-hidden="true">
     <span>SCROLL</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
   </div>
@@ -385,8 +453,8 @@ nav.visible { transform: translateY(0); }
   </div>
 </section>
 
-<!-- METHOD SECTION - TRANSPARENT BACKGROUND FOR RAIN -->
-<section id="method" style="background: linear-gradient(180deg, rgba(10, 10, 12, 0.85), rgba(17, 17, 20, 0.85));">
+<!-- METHOD SECTION -->
+<section id="method" style="background: linear-gradient(180deg, rgba(10, 10, 12, 0.9), rgba(17, 17, 20, 0.9));">
   <div class="section-header"><h2 class="section-title">SYSTEM LOG: METHOD</h2></div>
   <div class="timeline-container">
     <div class="timeline-line" aria-hidden="true"></div>
@@ -452,8 +520,8 @@ nav.visible { transform: translateY(0); }
   </div>
 </section>
 
-<!-- Projects Section - TRANSPARENT BACKGROUND FOR RAIN -->
-<section id="projects" style="background: linear-gradient(180deg, rgba(17, 17, 20, 0.85), rgba(233, 48, 168, 0.08));">
+<!-- Projects Section -->
+<section id="projects" style="background: linear-gradient(180deg, rgba(17, 17, 20, 0.9), rgba(233, 48, 168, 0.08));">
   <div class="section-header"><h2 class="section-title">ACTIVE OPS</h2></div>
   <div class="projects-grid">
     <!-- DRAGON AWACS FEATURED SECTION -->
@@ -563,27 +631,27 @@ nav.visible { transform: translateY(0); }
   </div>
 </section>
 
-<!-- Intercepted Transmissions - TRANSPARENT BACKGROUND FOR RAIN -->
-<section id="transmissions" style="background: linear-gradient(180deg, rgba(10, 10, 12, 0.85), rgba(233, 48, 168, 0.08));">
+<!-- Intercepted Transmissions -->
+<section id="transmissions" style="background: linear-gradient(180deg, rgba(10, 10, 12, 0.9), rgba(233, 48, 168, 0.08));">
   <div class="section-header"><h2 class="section-title">INTERCEPTED TRANSMISSIONS</h2></div>
   <div class="quote-wall">
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-1"></span></p>
       <cite class="quote-author">From the Project Archives</cite>
     </blockquote>
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-2"></span></p>
       <cite class="quote-author">Design Philosophy v2.4</cite>
     </blockquote>
     <blockquote class="quote-card">
-      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor"></span></p>
+      <p class="quote-text"><span class="quote-content"></span><span class="typewriter-cursor" id="cursor-3"></span></p>
       <cite class="quote-author">Mission Statement</cite>
     </blockquote>
   </div>
 </section>
 
-<!-- IDEA LABORATORY SECTION - TRANSPARENT BACKGROUND FOR RAIN -->
-<section id="idea-lab" style="background: linear-gradient(180deg, rgba(233, 48, 168, 0.08), rgba(17, 17, 20, 0.85));">
+<!-- IDEA LABORATORY SECTION -->
+<section id="idea-lab" style="background: linear-gradient(180deg, rgba(233, 48, 168, 0.08), rgba(17, 17, 20, 0.9));">
   <div class="section-header"><h2 class="section-title">DIRECTIVE: IDEA LABORATORY</h2></div>
   <div class="timeline-container">
     <div class="timeline-line" aria-hidden="true"></div>
@@ -661,8 +729,17 @@ let rainDrops = [];
 let animationFrameId = null;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Effect State
+let rainEnabled = true;
+let neonEnabled = true;
+
+// Toggle Buttons
+const toggleRain = document.getElementById('toggle-rain');
+const toggleNeon = document.getElementById('toggle-neon');
+
+/* ========== RAIN EFFECT ========== */
 function initRain() {
-  if (prefersReducedMotion) return;
+  if (!rainEnabled || prefersReducedMotion) return;
   rainCanvas.width = window.innerWidth;
   rainCanvas.height = window.innerHeight;
   rainDrops = [];
@@ -680,7 +757,7 @@ function initRain() {
 }
 
 function drawRain() {
-  if (prefersReducedMotion || !ctx || document.hidden) return;
+  if (!rainEnabled || prefersReducedMotion || !ctx || document.hidden) return;
   ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
   rainDrops.forEach(drop => {
     ctx.beginPath();
@@ -698,6 +775,64 @@ function drawRain() {
   animationFrameId = requestAnimationFrame(drawRain);
 }
 
+function toggleRainEffect() {
+  rainEnabled = !rainEnabled;
+  toggleRain.classList.toggle('active', rainEnabled);
+  toggleRain.setAttribute('aria-pressed', rainEnabled);
+  rainCanvas.classList.toggle('disabled', !rainEnabled);
+  
+  if (rainEnabled) {
+    initRain();
+    drawRain();
+  } else {
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  }
+}
+
+/* ========== NEON EFFECT ========== */
+function toggleNeonEffect() {
+  neonEnabled = !neonEnabled;
+  toggleNeon.classList.toggle('active', neonEnabled);
+  toggleNeon.setAttribute('aria-pressed', neonEnabled);
+  
+  const hero = document.getElementById('hero-section');
+  const marquee = document.querySelector('.neon-marquee');
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  const cursors = document.querySelectorAll('.typewriter-cursor');
+  const scanlines = document.getElementById('scanlines');
+  const filmGrain = document.getElementById('film-grain');
+  
+  if (neonEnabled) {
+    hero.classList.remove('neon-disabled');
+    hero.classList.add('neon-enabled');
+    marquee.style.textShadow = '0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan)';
+    marquee.style.animation = 'flicker 4s infinite';
+    scrollIndicator.classList.remove('disabled');
+    scrollIndicator.style.animation = 'bounce 2s infinite';
+    cursors.forEach(c => {
+      c.classList.remove('disabled');
+      c.style.animation = 'blink 0.8s infinite';
+    });
+    scanlines.classList.remove('disabled');
+    filmGrain.classList.remove('disabled');
+  } else {
+    hero.classList.remove('neon-enabled');
+    hero.classList.add('neon-disabled');
+    marquee.style.textShadow = 'none';
+    marquee.style.animation = 'none';
+    scrollIndicator.classList.add('disabled');
+    scrollIndicator.style.animation = 'none';
+    cursors.forEach(c => {
+      c.classList.add('disabled');
+      c.style.animation = 'none';
+    });
+    scanlines.classList.add('disabled');
+    filmGrain.classList.add('disabled');
+  }
+}
+
+/* ========== PARALLAX ========== */
 function initParallax() {
   if (prefersReducedMotion) return;
   const cityFar = document.getElementById('city-far');
@@ -706,6 +841,7 @@ function initParallax() {
   }, { passive: true });
 }
 
+/* ========== NAVIGATION ========== */
 function initNavigation() {
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => { 
@@ -713,6 +849,7 @@ function initNavigation() {
   }, { passive: true });
 }
 
+/* ========== SCROLL REVEAL ========== */
 function initScrollReveal() {
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
   const observer = new IntersectionObserver((entries) => {
@@ -725,6 +862,7 @@ function initScrollReveal() {
   document.querySelectorAll('.timeline-item, .project-card:not(.dragon-section), .skills-category, .quote-card').forEach(el => observer.observe(el));
 }
 
+/* ========== DRAGON VIEWER ========== */
 function initDragonViewer() {
   const tabs = document.querySelectorAll('.dragon-tab');
   const images = document.querySelectorAll('.dragon-image');
@@ -740,6 +878,7 @@ function initDragonViewer() {
   });
 }
 
+/* ========== TYPEWRITER ========== */
 function initTypewriter() {
   const quotes = [
     "I don't just build prototypes—I create the complete technical pathway that enables others to understand, replicate, and improve upon the work.",
@@ -783,16 +922,21 @@ function typeText(element, text, cursor) {
       element.textContent += text.charAt(i); 
       i++; 
       setTimeout(type, prefersReducedMotion ? 0 : 30); 
-    } else if (cursor) { 
+    } else if (cursor && neonEnabled) { 
       cursor.style.animation = 'blink 0.8s infinite'; 
     } 
   } 
   type(); 
 }
 
+/* ========== INITIALIZE ========== */
 function init() { 
-  initRain(); 
-  if (!prefersReducedMotion) drawRain(); 
+  // Auto-toggle effects on load (with slight delay for DOM readiness)
+  setTimeout(() => {
+    toggleRainEffect();
+    toggleNeonEffect();
+  }, 100);
+  
   initParallax(); 
   initNavigation(); 
   initScrollReveal(); 
@@ -800,6 +944,9 @@ function init() {
   initTypewriter(); 
 }
 
+// Event Listeners
+toggleRain.addEventListener('click', toggleRainEffect);
+toggleNeon.addEventListener('click', toggleNeonEffect);
 window.addEventListener('resize', initRain);
 document.addEventListener('DOMContentLoaded', init);
 document.querySelectorAll('a[href^="#"]').forEach(anchor => { 
