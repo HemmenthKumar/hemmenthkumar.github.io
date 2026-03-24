@@ -1,635 +1,2039 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hemmenth Kumar | Product Design Portfolio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root {
---bg: #0a0a0c;
---bg-secondary: #111114;
---fg: #e8e6e3;
---muted: #a8a8a8;
---accent-cyan: #00e5cc;
---accent-magenta: #e930a8;
---accent-amber: #f5a623;
---card: rgba(18, 18, 22, 0.85);
---border: rgba(255, 255, 255, 0.08);
---glow-cyan: rgba(0, 229, 204, 0.4);
---glow-magenta: rgba(233, 48, 168, 0.4);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-font-family: 'Space Mono', monospace;
-background: var(--bg);
-color: var(--fg);
-overflow-x: hidden;
-line-height: 1.7;
--webkit-font-smoothing: antialiased;
-}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hemmenth Kumar | Product Design Portfolio</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg: #0a0a0c;
+                --bg-secondary: #111114;
+                --fg: #e8e6e3;
+                --muted: #a8a8a8;
+                --accent-cyan: #00e5cc;
+                --accent-magenta: #e930a8;
+                --accent-amber: #f5a623;
+                --card: rgba(18, 18, 22, 0.85);
+                --border: rgba(255, 255, 255, 0.08);
+                --glow-cyan: rgba(0, 229, 204, 0.4);
+                --glow-magenta: rgba(233, 48, 168, 0.4);
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: "Space Mono", monospace;
+                background: var(--bg);
+                color: var(--fg);
+                overflow-x: hidden;
+                line-height: 1.7;
+                -webkit-font-smoothing: antialiased;
+            }
 
-/* CRT Scanlines */
-.scanlines { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px); opacity: 0.3; }
+            /* CRT Scanlines */
+            .scanlines {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 9999;
+                background: repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15) 0px,
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+                opacity: 0.3;
+            }
 
-/* Film Grain */
-.film-grain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9998; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); animation: grain 0.5s steps(10) infinite; }
-.film-grain.disabled { display: none; }
-@keyframes grain { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-1%, -1%); } 20% { transform: translate(1%, 1%); } 30% { transform: translate(-1%, 1%); } 40% { transform: translate(1%, -1%); } 50% { transform: translate(-1%, 0); } 60% { transform: translate(1%, 0); } 70% { transform: translate(0, 1%); } 80% { transform: translate(0, -1%); } 90% { transform: translate(1%, 1%); } }
+            /* Film Grain */
+            .film-grain {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 9998;
+                opacity: 0.05;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+                animation: grain 0.5s steps(10) infinite;
+            }
+            .film-grain.disabled {
+                display: none;
+            }
+            @keyframes grain {
+                0%,
+                100% {
+                    transform: translate(0, 0);
+                }
+                10% {
+                    transform: translate(-1%, -1%);
+                }
+                20% {
+                    transform: translate(1%, 1%);
+                }
+                30% {
+                    transform: translate(-1%, 1%);
+                }
+                40% {
+                    transform: translate(1%, -1%);
+                }
+                50% {
+                    transform: translate(-1%, 0);
+                }
+                60% {
+                    transform: translate(1%, 0);
+                }
+                70% {
+                    transform: translate(0, 1);
+                }
+                80% {
+                    transform: translate(0, -1%);
+                }
+                90% {
+                    transform: translate(1%, 1%);
+                }
+            }
 
-/* Rain Effect Canvas */
-#rain-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9997; opacity: 0.7; transition: opacity 0.3s ease; }
-#rain-canvas.disabled { opacity: 0; }
+            /* Rain Effect Canvas */
+            #rain-canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 9997;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+            }
+            #rain-canvas.disabled {
+                opacity: 0;
+            }
 
-/* TOGGLE BUTTONS */
-.effect-toggles { position: fixed; bottom: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
-.toggle-btn { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(10, 10, 12, 0.9); border: 1px solid var(--border); border-radius: 4px; color: var(--accent-cyan); font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px); }
-.toggle-btn.active { border-color: var(--accent-cyan); color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
-.toggle-btn .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); box-shadow: 0 0 8px var(--glow-cyan); transition: background 0.3s ease; }
-.toggle-btn:not(.active) .status-dot { background: var(--muted); box-shadow: none; }
+            /* TOGGLE BUTTONS */
+            .effect-toggles {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 10000;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .toggle-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 14px;
+                background: rgba(10, 10, 12, 0.9);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                color: var(--accent-cyan);
+                font-family: "Space Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.1em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+            .toggle-btn.active {
+                border-color: var(--accent-cyan);
+                color: var(--accent-cyan);
+                box-shadow: 0 0 15px var(--glow-cyan);
+            }
+            .toggle-btn .status-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent-cyan);
+                box-shadow: 0 0 8px var(--glow-cyan);
+                transition: background 0.3s ease;
+            }
+            .toggle-btn:not(.active) .status-dot {
+                background: var(--muted);
+                box-shadow: none;
+            }
 
-/* Hero Section */
-.hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 10, 12, 0) 0%, rgba(10, 10, 12, 0.3) 50%, var(--bg) 100%); z-index: 1; }
-.cityscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; z-index: 0; }
-.city-layer { position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; background-size: contain; background-repeat: repeat-x; background-position: bottom; }
-.city-far { background: linear-gradient(0deg, rgba(0, 229, 204, 0.03) 0%, transparent 100%); opacity: 0.5; }
-.neon-grid { position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; background: linear-gradient(90deg, rgba(0, 229, 204, 0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(0, 229, 204, 0.05) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: bottom; opacity: 0.3; }
-.hero-content { position: relative; z-index: 10; text-align: center; padding: 2rem; }
+            /* Hero Section */
+            .hero {
+                position: relative;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+            .hero-bg {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    180deg,
+                    rgba(10, 10, 12, 0) 0%,
+                    rgba(10, 10, 12, 0.3) 50%,
+                    var(--bg) 100%
+                );
+                z-index: 1;
+            }
+            .cityscape {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 60%;
+                z-index: 0;
+            }
+            .city-layer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200%;
+                height: 100%;
+                background-size: contain;
+                background-repeat: repeat-x;
+                background-position: bottom;
+            }
+            .city-far {
+                background: linear-gradient(
+                    0deg,
+                    rgba(0, 229, 204, 0.03) 0%,
+                    transparent 100%
+                );
+                opacity: 0.5;
+            }
+            .neon-grid {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 30%;
+                background:
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 229, 204, 0.1) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        0deg,
+                        rgba(0, 229, 204, 0.05) 1px,
+                        transparent 1px
+                    );
+                background-size: 60px 60px;
+                transform: perspective(500px) rotateX(60deg);
+                transform-origin: bottom;
+                opacity: 0.3;
+            }
+            .hero-content {
+                position: relative;
+                z-index: 10;
+                text-align: center;
+                padding: 2rem;
+            }
 
-/* Glitch Headline */
-.glitch-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 12vw, 8rem); font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.1; display: inline-flex; flex-wrap: wrap; justify-content: center; color: var(--fg); }
-.glitch-word { position: relative; display: inline-block; color: transparent; }
-.glitch-word::before, .glitch-word::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.9; }
-.glitch-word::before { z-index: -1; animation: glitch-bottom 2s infinite linear alternate-reverse; }
-.glitch-word::after { z-index: 1; animation: glitch-top 3s infinite linear alternate-reverse; }
-.glitch-word.disabled::before, .glitch-word.disabled::after { animation: none; }
-.glitch-word.cyan::before { color: var(--accent-cyan); } .glitch-word.cyan::after { color: var(--accent-magenta); }
-.glitch-word.magenta::before { color: var(--accent-magenta); } .glitch-word.magenta::after { color: var(--accent-cyan); }
+            /* Glitch Headline */
+            .glitch-headline {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(3rem, 12vw, 8rem);
+                font-weight: 400;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                line-height: 1.1;
+                display: inline-flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                color: var(--fg);
+            }
+            .glitch-word {
+                position: relative;
+                display: inline-block;
+                color: transparent;
+            }
+            .glitch-word::before,
+            .glitch-word::after {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.9;
+            }
+            .glitch-word::before {
+                z-index: -1;
+                animation: glitch-bottom 2s infinite linear alternate-reverse;
+            }
+            .glitch-word::after {
+                z-index: 1;
+                animation: glitch-top 3s infinite linear alternate-reverse;
+            }
+            .glitch-word.disabled::before,
+            .glitch-word.disabled::after {
+                animation: none;
+            }
+            .glitch-word.cyan::before {
+                color: var(--accent-cyan);
+            }
+            .glitch-word.cyan::after {
+                color: var(--accent-magenta);
+            }
+            .glitch-word.magenta::before {
+                color: var(--accent-magenta);
+            }
+            .glitch-word.magenta::after {
+                color: var(--accent-cyan);
+            }
 
-@keyframes glitch-bottom { 0%, 90%, 100% { transform: translate(0); } 92% { transform: translate(-4px, 2px); } 94% { transform: translate(4px, -2px); } 96% { transform: translate(-2px, 3px); } 98% { transform: translate(3px, -1px); } }
-@keyframes glitch-top { 0%, 88%, 100% { transform: translate(0); } 90% { transform: translate(4px, -2px); } 93% { transform: translate(-4px, 2px); } 95% { transform: translate(3px, 1px); } 97% { transform: translate(-2px, -3px); } }
+            @keyframes glitch-bottom {
+                0%,
+                90%,
+                100% {
+                    transform: translate(0);
+                }
+                92% {
+                    transform: translate(-4px, 2px);
+                }
+                94% {
+                    transform: translate(4px, -2px);
+                }
+                96% {
+                    transform: translate(-2px, 3px);
+                }
+                98% {
+                    transform: translate(3px, -1px);
+                }
+            }
+            @keyframes glitch-top {
+                0%,
+                88%,
+                100% {
+                    transform: translate(0);
+                }
+                90% {
+                    transform: translate(4px, -2px);
+                }
+                93% {
+                    transform: translate(-4px, 2px);
+                }
+                95% {
+                    transform: translate(3px, 1px);
+                }
+                97% {
+                    transform: translate(-2px, -3px);
+                }
+            }
 
-.neon-marquee { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.2rem, 3vw, 2rem); letter-spacing: 0.4em; color: var(--accent-cyan); text-transform: uppercase; margin-top: 1rem; text-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan); }
-.tagline { font-size: clamp(0.8rem, 1.5vw, 1rem); color: var(--muted); margin-top: 1rem; max-width: 600px; letter-spacing: 0.1em; }
+            .neon-marquee {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(1.2rem, 3vw, 2rem);
+                letter-spacing: 0.4em;
+                color: var(--accent-cyan);
+                text-transform: uppercase;
+                margin-top: 1rem;
+                text-shadow:
+                    0 0 10px var(--glow-cyan),
+                    0 0 20px var(--glow-cyan);
+            }
+            .tagline {
+                font-size: clamp(0.8rem, 1.5vw, 1rem);
+                color: var(--muted);
+                margin-top: 1rem;
+                max-width: 600px;
+                letter-spacing: 0.1em;
+            }
 
-.scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.2em; animation: bounce 2s infinite; }
-@keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+            .scroll-indicator {
+                position: absolute;
+                bottom: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--muted);
+                font-size: 0.7rem;
+                letter-spacing: 0.2em;
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+                0%,
+                100% {
+                    transform: translateX(-50%) translateY(0);
+                }
+                50% {
+                    transform: translateX(-50%) translateY(10px);
+                }
+            }
 
-/* Section Styles */
-section { position: relative; padding: 6rem 1.5rem; z-index: 5; }
-.section-header { margin-bottom: 4rem; text-align: center; }
-.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: 0.15em; color: var(--fg); position: relative; display: inline-block; }
-.section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-magenta), transparent); }
+            /* Section Styles */
+            section {
+                position: relative;
+                padding: 6rem 1.5rem;
+                z-index: 5;
+            }
+            .section-header {
+                margin-bottom: 4rem;
+                text-align: center;
+            }
+            .section-title {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(2.5rem, 6vw, 4rem);
+                letter-spacing: 0.15em;
+                color: var(--fg);
+                position: relative;
+                display: inline-block;
+            }
+            .section-title::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--accent-cyan),
+                    var(--accent-magenta),
+                    transparent
+                );
+            }
 
-/* Timeline (Resume) */
-.timeline-container { max-width: 900px; margin: 0 auto; position: relative; }
-.timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta), transparent); }
-@media (min-width: 768px) { .timeline-line { left: 50%; transform: translateX(-50%); } }
-.timeline-item { position: relative; margin-bottom: 3rem; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.timeline-item.visible { opacity: 1; transform: translateY(0); }
-.timeline-dot { position: absolute; left: 12px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent-cyan); box-shadow: 0 0 20px var(--glow-cyan); z-index: 2; }
-@media (min-width: 768px) { .timeline-dot { left: 50%; transform: translateX(-50%); } }
-.timeline-content { margin-left: 50px; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; backdrop-filter: blur(10px); color: var(--fg); }
-@media (min-width: 768px) { .timeline-content { width: 45%; margin-left: 0; } .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; margin-right: 55%; } .timeline-item:nth-child(even) .timeline-content { margin-left: 55%; } }
-.timeline-year { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--accent-amber); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-.timeline-role { font-size: 1.1rem; color: var(--fg); font-weight: 700; margin-bottom: 0.25rem; }
-.timeline-org { font-size: 0.8rem; color: var(--accent-cyan); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-.timeline-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+            /* Timeline (Resume) */
+            .timeline-container {
+                max-width: 900px;
+                margin: 0 auto;
+                position: relative;
+            }
+            .timeline-line {
+                position: absolute;
+                left: 20px;
+                top: 0;
+                bottom: 0;
+                width: 1px;
+                background: linear-gradient(
+                    180deg,
+                    var(--accent-cyan),
+                    var(--accent-magenta),
+                    transparent
+                );
+            }
+            @media (min-width: 768px) {
+                .timeline-line {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+            .timeline-item {
+                position: relative;
+                margin-bottom: 3rem;
+                opacity: 0;
+                transform: translateY(30px);
+                transition:
+                    opacity 0.6s ease,
+                    transform 0.6s ease;
+            }
+            .timeline-item.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .timeline-dot {
+                position: absolute;
+                left: 12px;
+                top: 0;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: var(--bg);
+                border: 2px solid var(--accent-cyan);
+                box-shadow: 0 0 20px var(--glow-cyan);
+                z-index: 2;
+            }
+            @media (min-width: 768px) {
+                .timeline-dot {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+            .timeline-content {
+                margin-left: 50px;
+                padding: 1.5rem;
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                backdrop-filter: blur(10px);
+                color: var(--fg);
+            }
+            @media (min-width: 768px) {
+                .timeline-content {
+                    width: 45%;
+                    margin-left: 0;
+                }
+                .timeline-item:nth-child(odd) .timeline-content {
+                    margin-left: auto;
+                    margin-right: 55%;
+                }
+                .timeline-item:nth-child(even) .timeline-content {
+                    margin-left: 55%;
+                }
+            }
+            .timeline-year {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.2rem;
+                color: var(--accent-amber);
+                letter-spacing: 0.1em;
+                margin-bottom: 0.5rem;
+            }
+            .timeline-role {
+                font-size: 1.1rem;
+                color: var(--fg);
+                font-weight: 700;
+                margin-bottom: 0.25rem;
+            }
+            .timeline-org {
+                font-size: 0.8rem;
+                color: var(--accent-cyan);
+                letter-spacing: 0.1em;
+                margin-bottom: 0.75rem;
+            }
+            .timeline-desc {
+                font-size: 0.85rem;
+                color: var(--muted);
+                line-height: 1.8;
+            }
 
-/* Product Case Studies */
-.projects-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; }
-.dragon-section { background: linear-gradient(135deg, rgba(18, 18, 22, 0.9), rgba(0, 229, 204, 0.05)); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; opacity: 0; transform: translateY(40px); transition: all 0.6s ease; }
-.dragon-section.visible { opacity: 1; transform: translateY(0); }
-.dragon-visuals { position: relative; background: radial-gradient(circle at center, rgba(0, 229, 204, 0.08), transparent 70%); display: flex; flex-direction: column; min-height: 400px; }
-.dragon-image-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
-.dragon-image { max-width: 100%; max-height: 450px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3)); display: none; }
-.dragon-image.active { display: block; animation: fadeIn 0.5s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-.dragon-view-tabs { display: flex; border-top: 1px solid var(--border); background: rgba(0,0,0,0.3); }
-.dragon-tab { flex: 1; padding: 1rem; background: transparent; border: none; color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; border-right: 1px solid var(--border); transition: all 0.3s ease;}
-.dragon-tab:last-child { border-right: none; }
-.dragon-tab.active { color: var(--accent-cyan); background: rgba(0, 229, 204, 0.1); }
+            /* Product Case Studies */
+            .projects-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .dragon-section {
+                background: linear-gradient(
+                    135deg,
+                    rgba(18, 18, 22, 0.9),
+                    rgba(0, 229, 204, 0.05)
+                );
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all 0.6s ease;
+            }
+            .dragon-section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .dragon-visuals {
+                position: relative;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(0, 229, 204, 0.08),
+                    transparent 70%
+                );
+                display: flex;
+                flex-direction: column;
+                min-height: 400px;
+            }
+            .dragon-image-container {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+            }
+            .dragon-image {
+                max-width: 100%;
+                max-height: 450px;
+                object-fit: contain;
+                filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.3));
+                display: none;
+            }
+            .dragon-image.active {
+                display: block;
+                animation: fadeIn 0.5s ease;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+            .dragon-view-tabs {
+                display: flex;
+                border-top: 1px solid var(--border);
+                background: rgba(0, 0, 0, 0.3);
+            }
+            .dragon-tab {
+                flex: 1;
+                padding: 1rem;
+                background: transparent;
+                border: none;
+                color: var(--muted);
+                font-family: "Space Mono", monospace;
+                font-size: 0.8rem;
+                letter-spacing: 0.15em;
+                cursor: pointer;
+                border-right: 1px solid var(--border);
+                transition: all 0.3s ease;
+            }
+            .dragon-tab:last-child {
+                border-right: none;
+            }
+            .dragon-tab.active {
+                color: var(--accent-cyan);
+                background: rgba(0, 229, 204, 0.1);
+            }
 
-/* Case Study Text Layout */
-.dragon-info { padding: 3rem; }
-.dragon-id { font-size: 0.75rem; color: var(--accent-magenta); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-.dragon-title { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 0.08em; color: var(--fg); line-height: 1.1; margin-bottom: 0.5rem; }
-.dragon-subtitle { font-size: 1rem; color: var(--accent-cyan); letter-spacing: 0.15em; margin-bottom: 2rem; font-weight: bold; }
-.case-study-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
-@media (min-width: 768px) { .case-study-grid { grid-template-columns: 1.5fr 1fr; } }
-.cs-block h4 { color: var(--fg); font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; display: inline-block;}
-.cs-block p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
-.cs-list { list-style: none; padding: 0; }
-.cs-list li { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 0.25rem;}
-.cs-list li span:first-child { color: var(--accent-cyan); }
+            /* Case Study Text Layout */
+            .dragon-info {
+                padding: 3rem;
+            }
+            .dragon-id {
+                font-size: 0.75rem;
+                color: var(--accent-magenta);
+                letter-spacing: 0.2em;
+                margin-bottom: 0.5rem;
+            }
+            .dragon-title {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 3rem;
+                letter-spacing: 0.08em;
+                color: var(--fg);
+                line-height: 1.1;
+                margin-bottom: 0.5rem;
+            }
+            .dragon-subtitle {
+                font-size: 1rem;
+                color: var(--accent-cyan);
+                letter-spacing: 0.15em;
+                margin-bottom: 2rem;
+                font-weight: bold;
+            }
+            .case-study-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+            @media (min-width: 768px) {
+                .case-study-grid {
+                    grid-template-columns: 1.5fr 1fr;
+                }
+            }
+            .cs-block h4 {
+                color: var(--fg);
+                font-size: 1.1rem;
+                margin-bottom: 0.75rem;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 0.5rem;
+                display: inline-block;
+            }
+            .cs-block p {
+                font-size: 0.85rem;
+                color: var(--muted);
+                line-height: 1.8;
+                margin-bottom: 1rem;
+            }
+            .cs-list {
+                list-style: none;
+                padding: 0;
+            }
+            .cs-list li {
+                font-size: 0.8rem;
+                color: var(--muted);
+                margin-bottom: 0.5rem;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+                padding-bottom: 0.25rem;
+            }
+            .cs-list li span:first-child {
+                color: var(--accent-cyan);
+            }
 
-/* Specs Grid */
-.dragon-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
-.dragon-stat { text-align: center; background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); }
-.dragon-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--accent-amber); }
-.dragon-stat-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+            /* Specs Grid */
+            .dragon-stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 1rem;
+                padding-top: 2rem;
+                border-top: 1px solid var(--border);
+                margin-top: 2rem;
+            }
+            .dragon-stat {
+                text-align: center;
+                background: rgba(255, 255, 255, 0.02);
+                padding: 1rem;
+                border-radius: 4px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .dragon-stat-value {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 2rem;
+                color: var(--accent-amber);
+            }
+            .dragon-stat-label {
+                font-size: 0.65rem;
+                color: var(--muted);
+                letter-spacing: 0.1em;
+            }
 
-/* Skills Section */
-.skills-container { max-width: 1000px; margin: 0 auto; }
-.skills-category { margin-bottom: 3rem; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
-.skills-category.visible { opacity: 1; transform: translateY(0); }
-.category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-.category-icon { width: 24px; height: 24px; stroke: var(--accent-magenta); stroke-width: 1.5; fill: none; }
-.category-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.15em; color: var(--fg); }
-.skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-.skill-item { font-size: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 2px; color: var(--muted); transition: all 0.3s ease; cursor: default; }
-.skill-item:hover { background: rgba(0, 229, 204, 0.1); border-color: var(--accent-cyan); color: var(--accent-cyan); transform: translateY(-2px); }
+            /* Skills Section */
+            .skills-container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .skills-category {
+                margin-bottom: 3rem;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s ease;
+            }
+            .skills-category.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .category-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .category-icon {
+                width: 24px;
+                height: 24px;
+                stroke: var(--accent-magenta);
+                stroke-width: 1.5;
+                fill: none;
+            }
+            .category-title {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.3rem;
+                letter-spacing: 0.15em;
+                color: var(--fg);
+            }
+            .skills-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+            .skill-item {
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--border);
+                border-radius: 2px;
+                color: var(--muted);
+                transition: all 0.3s ease;
+                cursor: default;
+            }
+            .skill-item:hover {
+                background: rgba(0, 229, 204, 0.1);
+                border-color: var(--accent-cyan);
+                color: var(--accent-cyan);
+                transform: translateY(-2px);
+            }
 
-/* Contact Section */
-.contact-section { text-align: center; padding: 8rem 1.5rem; background: linear-gradient(180deg, transparent, rgba(0, 229, 204, 0.02), rgba(233, 48, 168, 0.02)); }
-.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.15em; margin-bottom: 1rem; color: var(--fg); }
-.contact-subtitle { font-size: 0.9rem; color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.8; }
-.contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-.contact-link { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; color: var(--fg); text-decoration: none; font-size: 0.85rem; transition: all 0.3s ease; }
-.contact-link:hover { border-color: var(--accent-cyan); box-shadow: 0 0 30px var(--glow-cyan); transform: translateY(-3px); }
+            /* Contact Section */
+            .contact-section {
+                text-align: center;
+                padding: 8rem 1.5rem;
+                background: linear-gradient(
+                    180deg,
+                    transparent,
+                    rgba(0, 229, 204, 0.02),
+                    rgba(233, 48, 168, 0.02)
+                );
+            }
+            .contact-title {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                letter-spacing: 0.15em;
+                margin-bottom: 1rem;
+                color: var(--fg);
+            }
+            .contact-subtitle {
+                font-size: 0.9rem;
+                color: var(--muted);
+                max-width: 600px;
+                margin: 0 auto 2.5rem;
+                line-height: 1.8;
+            }
+            .contact-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .contact-link {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 1rem 1.75rem;
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                color: var(--fg);
+                text-decoration: none;
+                font-size: 0.85rem;
+                transition: all 0.3s ease;
+            }
+            .contact-link:hover {
+                border-color: var(--accent-cyan);
+                box-shadow: 0 0 30px var(--glow-cyan);
+                transform: translateY(-3px);
+            }
 
-/* Navigation */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(10, 10, 12, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); transform: translateY(-100%); transition: transform 0.3s ease; }
-nav.visible { transform: translateY(0); }
-.nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--fg); }
-.nav-links { display: flex; gap: 2rem; }
-.nav-link { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; transition: color 0.3s ease; }
-.nav-link:hover { color: var(--accent-cyan); }
-@media (max-width: 640px) { .nav-links { display: none; } }
+            /* Navigation */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 1rem 2rem;
+                background: rgba(10, 10, 12, 0.9);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+            nav.visible {
+                transform: translateY(0);
+            }
+            .nav-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .nav-logo {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.2rem;
+                letter-spacing: 0.15em;
+                color: var(--fg);
+            }
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+            }
+            .nav-link {
+                font-size: 0.75rem;
+                color: var(--muted);
+                text-decoration: none;
+                letter-spacing: 0.15em;
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: var(--accent-cyan);
+            }
+            @media (max-width: 640px) {
+                .nav-links {
+                    display: none;
+                }
+            }
 
-@media (prefers-reduced-motion: reduce) {
-*, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-.scanlines, .film-grain { display: none; }
-}
-</style>
-</head>
-<body>
-<div class="scanlines" id="scanlines"></div>
-<div class="film-grain" id="film-grain"></div>
-<canvas id="rain-canvas"></canvas>
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+                .scanlines,
+                .film-grain {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="scanlines" id="scanlines"></div>
+        <div class="film-grain" id="film-grain"></div>
+        <canvas id="rain-canvas"></canvas>
 
-<!-- Toggle Buttons -->
-<div class="effect-toggles">
-<button class="toggle-btn" id="toggle-rain">
-<span>RAIN</span>
-<span class="status-dot"></span>
-</button>
-<button class="toggle-btn active" id="toggle-neon">
-<span>NEON</span>
-<span class="status-dot"></span>
-</button>
-</div>
+        <!-- Toggle Buttons -->
+        <div class="effect-toggles">
+            <button class="toggle-btn" id="toggle-rain">
+                <span>RAIN</span>
+                <span class="status-dot"></span>
+            </button>
+            <button class="toggle-btn active" id="toggle-neon">
+                <span>NEON</span>
+                <span class="status-dot"></span>
+            </button>
+        </div>
 
-<!-- Navigation -->
-<nav role="navigation">
-<div class="nav-content">
-<div class="nav-logo">H. KUMAR</div>
-<div class="nav-links">
-<a href="#about" class="nav-link">ABOUT</a>
-<a href="#case-studies" class="nav-link">CASE STUDIES</a>
-<a href="#specs" class="nav-link">SKILLS</a>
-<a href="#contact" class="nav-link">CONTACT</a>
-</div>
-</div>
-</nav>
+        <!-- Navigation -->
+        <nav role="navigation">
+            <div class="nav-content">
+                <div class="nav-logo">H. KUMAR</div>
+                <div class="nav-links">
+                    <a href="#about" class="nav-link">ABOUT</a>
+                    <a href="#case-studies" class="nav-link">CASE STUDIES</a>
+                    <a href="#specs" class="nav-link">SKILLS</a>
+                    <a href="#contact" class="nav-link">CONTACT</a>
+                </div>
+            </div>
+        </nav>
 
-<!-- Hero Section -->
-<header class="hero">
-<div class="hero-bg"></div>
-<div class="cityscape" aria-hidden="true">
-<div class="city-layer city-far" id="city-far"></div>
-<div class="neon-grid"></div>
-</div>
-<div class="hero-content">
-<h1 class="glitch-headline">
-<span class="glitch-word cyan" data-text="HEMMENTH">HEMMENTH</span>
-<span class="glitch-word magenta" data-text="KUMAR">KUMAR</span>
-</h1>
-<p class="neon-marquee" id="neon-marquee">PRODUCT DESIGN PORTFOLIO</p>
-<p class="tagline">Hardware Engineering, Prototyping & R&D</p>
-</div>
-<div class="scroll-indicator" id="scroll-indicator">
-<span>SCROLL</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-</div>
-</header>
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-bg"></div>
+            <div class="cityscape" aria-hidden="true">
+                <div class="city-layer city-far" id="city-far"></div>
+                <div class="neon-grid"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="glitch-headline">
+                    <span class="glitch-word cyan" data-text="HEMMENTH"
+                        >HEMMENTH</span
+                    >
+                    <span class="glitch-word magenta" data-text="KUMAR"
+                        >KUMAR</span
+                    >
+                </h1>
+                <p class="neon-marquee" id="neon-marquee">
+                    PRODUCT DESIGN PORTFOLIO
+                </p>
+                <p class="tagline">Hardware Engineering, Prototyping & R&D</p>
+            </div>
+            <div class="scroll-indicator" id="scroll-indicator">
+                <span>SCROLL</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+            </div>
+        </header>
 
-<!-- ABOUT SECTION -->
-<section id="about">
-<div class="section-header"><h2 class="section-title">EXECUTIVE SUMMARY</h2></div>
-<div class="timeline-container">
-<div class="timeline-line"></div>
-<article class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<div class="timeline-year">DESIGN PHILOSOPHY</div>
-<div class="timeline-role">Bridging Concepts to Hardware</div>
-<div class="timeline-desc">I specialize in turning conceptual ideas into functional, investor-ready hardware prototypes. My background spans electronics, composite manufacturing, and CAD. By deeply understanding first principles across physics, chemistry, and circuit theory, I simulate and solve complex mechanical interactions before the first cut is made.</div>
-</div>
-</article>
-<article class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<div class="timeline-year">THE DUAL DOMAIN</div>
-<div class="timeline-role">Product Design & Engineering</div>
-<div class="timeline-desc">Sitting at the intersection of engineering and design, I ensure that raw technical capabilities translate into intuitive, human-centered products. Rather than just focusing on thrust-to-weight ratios or circuit logic, I design with form-factor, ergonomics, and the end-user in mind.</div>
-</div>
-</article>
-<article class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<div class="timeline-year">2024 - PRESENT</div>
-<div class="timeline-role">AR/VR R&D Intern</div>
-<div class="timeline-org">MAJORBEAM</div>
-<div class="timeline-desc">Mastering industry-level AR/VR technologies and spatial computing hardware while concurrently developing the DRAGON UAV//AWACS and BURST SWARM AWACS systems. Gaining practical experience in immersive tech integration for real-world R&D applications.</div>
-</div>
-</article>
-<article class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<div class="timeline-year">2024</div>
-<div class="timeline-role">Certificate in Product Design</div>
-<div class="timeline-org">SOMAIYA SCHOOL OF DESIGN, MUMBAI</div>
-<div class="timeline-desc">Focused on design thinking, material science, and human-centered design. Concluded studies to pursue full-time independent R&D on autonomous UAV systems, prioritizing field application and physical manufacturing over academic theory.</div>
-</div>
-</article>
-<article class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<div class="timeline-year">2022 - 2024</div>
-<div class="timeline-role">Electronics & Communications Engineering</div>
-<div class="timeline-org">IIIT NAGPUR</div>
-<div class="timeline-desc">Gained formal grounding in circuit theory, signal processing, and embedded systems. This theoretical base remains the core of my current R&D work in avionics, power distribution, and telemetry networks.</div>
-</div>
-</article>
-</div>
-</section>
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="section-header">
+                <h2 class="section-title">EXECUTIVE SUMMARY</h2>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <article class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">DESIGN PHILOSOPHY</div>
+                        <div class="timeline-role">
+                            Bridging Concepts to Hardware
+                        </div>
+                        <div class="timeline-desc">
+                            I specialize in turning conceptual ideas into
+                            functional, investor-ready hardware prototypes. My
+                            background spans electronics, composite
+                            manufacturing, and CAD. By deeply understanding
+                            first principles across physics, chemistry, and
+                            circuit theory, I simulate and solve complex
+                            mechanical interactions before the first cut is
+                            made.
+                        </div>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">THE DUAL DOMAIN</div>
+                        <div class="timeline-role">
+                            Product Design & Engineering
+                        </div>
+                        <div class="timeline-desc">
+                            Sitting at the intersection of engineering and
+                            design, I ensure that raw technical capabilities
+                            translate into intuitive, human-centered products.
+                            Rather than just focusing on thrust-to-weight ratios
+                            or circuit logic, I design with form-factor,
+                            ergonomics, and the end-user in mind.
+                        </div>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024 - PRESENT</div>
+                        <div class="timeline-role">AR/VR R&D Intern</div>
+                        <div class="timeline-org">MAJORBEAM</div>
+                        <div class="timeline-desc">
+                            Mastering industry-level AR/VR technologies and
+                            spatial computing hardware while concurrently
+                            developing the DRAGON UAV//AWACS and BURST SWARM
+                            AWACS systems. Gaining practical experience in
+                            immersive tech integration for real-world R&D
+                            applications.
+                        </div>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-role">
+                            Certificate in Product Design
+                        </div>
+                        <div class="timeline-org">
+                            SOMAIYA SCHOOL OF DESIGN, MUMBAI
+                        </div>
+                        <div class="timeline-desc">
+                            Focused on design thinking, material science, and
+                            human-centered design. Concluded studies to pursue
+                            full-time independent R&D on autonomous UAV systems,
+                            prioritizing field application and physical
+                            manufacturing over academic theory.
+                        </div>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022 - 2024</div>
+                        <div class="timeline-role">
+                            Electronics & Communications Engineering
+                        </div>
+                        <div class="timeline-org">IIIT NAGPUR</div>
+                        <div class="timeline-desc">
+                            Gained formal grounding in circuit theory, signal
+                            processing, and embedded systems. This theoretical
+                            base remains the core of my current R&D work in
+                            avionics, power distribution, and telemetry
+                            networks.
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-<!-- CASE STUDIES SECTION -->
-<section id="case-studies" style="background: linear-gradient(180deg, rgba(17, 17, 20, 0.85), rgba(233, 48, 168, 0.05));">
-<div class="section-header"><h2 class="section-title">CASE STUDIES</h2></div>
-<div class="projects-grid">
+        <!-- CASE STUDIES SECTION -->
+        <section
+            id="case-studies"
+            style="
+                background: linear-gradient(
+                    180deg,
+                    rgba(17, 17, 20, 0.85),
+                    rgba(233, 48, 168, 0.05)
+                );
+            "
+        >
+            <div class="section-header">
+                <h2 class="section-title">CASE STUDIES</h2>
+            </div>
+            <div class="projects-grid">
+                <!-- CASE STUDY 1: DRAGON UAV -->
+                <article class="dragon-section project-card visible">
+                    <div class="dragon-visuals">
+                        <div class="dragon-image-container">
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png"
+                                alt="Dragon TMFM Mode"
+                                class="dragon-image active"
+                                id="dragon-tmfm"
+                            />
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/dragon_vtol.png"
+                                alt="Dragon VTOL Mode"
+                                class="dragon-image"
+                                id="dragon-vtol"
+                            />
+                        </div>
+                        <div class="dragon-view-tabs">
+                            <button
+                                class="dragon-tab active"
+                                data-target="dragon-tmfm"
+                            >
+                                TWIN MOTOR FLIGHT MODE (TMFM)
+                            </button>
+                            <button
+                                class="dragon-tab"
+                                data-target="dragon-vtol"
+                            >
+                                VTOL HOVER MODE
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dragon-info">
+                        <div class="dragon-id">
+                            HARDWARE PROTOTYPE // IN DEVELOPMENT
+                        </div>
+                        <h3 class="dragon-title">DRAGON UAV//AWACS</h3>
+                        <div class="dragon-subtitle">
+                            Long-Range Autonomous Search & Rescue Aircraft
+                        </div>
 
-<!-- CASE STUDY 1: DRAGON UAV -->
-<article class="dragon-section project-card visible">
-<div class="dragon-visuals">
-<div class="dragon-image-container">
-<img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="Dragon TMFM Mode" class="dragon-image active" id="dragon-tmfm">
-<img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/dragon_vtol.png" alt="Dragon VTOL Mode" class="dragon-image" id="dragon-vtol">
-</div>
-<div class="dragon-view-tabs">
-<button class="dragon-tab active" data-target="dragon-tmfm">TWIN MOTOR FLIGHT MODE (TMFM)</button>
-<button class="dragon-tab" data-target="dragon-vtol">VTOL HOVER MODE</button>
-</div>
-</div>
-<div class="dragon-info">
-<div class="dragon-id">HARDWARE PROTOTYPE // IN DEVELOPMENT</div>
-<h3 class="dragon-title">DRAGON UAV//AWACS</h3>
-<div class="dragon-subtitle">Long-Range Autonomous Search & Rescue Aircraft</div>
+                        <div class="case-study-grid">
+                            <div class="cs-block">
+                                <h4>The Problem</h4>
+                                <p>
+                                    Current Search and Rescue (SAR) missions
+                                    rely on helicopters (high operating costs,
+                                    complex logistics) or standard drones
+                                    (insufficient flight times of ~90 minutes).
+                                    SAR requires persistent, long-range aerial
+                                    surveying that traditional multicopters
+                                    physically cannot provide due to energy
+                                    density limits.
+                                </p>
+                                <h4>The Solution</h4>
+                                <p>
+                                    An autonomous electric glider featuring VTOL
+                                    capabilities transitioning into Twin Motor
+                                    Flight Mode (TMFM). Designed for massive
+                                    endurance, it achieves an 8+ hour flight
+                                    time. It streams live video, utilizes
+                                    thermal/night vision, and maps terrain using
+                                    3D Gaussian Splatting (OpenSplat) to bypass
+                                    heavy/expensive Lidar systems.
+                                </p>
+                                <h4>Manufacturing & Avionics</h4>
+                                <p>
+                                    The fuselage and wings utilize a composite
+                                    approach: Expanded Polypropylene (EPP) foam
+                                    core, covered by 100 GSM fiberglass and
+                                    50/36 GSM Kevlar, stiffened with carbon
+                                    fiber spars. Avionics are driven by an
+                                    ArduPilot Mega 2.8 flight controller and an
+                                    ODroid XU4 companion computer running OpenHD
+                                    for beyond-line-of-sight video transmission.
+                                </p>
+                            </div>
 
-<div class="case-study-grid">
-<div class="cs-block">
-<h4>The Problem</h4>
-<p>Current Search and Rescue (SAR) missions rely on helicopters (high operating costs, complex logistics) or standard drones (insufficient flight times of ~90 minutes). SAR requires persistent, long-range aerial surveying that traditional multicopters physically cannot provide due to energy density limits.</p>
-<h4>The Solution</h4>
-<p>An autonomous electric glider featuring VTOL capabilities transitioning into Twin Motor Flight Mode (TMFM). Designed for massive endurance, it achieves an 8+ hour flight time. It streams live video, utilizes thermal/night vision, and maps terrain using 3D Gaussian Splatting (OpenSplat) to bypass heavy/expensive Lidar systems.</p>
-<h4>Manufacturing & Avionics</h4>
-<p>The fuselage and wings utilize a composite approach: Expanded Polypropylene (EPP) foam core, covered by 100 GSM fiberglass and 50/36 GSM Kevlar, stiffened with carbon fiber spars. Avionics are driven by an ArduPilot Mega 2.8 flight controller and an ODroid XU4 companion computer running OpenHD for beyond-line-of-sight video transmission.</p>
-</div>
+                            <div class="cs-block">
+                                <h4>Technical Specifications</h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>Target AUW</span>
+                                        <span>14 kg</span>
+                                    </li>
+                                    <li>
+                                        <span>Wingspan</span>
+                                        <span>2.54 m</span>
+                                    </li>
+                                    <li>
+                                        <span>Wing Area</span>
+                                        <span>0.496 m²</span>
+                                    </li>
+                                    <li>
+                                        <span>Wing Loading</span>
+                                        <span>28.2 kg/m²</span>
+                                    </li>
+                                    <li>
+                                        <span>Est. L/D Ratio</span>
+                                        <span>15:1</span>
+                                    </li>
+                                    <li>
+                                        <span>Motors</span>
+                                        <span>2 × AT4120 KV500</span>
+                                    </li>
+                                    <li>
+                                        <span>Battery Cap.</span>
+                                        <span>75 Ah (3x 22.8V packs)</span>
+                                    </li>
+                                    <li>
+                                        <span>Total Energy</span>
+                                        <span>1,710 Wh</span>
+                                    </li>
+                                    <li>
+                                        <span>System Power</span>
+                                        <span>208 W (Cruise)</span>
+                                    </li>
+                                    <li>
+                                        <span>Flight Controller</span>
+                                        <span>ArduPilot APM 2.8</span>
+                                    </li>
+                                    <li>
+                                        <span>Telemetry/Vid</span>
+                                        <span>OpenHD via ODroid</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-<div class="cs-block">
-<h4>Technical Specifications</h4>
-<ul class="cs-list">
-<li><span>Target AUW</span> <span>14 kg</span></li>
-<li><span>Wingspan</span> <span>2.54 m</span></li>
-<li><span>Wing Area</span> <span>0.496 m²</span></li>
-<li><span>Wing Loading</span> <span>28.2 kg/m²</span></li>
-<li><span>Est. L/D Ratio</span> <span>15:1</span></li>
-<li><span>Motors</span> <span>2 × AT4120 KV500</span></li>
-<li><span>Battery Cap.</span> <span>75 Ah (3x 22.8V packs)</span></li>
-<li><span>Total Energy</span> <span>1,710 Wh</span></li>
-<li><span>System Power</span> <span>208 W (Cruise)</span></li>
-<li><span>Flight Controller</span> <span>ArduPilot APM 2.8</span></li>
-<li><span>Telemetry/Vid</span> <span>OpenHD via ODroid</span></li>
-</ul>
-</div>
-</div>
+                        <div class="dragon-stats-grid">
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">411 KM</div>
+                                <div class="dragon-stat-label">
+                                    CALCULATED RANGE
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">8.2 HRS</div>
+                                <div class="dragon-stat-label">
+                                    FLIGHT ENDURANCE
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">50 KM/H</div>
+                                <div class="dragon-stat-label">
+                                    CRUISE SPEED
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">1.35:1</div>
+                                <div class="dragon-stat-label">
+                                    THRUST/WEIGHT
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-<div class="dragon-stats-grid">
-<div class="dragon-stat"><div class="dragon-stat-value">411 KM</div><div class="dragon-stat-label">CALCULATED RANGE</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">8.2 HRS</div><div class="dragon-stat-label">FLIGHT ENDURANCE</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">50 KM/H</div><div class="dragon-stat-label">CRUISE SPEED</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">1.35:1</div><div class="dragon-stat-label">THRUST/WEIGHT</div></div>
-</div>
-</div>
-</article>
+                <!-- CASE STUDY 2: BURST SWARM -->
+                <article
+                    class="dragon-section project-card visible"
+                    style="margin-top: 4rem"
+                >
+                    <div class="dragon-visuals">
+                        <div class="dragon-image-container">
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/swarm_out.png"
+                                alt="Swarm Deployed"
+                                class="dragon-image active"
+                                id="swarm-out"
+                            />
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/swarm_in.png"
+                                alt="Swarm Stowed"
+                                class="dragon-image"
+                                id="swarm-in"
+                            />
+                        </div>
+                        <div class="dragon-view-tabs">
+                            <button
+                                class="dragon-tab active"
+                                data-target="swarm-out"
+                            >
+                                SWARM DEPLOYED
+                            </button>
+                            <button class="dragon-tab" data-target="swarm-in">
+                                INTERNAL PAYLOAD STOWED
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dragon-info">
+                        <div class="dragon-id">
+                            SYSTEM ARCHITECTURE // PROOF OF CONCEPT
+                        </div>
+                        <h3 class="dragon-title">BURST SWARM AWACS</h3>
+                        <div class="dragon-subtitle">
+                            Autonomous Aerial Mesh Node Deployment System
+                        </div>
 
-<!-- CASE STUDY 2: BURST SWARM -->
-<article class="dragon-section project-card visible" style="margin-top: 4rem;">
-<div class="dragon-visuals">
-<div class="dragon-image-container">
-<img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/swarm_out.png" alt="Swarm Deployed" class="dragon-image active" id="swarm-out">
-<img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/swarm_in.png" alt="Swarm Stowed" class="dragon-image" id="swarm-in">
-</div>
-<div class="dragon-view-tabs">
-<button class="dragon-tab active" data-target="swarm-out">SWARM DEPLOYED</button>
-<button class="dragon-tab" data-target="swarm-in">INTERNAL PAYLOAD STOWED</button>
-</div>
-</div>
-<div class="dragon-info">
-<div class="dragon-id">SYSTEM ARCHITECTURE // PROOF OF CONCEPT</div>
-<h3 class="dragon-title">BURST SWARM AWACS</h3>
-<div class="dragon-subtitle">Autonomous Aerial Mesh Node Deployment System</div>
+                        <div class="case-study-grid">
+                            <div class="cs-block">
+                                <h4>The Problem</h4>
+                                <p>
+                                    During natural disasters, existing cellular
+                                    networks are immediately compromised. First
+                                    responders enter "denied environments" where
+                                    establishing command-and-control
+                                    communications is slow, dangerous, and
+                                    physically constrained by line-of-sight.
+                                </p>
+                                <h4>The Solution</h4>
+                                <p>
+                                    BURST SWARM AWACS is a cylindrical carrier
+                                    drone (deployer) that ascends and uses
+                                    controlled centrifugal force to scatter 7
+                                    independent, solar-powered communication
+                                    nodes. The nodes form an instant hexagonal
+                                    Meshtastic (LoRa) mesh network covering 4
+                                    km², restoring connectivity for first
+                                    responders in under 90 seconds without human
+                                    footprints.
+                                </p>
+                                <h4>Deployment Mechanics</h4>
+                                <p>
+                                    The carrier utilizes dual contra-rotating
+                                    brushless motors for stable hover.
+                                    Differential ESC control induces a spin,
+                                    tilting the internal cradle horizontal. Six
+                                    outer nodes eject radially at 60° intervals,
+                                    and one central node drops vertically. No
+                                    parachutes are required due to the nodes'
+                                    aerodynamic stability and shock-absorbing
+                                    IP67 casing.
+                                </p>
+                            </div>
 
-<div class="case-study-grid">
-<div class="cs-block">
-<h4>The Problem</h4>
-<p>During natural disasters, existing cellular networks are immediately compromised. First responders enter "denied environments" where establishing command-and-control communications is slow, dangerous, and physically constrained by line-of-sight.</p>
-<h4>The Solution</h4>
-<p>BURST SWARM AWACS is a cylindrical carrier drone (deployer) that ascends and uses controlled centrifugal force to scatter 7 independent, solar-powered communication nodes. The nodes form an instant hexagonal Meshtastic (LoRa) mesh network covering 4 km², restoring connectivity for first responders in under 90 seconds without human footprints.</p>
-<h4>Deployment Mechanics</h4>
-<p>The carrier utilizes dual contra-rotating brushless motors for stable hover. Differential ESC control induces a spin, tilting the internal cradle horizontal. Six outer nodes eject radially at 60° intervals, and one central node drops vertically. No parachutes are required due to the nodes' aerodynamic stability and shock-absorbing IP67 casing.</p>
-</div>
+                            <div class="cs-block">
+                                <h4>Carrier Specifications</h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>Dimensions</span>
+                                        <span>Ø 25 cm × H 45 cm</span>
+                                    </li>
+                                    <li>
+                                        <span>Empty Weight</span>
+                                        <span>1.2 kg</span>
+                                    </li>
+                                    <li>
+                                        <span>Payload</span>
+                                        <span>7 Nodes (~800g total)</span>
+                                    </li>
+                                    <li>
+                                        <span>Deployment</span>
+                                        <span>< 90 Seconds</span>
+                                    </li>
+                                    <li>
+                                        <span>Drop Accuracy</span>
+                                        <span>±2 m (GPS + IMU)</span>
+                                    </li>
+                                </ul>
+                                <h4 style="margin-top: 1.5rem">
+                                    Node Specifications
+                                </h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>Radio</span>
+                                        <span>SX1262 LoRa + ESP32</span>
+                                    </li>
+                                    <li>
+                                        <span>Power</span>
+                                        <span>2000mAh LiFePO₄</span>
+                                    </li>
+                                    <li>
+                                        <span>Solar Panel</span>
+                                        <span>6V 2W, Auto-deploy</span>
+                                    </li>
+                                    <li>
+                                        <span>Range (LOS)</span>
+                                        <span>5–8 km per node</span>
+                                    </li>
+                                    <li>
+                                        <span>Protocol</span>
+                                        <span>Meshtastic v2+ (Encrypted)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-<div class="cs-block">
-<h4>Carrier Specifications</h4>
-<ul class="cs-list">
-<li><span>Dimensions</span> <span>Ø 25 cm × H 45 cm</span></li>
-<li><span>Empty Weight</span> <span>1.2 kg</span></li>
-<li><span>Payload</span> <span>7 Nodes (~800g total)</span></li>
-<li><span>Deployment</span> <span>< 90 Seconds</span></li>
-<li><span>Drop Accuracy</span> <span>±2 m (GPS + IMU)</span></li>
-</ul>
-<h4 style="margin-top: 1.5rem;">Node Specifications</h4>
-<ul class="cs-list">
-<li><span>Radio</span> <span>SX1262 LoRa + ESP32</span></li>
-<li><span>Power</span> <span>2000mAh LiFePO₄</span></li>
-<li><span>Solar Panel</span> <span>6V 2W, Auto-deploy</span></li>
-<li><span>Range (LOS)</span> <span>5–8 km per node</span></li>
-<li><span>Protocol</span> <span>Meshtastic v2+ (Encrypted)</span></li>
-</ul>
-</div>
-</div>
+                        <div class="dragon-stats-grid">
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">4 KM²</div>
+                                <div class="dragon-stat-label">
+                                    NETWORK COVERAGE
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">90 SEC</div>
+                                <div class="dragon-stat-label">
+                                    DEPLOYMENT TIME
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">IP67</div>
+                                <div class="dragon-stat-label">
+                                    NODE DURABILITY
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">15 MIN</div>
+                                <div class="dragon-stat-label">
+                                    CARRIER FLIGHT TIME
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-<div class="dragon-stats-grid">
-<div class="dragon-stat"><div class="dragon-stat-value">4 KM²</div><div class="dragon-stat-label">NETWORK COVERAGE</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">90 SEC</div><div class="dragon-stat-label">DEPLOYMENT TIME</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">IP67</div><div class="dragon-stat-label">NODE DURABILITY</div></div>
-<div class="dragon-stat"><div class="dragon-stat-value">15 MIN</div><div class="dragon-stat-label">CARRIER FLIGHT TIME</div></div>
-</div>
-</div>
-</article>
+                <!-- CASE STUDY 3: ELECTRIC VIOLIN -->
+                <article
+                    class="dragon-section project-card visible"
+                    style="margin-top: 4rem"
+                >
+                    <div class="dragon-visuals">
+                        <div class="dragon-image-container">
+                            <!-- Placeholder image - replace src with your actual image URL -->
+                            <img
+                                src="https://placehold.co/800x450/0a0a0c/00e5cc?text=Electric+Violin"
+                                alt="Electric Violin"
+                                class="dragon-image active"
+                                id="violin-main"
+                            />
+                        </div>
+                    </div>
+                    <div class="dragon-info">
+                        <div class="dragon-id">
+                            RESTORATION PROJECT // IN PROGRESS
+                        </div>
+                        <h3 class="dragon-title">ELECTRIC VIOLIN</h3>
+                        <div class="dragon-subtitle">
+                            Piezoelectric Stereo Amplification & Acrylic
+                            Conversion
+                        </div>
 
-</div>
-</section>
+                        <div class="case-study-grid">
+                            <div class="cs-block">
+                                <h4>The Challenge</h4>
+                                <p>
+                                    A used violin suffered a full belly
+                                    separation, with the top panel split in
+                                    half. Traditional restoration was bypassed
+                                    in favor of a modern engineering solution
+                                    that would restore functionality while
+                                    enhancing the instrument's capabilities
+                                    through electronics.
+                                </p>
+                                <h4>The Solution (Prototype V1)</h4>
+                                <p>
+                                    The damaged wooden belly panel was replaced
+                                    by a custom laser-cut acrylic panel. To
+                                    compensate for the loss of acoustic
+                                    resonance, a custom piezoelectric
+                                    amplification system was designed. Ceramic
+                                    piezoelectric crystals placed on each bridge
+                                    foot capture stereo sound by converting
+                                    mechanical strains into electrical current.
+                                    The circuit is designed with an
+                                    <strong>11x gain</strong>, delivering crisp,
+                                    clear sound far louder than its acoustic
+                                    counterpart.
+                                </p>
+                            </div>
 
-<!-- System Specifications Section -->
-<section id="specs">
-<div class="section-header"><h2 class="section-title">SYSTEM SPECIFICATIONS</h2></div>
-<div class="skills-container">
+                            <div class="cs-block">
+                                <h4>Technical Specifications</h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>Body Material</span>
+                                        <span>Laser-Cut Acrylic</span>
+                                    </li>
+                                    <li>
+                                        <span>Pickup Type</span>
+                                        <span>Ceramic Piezoelectric</span>
+                                    </li>
+                                    <li>
+                                        <span>Audio Mode</span>
+                                        <span>Stereo (Bridge Feet)</span>
+                                    </li>
+                                    <li>
+                                        <span>Circuit Gain</span>
+                                        <span>11x</span>
+                                    </li>
+                                </ul>
+                                <h4 style="margin-top: 1.5rem">
+                                    Project Timeline
+                                </h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>PCB Fabrication</span>
+                                        <span>March 26th</span>
+                                    </li>
+                                    <li>
+                                        <span>Working Prototype</span>
+                                        <span>April 2nd</span>
+                                    </li>
+                                    <li>
+                                        <span>Delivery</span>
+                                        <span>April 8th</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-<div class="skills-category">
-<div class="category-header">
-<svg class="category-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-<h3 class="category-title">CORE SCIENCES</h3>
-</div>
-<div class="skills-list">
-<span class="skill-item">Math</span>
-<span class="skill-item">Physics</span>
-<span class="skill-item">Chemistry</span>
-<span class="skill-item">Biology</span>
-<span class="skill-item">Space Stuff</span>
-</div>
-</div>
+                        <!-- NEW SECTION: Expandability -->
+                        <div
+                            class="cs-block"
+                            style="
+                                margin-top: 1rem;
+                                border-top: 1px solid var(--border);
+                                padding-top: 1.5rem;
+                            "
+                        >
+                            <h4>Expandability (Roadmap)</h4>
+                            <p>
+                                In practice the electric violin sounds exactly
+                                like its acoustic counterpart, but it is also
+                                possible to introduce effects, right from adding
+                                distortion within the circuit design, to live
+                                audio processing through an onboard computer
+                                such as a raspberry pi. This would allow for
+                                direct software effects through DAWs, and use
+                                and creation of endless pedals to the artist’s
+                                liking. That would be the ultimate electric
+                                violin. The current prototype serves as the
+                                platform for these future integrations.
+                            </p>
+                        </div>
 
-<div class="skills-category">
-<div class="category-header">
-<svg class="category-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-<h3 class="category-title">ENGINEERING & FABRICATION</h3>
-</div>
-<div class="skills-list">
-<span class="skill-item">PCB Design</span>
-<span class="skill-item">Aerospace Fundamentals</span>
-<span class="skill-item">3D Printing</span>
-<span class="skill-item">Manufacturing Processes</span>
-<span class="skill-item">Repairing things</span>
-<span class="skill-item">Laser CNC</span>
-</div>
-</div>
+                        <div class="dragon-stats-grid">
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">11x</div>
+                                <div class="dragon-stat-label">SIGNAL GAIN</div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">STEREO</div>
+                                <div class="dragon-stat-label">PICKUP MODE</div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">ACRYLIC</div>
+                                <div class="dragon-stat-label">
+                                    BODY MATERIAL
+                                </div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">V2.0</div>
+                                <div class="dragon-stat-label">NEXT PHASE</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-<div class="skills-category">
-<div class="category-header">
-<svg class="category-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-<h3 class="category-title">DESIGN & TOOLS</h3>
-</div>
-<div class="skills-list">
-<span class="skill-item">Product Design</span>
-<span class="skill-item">CAD</span>
-<span class="skill-item">Illustration & Sketching</span>
-<span class="skill-item">Simulations & Game Engines</span>
-<span class="skill-item">Consumer Products</span>
-</div>
-</div>
+                <!-- CASE STUDY 4: BLACKHOLE SIMULATOR -->
+                <article
+                    class="dragon-section project-card visible"
+                    style="margin-top: 4rem"
+                >
+                    <div class="dragon-visuals">
+                        <div class="dragon-image-container">
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/Screenshot%202026-03-24%20at%2015-48-22%20p5.js%20Web%20Editor%20Blackhole%20asteroids%20accretion%20disk%20v4.png"
+                                alt="Blackhole State 1"
+                                class="dragon-image active"
+                                id="bh-view-1"
+                            />
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/Screenshot%202026-03-24%20at%2015-47-56%20p5.js%20Web%20Editor%20Blackhole%20asteroids%20accretion%20disk%20v4.png"
+                                alt="Blackhole State 2"
+                                class="dragon-image"
+                                id="bh-view-2"
+                            />
+                            <img
+                                src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/Screenshot%202026-03-24%20at%2015-47-16%20p5.js%20Web%20Editor%20Blackhole%20asteroids%20accretion%20disk%20v4.png"
+                                alt="Blackhole State 3"
+                                class="dragon-image"
+                                id="bh-view-3"
+                            />
+                        </div>
+                        <div class="dragon-view-tabs">
+                            <button
+                                class="dragon-tab active"
+                                data-target="bh-view-1"
+                            >
+                                VIEW 1
+                            </button>
+                            <button class="dragon-tab" data-target="bh-view-2">
+                                VIEW 2
+                            </button>
+                            <button class="dragon-tab" data-target="bh-view-3">
+                                VIEW 3
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dragon-info">
+                        <div class="dragon-id">
+                            COMPUTATIONAL PHYSICS // BROWSER SIMULATION
+                        </div>
+                        <h3 class="dragon-title">
+                            BLACKHOLE ACCRETION DISK SIMULATOR
+                        </h3>
+                        <div class="dragon-subtitle">
+                            Schwarzschild Geodesic Equations Visualization
+                        </div>
 
-<div class="skills-category">
-<div class="category-header">
-<svg class="category-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-<h3 class="category-title">COMPUTING & TECH</h3>
-</div>
-<div class="skills-list">
-<span class="skill-item">Electronics</span>
-<span class="skill-item">Ergonomics</span>
-<span class="skill-item">Videogames</span>
-<span class="skill-item">Networking</span>
-<span class="skill-item">Open Source</span>
-<span class="skill-item">Technical Documentation</span>
-</div>
-</div>
+                        <div class="case-study-grid">
+                            <div class="cs-block">
+                                <h4>The Concept</h4>
+                                <p>
+                                    A real-time gravitational physics simulation
+                                    where asteroids spawn on mouse click and
+                                    orbit a central singularity. The simulation
+                                    calculates trajectories strictly for mass,
+                                    visualizing the formation of an accretion
+                                    disk.
+                                </p>
+                                <h4>The Tech</h4>
+                                <p>
+                                    Built entirely in JavaScript using the p5.js
+                                    library. The renderer solves the
+                                    Schwarzschild geodesic equations numerically
+                                    for every asteroid, demonstrating how stable
+                                    orbits form and decay near the event
+                                    horizon. Visuals are inspired by the classic
+                                    game <em>Asteroids</em>, featuring
+                                    vector-style graphics and a stark white
+                                    circle highlighting the event horizon.
+                                </p>
 
-<div class="skills-category">
-<div class="category-header">
-<svg class="category-icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-<h3 class="category-title">RESEARCH & FOCUS</h3>
-</div>
-<div class="skills-list">
-<span class="skill-item">Autonomous UAVs</span>
-<span class="skill-item">Motorsports & Aviation</span>
-<span class="skill-item">Engines & Energy Systems</span>
-<span class="skill-item">Disability Innovations</span>
-</div>
-</div>
+                                <a
+                                    href="https://editor.p5js.org/hemmenth.k/sketches/RzW1Z_fQm"
+                                    target="_blank"
+                                    class="contact-link"
+                                    style="
+                                        margin-top: 1.5rem;
+                                        width: 100%;
+                                        justify-content: center;
+                                        border-color: var(--accent-amber);
+                                    "
+                                >
+                                    <span>CLICK HERE TO RUN SIMULATION</span>
+                                </a>
+                            </div>
 
-</div>
-</section>
+                            <div class="cs-block">
+                                <h4>Technical Specifications</h4>
+                                <ul class="cs-list">
+                                    <li>
+                                        <span>Physics Model</span>
+                                        <span>Schwarzschild Metric</span>
+                                    </li>
+                                    <li>
+                                        <span>Simulated Entity</span>
+                                        <span>Mass (Asteroids)</span>
+                                    </li>
+                                    <li>
+                                        <span>Interaction</span>
+                                        <span>Mouse Click Spawning</span>
+                                    </li>
+                                    <li>
+                                        <span>Visual Style</span>
+                                        <span>Asteroids Inspired</span>
+                                    </li>
+                                    <li>
+                                        <span>Engine</span>
+                                        <span>p5.js (WebGL)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-<!-- Upcoming Projects -->
-<section id="upcoming" style="background: linear-gradient(180deg, rgba(10, 10, 12, 0.85), rgba(233, 48, 168, 0.05)); text-align: center;">
-<div class="section-header"><h2 class="section-title">IN THE PIPELINE</h2></div>
-<p class="contact-subtitle" style="margin: 0 auto 2rem;">Currently designing and manufacturing secondary hardware projects:</p>
-<div class="skills-list" style="justify-content: center; max-width: 600px; margin: 0 auto;">
-<span class="skill-item" style="border-color: var(--accent-magenta);">Custom 4-Axis CNC Hot Wire Foam Cutter</span>
-<span class="skill-item" style="border-color: var(--accent-magenta);">Direct-Drive Simracing Steering Wheel</span>
-<span class="skill-item" style="border-color: var(--accent-magenta);">Electric Violin (Restored Acoustic Body)</span>
-</div>
-</section>
+                        <div class="dragon-stats-grid">
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">WEBGL</div>
+                                <div class="dragon-stat-label">RENDERER</div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">RT</div>
+                                <div class="dragon-stat-label">CALCULATION</div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">P5.JS</div>
+                                <div class="dragon-stat-label">FRAMEWORK</div>
+                            </div>
+                            <div class="dragon-stat">
+                                <div class="dragon-stat-value">LIVE</div>
+                                <div class="dragon-stat-label">STATUS</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-<!-- Contact Section -->
-<section id="contact" class="contact-section">
-<h2 class="contact-title">INITIATE CONTACT</h2>
-<p class="contact-subtitle">Currently seeking pre-seed funding, grants, or strategic partnerships to finalize TRL-7 flight testing for the DRAGON UAV//AWACS and BURST SWARM AWACS systems.</p>
-<div class="contact-links">
-<a href="mailto:idealaboratoryhemu@gmail.com" class="contact-link">
-<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-<span>idealaboratoryhemu@gmail.com</span>
-</a>
-<a href="https://www.linkedin.com/in/YOUR_LINKEDIN_HERE" target="_blank" rel="noopener noreferrer" class="contact-link">
-<svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-<span>LinkedIn</span>
-</a>
-</div>
-</section>
+        <!-- System Specifications Section -->
+        <section id="specs">
+            <div class="section-header">
+                <h2 class="section-title">SYSTEM SPECIFICATIONS</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                            />
+                        </svg>
+                        <h3 class="category-title">CORE SCIENCES</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-item">Math</span>
+                        <span class="skill-item">Physics</span>
+                        <span class="skill-item">Chemistry</span>
+                        <span class="skill-item">Biology</span>
+                        <span class="skill-item">Space Stuff</span>
+                    </div>
+                </div>
 
-<!-- Footer -->
-<footer><p class="footer-meta">HEMMENTH KUMAR // PRODUCT DESIGN & R&D</p></footer>
+                <div class="skills-category">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                            />
+                        </svg>
+                        <h3 class="category-title">
+                            ENGINEERING & FABRICATION
+                        </h3>
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-item">PCB Design</span>
+                        <span class="skill-item">Aerospace Fundamentals</span>
+                        <span class="skill-item">3D Printing</span>
+                        <span class="skill-item">Manufacturing Processes</span>
+                        <span class="skill-item">Repairing stuff</span>
+                        <span class="skill-item">Laser CNC</span>
+                    </div>
+                </div>
 
-<script>
-const rainCanvas = document.getElementById('rain-canvas');
-const ctx = rainCanvas.getContext('2d');
-let rainDrops =[];
-let animationFrameId = null;
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                <div class="skills-category">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
+                        <h3 class="category-title">DESIGN & TOOLS</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-item">Product Design</span>
+                        <span class="skill-item">SolidWorks / CAD</span>
+                        <span class="skill-item">Illustration & Sketching</span>
+                        <span class="skill-item">Simulations & Game Engines</span>
+						<span class="skill-item">Technical Documentation</span>	
+                        <span class="skill-item">Consumer Products</span>
+                    </div>
+                </div>
 
-// I set Rain to FALSE by default so it looks cleaner for a professional portfolio, but the button still works!
-let rainEnabled = false; 
-let neonEnabled = true;
+                <div class="skills-category">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24">
+                            <rect
+                                x="4"
+                                y="4"
+                                width="16"
+                                height="16"
+                                rx="2"
+                                ry="2"
+                            />
+                            <rect x="9" y="9" width="6" height="6" />
+                            <line x1="9" y1="1" x2="9" y2="4" />
+                            <line x1="15" y1="1" x2="15" y2="4" />
+                            <line x1="9" y1="20" x2="9" y2="23" />
+                            <line x1="15" y1="20" x2="15" y2="23" />
+                            <line x1="20" y1="9" x2="23" y2="9" />
+                            <line x1="20" y1="14" x2="23" y2="14" />
+                            <line x1="1" y1="9" x2="4" y2="9" />
+                            <line x1="1" y1="14" x2="4" y2="14" />
+                        </svg>
+                        <h3 class="category-title">COMPUTING & TECH</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-item">Programming</span>
+                        <span class="skill-item">Ergonomics</span>
+                        <span class="skill-item">Videogames</span>
+                        <span class="skill-item">Networking</span>
+                    </div>
+                </div>
 
-const toggleRain = document.getElementById('toggle-rain');
-const toggleNeon = document.getElementById('toggle-neon');
+                <div class="skills-category">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"
+                            />
+                            <path
+                                d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
+                            />
+                        </svg>
+                        <h3 class="category-title">RESEARCH & FOCUS</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-item">Autonomous UAVs</span>
+                        <span class="skill-item">Cars & Planes</span>
+                        <span class="skill-item">Engines & Energy Systems</span>
+                        <span class="skill-item">Disability Innovations</span>
+                        <span class="skill-item">Design Research</span>
+						<span class="skill-item">Open Source</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-/* ========== RAIN EFFECT ========== */
-function initRain() {
-if (prefersReducedMotion || !rainEnabled) return;
-rainCanvas.width = window.innerWidth;
-rainCanvas.height = window.innerHeight;
-rainDrops =[];
-const density = window.innerWidth < 768 ? 15 : 8;
-const dropCount = Math.floor(window.innerWidth / density);
-for (let i = 0; i < dropCount; i++) {
-rainDrops.push({
-x: Math.random() * rainCanvas.width,
-y: Math.random() * rainCanvas.height,
-length: Math.random() * 25 + 10,
-speed: Math.random() * 10 + 6,
-opacity: Math.random() * 0.5 + 0.3
-});
-}
-}
+        <!-- Upcoming Projects -->
+        <section
+            id="upcoming"
+            style="
+                background: linear-gradient(
+                    180deg,
+                    rgba(10, 10, 12, 0.85),
+                    rgba(233, 48, 168, 0.05)
+                );
+                text-align: center;
+            "
+        >
+            <div class="section-header">
+                <h2 class="section-title">IN THE PIPELINE</h2>
+            </div>
+            <p class="contact-subtitle" style="margin: 0 auto 2rem">
+                Currently designing and manufacturing secondary hardware
+                projects:
+            </p>
+            <div
+                class="skills-list"
+                style="
+                    justify-content: center;
+                    max-width: 600px;
+                    margin: 0 auto;
+                "
+            >
+                <span
+                    class="skill-item"
+                    style="border-color: var(--accent-magenta)"
+                    >Custom 4-Axis CNC Hot Wire Foam Cutter</span
+                >
+                <span
+                    class="skill-item"
+                    style="border-color: var(--accent-magenta)"
+                    >Direct-Drive Simracing Steering Wheel</span
+                >
+            </div>
+        </section>
 
-function drawRain() {
-if (prefersReducedMotion || !rainEnabled || !ctx || document.hidden) return;
-ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
-rainDrops.forEach(drop => {
-ctx.beginPath();
-ctx.moveTo(drop.x, drop.y);
-ctx.lineTo(drop.x, drop.y + drop.length);
-ctx.strokeStyle = `rgba(0, 229, 204, ${drop.opacity})`;
-ctx.lineWidth = 1.5;
-ctx.stroke();
-drop.y += drop.speed;
-if (drop.y > rainCanvas.height) {
-drop.y = -drop.length;
-drop.x = Math.random() * rainCanvas.width;
-}
-});
-animationFrameId = requestAnimationFrame(drawRain);
-}
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2 class="contact-title">INITIATE CONTACT</h2>
+            <p class="contact-subtitle">
+                Currently seeking pre-seed funding, grants, or strategic
+                partnerships to finalize TRL-7 flight testing for the DRAGON
+                UAV//AWACS and BURST SWARM AWACS systems.
+            </p>
+            <div class="contact-links">
+                <a
+                    href="mailto:idealaboratoryhemu@gmail.com"
+                    class="contact-link"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                        />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    <span>idealaboratoryhemu@gmail.com</span>
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/YOUR_LINKEDIN_HERE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-link"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                        />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </section>
 
-function setRain(enabled) {
-rainEnabled = enabled;
-toggleRain.classList.toggle('active', rainEnabled);
-rainCanvas.classList.toggle('disabled', !rainEnabled);
-if (rainEnabled) {
-initRain();
-drawRain();
-} else {
-if (animationFrameId) cancelAnimationFrame(animationFrameId);
-ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
-}
-}
+        <!-- Footer -->
+        <footer>
+            <p class="footer-meta">HEMMENTH KUMAR // PRODUCT DESIGN & R&D</p>
+        </footer>
 
-/* ========== NEON EFFECT ========== */
-function setNeon(enabled) {
-neonEnabled = enabled;
-toggleNeon.classList.toggle('active', neonEnabled);
-const glitchWords = document.querySelectorAll('.glitch-word');
-const marquee = document.getElementById('neon-marquee');
-const scrollIndicator = document.getElementById('scroll-indicator');
-const scanlines = document.getElementById('scanlines');
-const filmGrain = document.getElementById('film-grain');
+        <script>
+            const rainCanvas = document.getElementById("rain-canvas");
+            const ctx = rainCanvas.getContext("2d");
+            let rainDrops = [];
+            let animationFrameId = null;
+            const prefersReducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
 
-glitchWords.forEach(word => word.classList.toggle('disabled', !neonEnabled));
-marquee.classList.toggle('disabled', !neonEnabled);
-scrollIndicator.classList.toggle('disabled', !neonEnabled);
-scanlines.classList.toggle('disabled', !neonEnabled);
-filmGrain.classList.toggle('disabled', !neonEnabled);
-}
+            // I set Rain to FALSE by default so it looks cleaner for a professional portfolio, but the button still works!
+            let rainEnabled = false;
+            let neonEnabled = true;
 
-/* ========== NAV & SCROLL ========== */
-function initNavigation() {
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => { window.scrollY > 100 ? nav.classList.add('visible') : nav.classList.remove('visible'); }, { passive: true });
-}
+            const toggleRain = document.getElementById("toggle-rain");
+            const toggleNeon = document.getElementById("toggle-neon");
 
-function initScrollReveal() {
-const observer = new IntersectionObserver((entries) => {
-entries.forEach((entry) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), 50); }});
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.timeline-item, .dragon-section, .skills-category').forEach(el => observer.observe(el));
-}
+            /* ========== RAIN EFFECT ========== */
+            function initRain() {
+                if (prefersReducedMotion || !rainEnabled) return;
+                rainCanvas.width = window.innerWidth;
+                rainCanvas.height = window.innerHeight;
+                rainDrops = [];
+                const density = window.innerWidth < 768 ? 15 : 8;
+                const dropCount = Math.floor(window.innerWidth / density);
+                for (let i = 0; i < dropCount; i++) {
+                    rainDrops.push({
+                        x: Math.random() * rainCanvas.width,
+                        y: Math.random() * rainCanvas.height,
+                        length: Math.random() * 25 + 10,
+                        speed: Math.random() * 10 + 6,
+                        opacity: Math.random() * 0.5 + 0.3,
+                    });
+                }
+            }
 
-/* ========== PROJECT TABS ========== */
-function initProjectTabs() {
-  const viewerSections = document.querySelectorAll('.dragon-section');
-  viewerSections.forEach(section => {
-    const tabs = section.querySelectorAll('.dragon-tab');
-    const images = section.querySelectorAll('.dragon-image');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetId = tab.dataset.target;
-        tabs.forEach(t => { t.classList.remove('active'); });
-        tab.classList.add('active'); 
-        images.forEach(img => img.classList.remove('active'));
-        const targetImage = section.querySelector(`#${targetId}`);
-        if (targetImage) targetImage.classList.add('active');
-      });
-    });
-  });
-}
+            function drawRain() {
+                if (
+                    prefersReducedMotion ||
+                    !rainEnabled ||
+                    !ctx ||
+                    document.hidden
+                )
+                    return;
+                ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+                rainDrops.forEach((drop) => {
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(drop.x, drop.y + drop.length);
+                    ctx.strokeStyle = `rgba(0, 229, 204, ${drop.opacity})`;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                    drop.y += drop.speed;
+                    if (drop.y > rainCanvas.height) {
+                        drop.y = -drop.length;
+                        drop.x = Math.random() * rainCanvas.width;
+                    }
+                });
+                animationFrameId = requestAnimationFrame(drawRain);
+            }
 
-function init() {
-setRain(rainEnabled);
-setNeon(true);
-initNavigation();
-initScrollReveal();
-initProjectTabs();
-}
+            function setRain(enabled) {
+                rainEnabled = enabled;
+                toggleRain.classList.toggle("active", rainEnabled);
+                rainCanvas.classList.toggle("disabled", !rainEnabled);
+                if (rainEnabled) {
+                    initRain();
+                    drawRain();
+                } else {
+                    if (animationFrameId)
+                        cancelAnimationFrame(animationFrameId);
+                    ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+                }
+            }
 
-toggleRain.addEventListener('click', () => setRain(!rainEnabled));
-toggleNeon.addEventListener('click', () => setNeon(!neonEnabled));
-window.addEventListener('resize', initRain);
-document.addEventListener('DOMContentLoaded', init);
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-});
-});
-</script>
-</body>
+            /* ========== NEON EFFECT ========== */
+            function setNeon(enabled) {
+                neonEnabled = enabled;
+                toggleNeon.classList.toggle("active", neonEnabled);
+                const glitchWords = document.querySelectorAll(".glitch-word");
+                const marquee = document.getElementById("neon-marquee");
+                const scrollIndicator =
+                    document.getElementById("scroll-indicator");
+                const scanlines = document.getElementById("scanlines");
+                const filmGrain = document.getElementById("film-grain");
+
+                glitchWords.forEach((word) =>
+                    word.classList.toggle("disabled", !neonEnabled),
+                );
+                marquee.classList.toggle("disabled", !neonEnabled);
+                scrollIndicator.classList.toggle("disabled", !neonEnabled);
+                scanlines.classList.toggle("disabled", !neonEnabled);
+                filmGrain.classList.toggle("disabled", !neonEnabled);
+            }
+
+            /* ========== NAV & SCROLL ========== */
+            function initNavigation() {
+                const nav = document.querySelector("nav");
+                window.addEventListener(
+                    "scroll",
+                    () => {
+                        window.scrollY > 100
+                            ? nav.classList.add("visible")
+                            : nav.classList.remove("visible");
+                    },
+                    { passive: true },
+                );
+            }
+
+            function initScrollReveal() {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setTimeout(
+                                    () => entry.target.classList.add("visible"),
+                                    50,
+                                );
+                            }
+                        });
+                    },
+                    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+                );
+                document
+                    .querySelectorAll(
+                        ".timeline-item, .dragon-section, .skills-category",
+                    )
+                    .forEach((el) => observer.observe(el));
+            }
+
+            /* ========== PROJECT TABS ========== */
+            function initProjectTabs() {
+                const viewerSections =
+                    document.querySelectorAll(".dragon-section");
+                viewerSections.forEach((section) => {
+                    const tabs = section.querySelectorAll(".dragon-tab");
+                    const images = section.querySelectorAll(".dragon-image");
+                    tabs.forEach((tab) => {
+                        tab.addEventListener("click", () => {
+                            const targetId = tab.dataset.target;
+                            tabs.forEach((t) => {
+                                t.classList.remove("active");
+                            });
+                            tab.classList.add("active");
+                            images.forEach((img) =>
+                                img.classList.remove("active"),
+                            );
+                            const targetImage = section.querySelector(
+                                `#${targetId}`,
+                            );
+                            if (targetImage)
+                                targetImage.classList.add("active");
+                        });
+                    });
+                });
+            }
+
+            function init() {
+                setRain(rainEnabled);
+                setNeon(true);
+                initNavigation();
+                initScrollReveal();
+                initProjectTabs();
+            }
+
+            toggleRain.addEventListener("click", () => setRain(!rainEnabled));
+            toggleNeon.addEventListener("click", () => setNeon(!neonEnabled));
+            window.addEventListener("resize", initRain);
+            document.addEventListener("DOMContentLoaded", init);
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document
+                        .querySelector(this.getAttribute("href"))
+                        ?.scrollIntoView({ behavior: "smooth" });
+                });
+            });
+        </script>
+    </body>
 </html>
