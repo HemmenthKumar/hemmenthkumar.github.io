@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAGON UAV // AWACS - Specification Sheet</title>
+    <style>
+        :root {
+            --primary: #2563eb; /* Engineering Blue */
+            --accent: #0ea5e9;  /* Sky Blue */
+            --dark-bg: #0f172a; /* Slate 900 */
+            --card-bg: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(15,23,42,0) 100%);
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-content h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-content h2 {
+            font-size: 1rem;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Image Section */
+        .visual-section {
+            width: 100%;
+            height: 300px;
+            background-color: #000;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .visual-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .placeholder-text {
+            position: absolute;
+            z-index: 10;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px dashed var(--text-muted);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Data Tables */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .spec-table th, .spec-table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            width: 40%;
+        }
+
+        .spec-table td {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .spec-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Key Metrics Highlight */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: var(--font-mono);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* Footer / CTA */
+        .footer {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        .tech-stack {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <span class="badge">TRL-6 Prototype</span>
+                <h1>DRAGON UAV // AWACS</h1>
+                <h2>Long-Range Autonomous Search & Rescue Aircraft</h2>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">DOC-ID:</div>
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-main);">IL-DRG-001</div>
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top:5px;">REV:</div>
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-main);">2.4</div>
+            </div>
+        </header>
+
+        <!-- Visual Placeholder -->
+        <div class="visual-section">
+            <!-- REPLACE THE SRC BELOW WITH YOUR IMAGE URL OR LOCAL PATH -->
+            <!-- Using a placeholder service for now -->
+            <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="DRAGON UAV Concept">
+            
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <!-- Left Column: Details -->
+            <div class="main-content">
+                <h3>Executive Summary</h3>
+                <p>
+                    Current Search and Rescue (SAR) missions rely on helicopters (high operating costs, complex logistics) or standard multicopters (insufficient flight times of ~90 minutes). SAR requires persistent, long-range aerial surveying that traditional platforms cannot provide due to energy density limits.
+                </p>
+                <p>
+                    The <strong>DRAGON UAV</strong> is an autonomous electric glider featuring VTOL capabilities transitioning into Twin Motor Flight Mode (TMFM). Designed for massive endurance, it achieves an <strong>8+ hour flight time</strong>. It streams live video, utilizes thermal/night vision, and maps terrain using 3D Gaussian Splatting (OpenSplat) to bypass heavy/expensive Lidar systems.
+                </p>
+
+                <h3>Manufacturing & Avionics</h3>
+                <p>
+                    The airframe utilizes a advanced composite approach: <strong>Expanded Polypropylene (EPP) foam core</strong>, covered by 100 GSM fiberglass and 50/36 GSM Kevlar, stiffened with carbon fiber spars for maximum strength-to-weight ratio.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">ArduPilot APM 2.8</span>
+                    <span class="tech-tag">ODroid XU4</span>
+                    <span class="tech-tag">OpenHD</span>
+                    <span class="tech-tag">EPP/Kevlar/CF</span>
+                    <span class="tech-tag">3D Gaussian Splatting</span>
+                </div>
+
+                <br>
+                <h3>Technical Specifications</h3>
+                <table class="spec-table">
+                    <tbody>
+                        <tr>
+                            <th>Target AUW</th>
+                            <td>14 kg</td>
+                        </tr>
+                        <tr>
+                            <th>Wingspan</th>
+                            <td>2.54 m</td>
+                        </tr>
+                        <tr>
+                            <th>Wing Area</th>
+                            <td>0.496 m²</td>
+                        </tr>
+                        <tr>
+                            <th>Wing Loading</th>
+                            <td>28.2 kg/m²</td>
+                        </tr>
+                        <tr>
+                            <th>Est. L/D Ratio</th>
+                            <td>15:1</td>
+                        </tr>
+                        <tr>
+                            <th>Propulsion</th>
+                            <td>2 × AT4120 KV500 (TMFM)</td>
+                        </tr>
+                        <tr>
+                            <th>Battery Capacity</th>
+                            <td>75 Ah (3x 22.8V packs)</td>
+                        </tr>
+                        <tr>
+                            <th>Total Energy</th>
+                            <td>1,710 Wh</td>
+                        </tr>
+                        <tr>
+                            <th>System Power (Cruise)</th>
+                            <td>208 W</td>
+                        </tr>
+                        <tr>
+                            <th>Telemetry / Video</th>
+                            <td>OpenHD via ODroid XU4</td>
+                        </tr>
+                        <tr>
+                            <th>Flight Controller</th>
+                            <td>ArduPilot Mega 2.8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Column: Key Metrics -->
+            <div class="sidebar">
+                <h3>Performance Metrics</h3>
+                <div class="metrics-grid" style="grid-template-columns: 1fr;">
+                    <div class="metric-card">
+                        <span class="metric-value">411 KM</span>
+                        <span class="metric-label">Calculated Range</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">8.2 HRS</span>
+                        <span class="metric-label">Flight Endurance</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">50 KM/H</span>
+                        <span class="metric-label">Cruise Speed</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">1.35:1</span>
+                        <span class="metric-label">Thrust/Weight</span>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); padding: 1rem; border-radius: 6px;">
+                    <h4 style="color: var(--success); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">Project Status</h4>
+                    <p style="font-size: 0.85rem; margin-bottom: 0; color: #d1fae5;">
+                        Currently seeking pre-seed funding to finalize TRL-7 flight testing. BOM optimized for cost-efficiency.
+                    </p>
+                </div>
+                
+                <br>
+                <a href="https://github.com/hemmenthkumar" target="_blank" class="btn" style="display:block; text-align:center;">
+                    View Source Code & CAD
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                <strong>IDEA LABORATORY</strong> | Public Access Deep-Tech R&D<br>
+                <span style="font-size: 0.75rem; opacity: 0.7;">Democratizing Innovation // Est. 2026</span>
+            </div>
+            <div style="text-align: right;">
+                Contact: idealaboratoryhemu@gmail.com<br>
+                <span style="font-family: var(--font-mono); font-size: 0.75rem;">CONFIDENTIAL DRAFT</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
