@@ -169,6 +169,59 @@
             border-bottom: none;
         }
 
+        /* BOM Table Specific */
+        .bom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .bom-table th {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--accent);
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .bom-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .bom-table td:nth-child(1) {
+            color: var(--text-main);
+            font-weight: 500;
+            width: 35%;
+        }
+
+        .bom-table td:nth-child(4) {
+            color: var(--success);
+            font-weight: 600;
+            font-family: var(--font-mono);
+            text-align: right;
+        }
+
+        .bom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bom-total-row {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .bom-total-row td {
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1rem;
+            border-top: 2px solid var(--success);
+        }
+
         /* Key Metrics Highlight */
         .metrics-grid {
             display: grid;
@@ -243,6 +296,13 @@
             margin-bottom: 5px;
         }
 
+        .bom-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -265,11 +325,7 @@
 
         <!-- Visual Placeholder -->
         <div class="visual-section">
-            <!-- REPLACE THE SRC BELOW WITH YOUR IMAGE URL OR LOCAL PATH -->
-            <!-- Using a placeholder service for now -->
             <img src="https://raw.githubusercontent.com/HemmenthKumar/hemmenthkumar.github.io/refs/heads/main/image.png" alt="DRAGON UAV Concept">
-            
-            </div>
         </div>
 
         <div class="content-grid">
@@ -345,6 +401,101 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- BILL OF MATERIALS SECTION -->
+                <h3>Bill of Materials (BOM)</h3>
+                <p>Estimated component costs for single-unit prototype production. Volume manufacturing expected to reduce costs by 35-40%.</p>
+                
+                <table class="bom-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Specification</th>
+                            <th>Qty</th>
+                            <th>Cost (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Brushless Motors</td>
+                            <td>AT4120 KV500</td>
+                            <td>2</td>
+                            <td>8,400</td>
+                        </tr>
+                        <tr>
+                            <td>Electronic Speed Controllers</td>
+                            <td>80A HV OPTO</td>
+                            <td>2</td>
+                            <td>6,200</td>
+                        </tr>
+                        <tr>
+                            <td>Flight Controller</td>
+                            <td>ArduPilot APM 2.8</td>
+                            <td>1</td>
+                            <td>4,500</td>
+                        </tr>
+                        <tr>
+                            <td>Companion Computer</td>
+                            <td>ODroid XU4</td>
+                            <td>1</td>
+                            <td>7,800</td>
+                        </tr>
+                        <tr>
+                            <td>Battery Packs</td>
+                            <td>22.8V 25Ah Li-Ion</td>
+                            <td>3</td>
+                            <td>42,000</td>
+                        </tr>
+                        <tr>
+                            <td>Video Transmission</td>
+                            <td>OpenHD Long-Range</td>
+                            <td>1</td>
+                            <td>5,500</td>
+                        </tr>
+                        <tr>
+                            <td>GPS Module</td>
+                            <td>M8N + Compass</td>
+                            <td>1</td>
+                            <td>2,800</td>
+                        </tr>
+                        <tr>
+                            <td>Airframe Materials</td>
+                            <td>EPP/Fiberglass/Kevlar/CF</td>
+                            <td>1</td>
+                            <td>12,500</td>
+                        </tr>
+                        <tr>
+                            <td>Servos & Control</td>
+                            <td>High-Torque Digital</td>
+                            <td>4</td>
+                            <td>4,800</td>
+                        </tr>
+                        <tr>
+                            <td>Power Distribution</td>
+                            <td>PCB + Wiring Harness</td>
+                            <td>1</td>
+                            <td>3,200</td>
+                        </tr>
+                        <tr>
+                            <td>Fasteners & Hardware</td>
+                            <td>Stainless/Aluminum</td>
+                            <td>1</td>
+                            <td>1,800</td>
+                        </tr>
+                        <tr>
+                            <td>Thermal Camera (Optional)</td>
+                            <td>FLIR Lepton 3.5</td>
+                            <td>1</td>
+                            <td>28,000</td>
+                        </tr>
+                        <tr class="bom-total-row">
+                            <td colspan="3">TOTAL ESTIMATED COST</td>
+                            <td>₹1,27,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="bom-note">* Costs based on Indian market pricing (2026). Does not include labor, R&D, or tooling. Volume production (10+ units) estimated at ₹82,000 per unit.</p>
+
             </div>
 
             <!-- Right Column: Key Metrics -->
