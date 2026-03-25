@@ -14,6 +14,7 @@
             --text-muted: #94a3b8;
             --border: #334155;
             --success: #10b981;
+            --warning: #f59e0b;
             --font-mono: 'Courier New', Courier, monospace;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
@@ -98,16 +99,6 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.8;
-        }
-
-        .placeholder-text {
-            position: absolute;
-            z-index: 10;
-            background: rgba(0,0,0,0.7);
-            padding: 1rem;
-            border-radius: 4px;
-            text-align: center;
-            border: 1px dashed var(--text-muted);
         }
 
         /* Content Grid */
@@ -222,6 +213,82 @@
             border-top: 2px solid var(--success);
         }
 
+        /* Build Process Section */
+        .build-phase {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .build-phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .build-phase-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            font-family: var(--font-mono);
+        }
+
+        .build-phase-timeline {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-family: var(--font-mono);
+        }
+
+        .build-phase-steps {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .build-phase-steps li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .build-phase-steps li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .tools-required {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tools-required h4 {
+            font-size: 0.85rem;
+            color: var(--warning);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .tool-item {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
         /* Key Metrics Highlight */
         .metrics-grid {
             display: grid;
@@ -303,6 +370,36 @@
             margin-top: 0.5rem;
         }
 
+        .milestone-checklist {
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .milestone-checklist h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .milestone-check {
+            color: var(--success);
+            font-weight: 700;
+        }
+
     </style>
 </head>
 <body>
@@ -341,7 +438,7 @@
 
                 <h3>Manufacturing & Avionics</h3>
                 <p>
-                    The airframe utilizes a advanced composite approach: <strong>Expanded Polypropylene (EPP) foam core</strong>, covered by 100 GSM fiberglass and 50/36 GSM Kevlar, stiffened with carbon fiber spars for maximum strength-to-weight ratio.
+                    The airframe utilizes an advanced composite approach: <strong>Expanded Polypropylene (EPP) foam core</strong>, covered by 100 GSM fiberglass and 50/36 GSM Kevlar, stiffened with carbon fiber spars for maximum strength-to-weight ratio.
                 </p>
                 <div class="tech-stack">
                     <span class="tech-tag">ArduPilot APM 2.8</span>
@@ -401,6 +498,120 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- HOW TO BUILD IT SECTION -->
+                <h3>How To Build It</h3>
+                <p>Complete build process from raw materials to flight-ready aircraft. Estimated total build time: 6-8 weeks for first prototype.</p>
+                
+                <!-- Tools Required -->
+                <div class="tools-required">
+                    <h4>⚠ Tools & Equipment Required</h4>
+                    <div class="tools-grid">
+                        <div class="tool-item">▸ CNC Hot Wire Foam Cutter</div>
+                        <div class="tool-item">▸ Vacuum Bagging System</div>
+                        <div class="tool-item">▸ Epoxy Resin & Brushes</div>
+                        <div class="tool-item">▸ Carbon Fiber Tubing (6mm-10mm)</div>
+                        <div class="tool-item">▸ Soldering Station (60W+)</div>
+                        <div class="tool-item">▸ 3D Printer (for mounts)</div>
+                        <div class="tool-item">▸ Multimeter & Power Analyzer</div>
+                        <div class="tool-item">▸ Servo Tester & Programming Card</div>
+                    </div>
+                </div>
+
+                <!-- Build Phases -->
+                <div class="build-phase">
+                    <div class="build-phase-header">
+                        <span class="build-phase-title">PHASE 1: Airframe Construction</span>
+                        <span class="build-phase-timeline">Week 1-2</span>
+                    </div>
+                    <ul class="build-phase-steps">
+                        <li>Cut EPP foam cores using CNC hot wire cutter (wing & fuselage profiles)</li>
+                        <li>Route servo bays, battery compartments, and spar channels</li>
+                        <li>Insert carbon fiber spars (main wing + horizontal stabilizer)</li>
+                        <li>Apply 100 GSM fiberglass wrap with epoxy resin</li>
+                        <li>Apply 50/36 GSM Kevlar reinforcement at high-stress points</li>
+                        <li>Vacuum bag and cure for 24 hours</li>
+                        <li>Sand, prime, and apply final finish</li>
+                    </ul>
+                </div>
+
+                <div class="build-phase">
+                    <div class="build-phase-header">
+                        <span class="build-phase-title">PHASE 2: Powertrain Installation</span>
+                        <span class="build-phase-timeline">Week 3</span>
+                    </div>
+                    <ul class="build-phase-steps">
+                        <li>Mount AT4120 KV500 motors on motor pods</li>
+                        <li>Install 80A HV ESCs with heat sinking</li>
+                        <li>Wire power distribution board (PDB) with XT90 connectors</li>
+                        <li>Connect battery harness (3x 22.8V packs in parallel)</li>
+                        <li>Test motor rotation direction and ESC calibration</li>
+                        <li>Verify current draw at static full throttle (target: &lt;80A)</li>
+                    </ul>
+                </div>
+
+                <div class="build-phase">
+                    <div class="build-phase-header">
+                        <span class="build-phase-title">PHASE 3: Avionics Integration</span>
+                        <span class="build-phase-timeline">Week 4-5</span>
+                    </div>
+                    <ul class="build-phase-steps">
+                        <li>Mount ArduPilot APM 2.8 on vibration-damped plate</li>
+                        <li>Install ODroid XU4 companion computer with OpenHD</li>
+                        <li>Connect GPS M8N module (external mast mount)</li>
+                        <li>Wire servos (aileron, elevator, rudder, VTOL flaps)</li>
+                        <li>Configure ArduPilot parameters (plane firmware, VTOL mixing)</li>
+                        <li>Set up telemetry link (915 MHz SiK radio)</li>
+                        <li>Test video transmission range (ground test)</li>
+                    </ul>
+                </div>
+
+                <div class="build-phase">
+                    <div class="build-phase-header">
+                        <span class="build-phase-title">PHASE 4: Ground Testing & Calibration</span>
+                        <span class="build-phase-timeline">Week 6</span>
+                    </div>
+                    <ul class="build-phase-steps">
+                        <li>Verify center of gravity (CG) at 25% MAC</li>
+                        <li>Perform control surface throw calibration</li>
+                        <li>Run motor test at 25%, 50%, 75%, 100% throttle (30 sec each)</li>
+                        <li>Check all servo movements for binding or reverse logic</li>
+                        <li>Verify failsafe behavior (RC loss, battery low)</li>
+                        <li>Complete pre-flight checklist (30+ items)</li>
+                    </ul>
+                </div>
+
+                <div class="build-phase">
+                    <div class="build-phase-header">
+                        <span class="build-phase-title">PHASE 5: Flight Testing (TRL-7)</span>
+                        <span class="build-phase-timeline">Week 7-8</span>
+                    </div>
+                    <ul class="build-phase-steps">
+                        <li>First flight: Hand launch, 5 min endurance test, manual landing</li>
+                        <li>Second flight: VTOL hover test (5 min), transition to forward flight</li>
+                        <li>Third flight: Autonomous waypoint mission (2 km loop)</li>
+                        <li>Fourth flight: Extended endurance test (target: 2+ hours)</li>
+                        <li>Fifth flight: Full mission profile (8+ hour target)</li>
+                        <li>Post-flight: Data analysis, log review, iterative tuning</li>
+                    </ul>
+                </div>
+
+                <!-- Milestone Checklist -->
+                <div class="milestone-checklist">
+                    <h4>✓ Funding Milestone Triggers</h4>
+                    <div class="milestone-item">
+                        <span class="milestone-check">▢</span>
+                        <span>₹50,000 released → Complete Phase 1-2 (Airframe + Powertrain)</span>
+                    </div>
+                    <div class="milestone-item">
+                        <span class="milestone-check">▢</span>
+                        <span>₹75,000 released → Complete Phase 3 (Avionics)</span>
+                    </div>
+                    <div class="milestone-item">
+                        <span class="milestone-check">▢</span>
+                        <span>₹50,000 released → Complete Phase 4-5 (Ground + Flight Testing)</span>
+                    </div>
+                </div>
 
                 <!-- BILL OF MATERIALS SECTION -->
                 <h3>Bill of Materials (BOM)</h3>
